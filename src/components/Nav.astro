@@ -1,56 +1,81 @@
 ---
-const primary = "#000";
-const secondary = "#000";
-const accent = "#000";
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "Sobre mim" },
+  { href: "/services", label: "Serviços" },
+  { href: "/testimonials", label: "Testemunhos" },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/"
+    ? currentPath === "/"
+    : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
-<header class="h-[10vh]">
-  <nav>
-    <div class="nav-links">
-      <a href="/" class="active">Home</a>
-      <a href="/about">Sobre mim</a>
-      <a href="/services">Serviços</a>
-      <a href="/testimonials">Testemunhos</a>
+<header
+  class="relative flex h-[10vh] items-center justify-end px-6 md:justify-center md:px-0"
+>
+  <nav class="group">
+    <button
+      type="button"
+      class="flex cursor-pointer flex-col gap-1.25 p-2 md:hidden"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Abrir menu"
+    >
+      <span
+        class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:translate-y-1.75 group-data-open:rotate-45"
+      ></span>
+      <span
+        class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:opacity-0"
+      ></span>
+      <span
+        class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:-translate-y-1.75 group-data-open:-rotate-45"
+      ></span>
+    </button>
+
+    <div
+      id="nav-links"
+      class="pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-1 border-b border-black/10 bg-white px-6 py-4 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
+    >
+      {
+        links.map(({ href, label }) => (
+          <a
+            href={href}
+            aria-current={isActive(href) ? "page" : undefined}
+            class="rounded-lg px-3 py-2 text-base font-medium opacity-85 hover:bg-black/5 hover:opacity-100 aria-[current=page]:border aria-[current=page]:opacity-100 md:text-[0.85rem]"
+          >
+            {label}
+          </a>
+        ))
+      }
     </div>
   </nav>
 </header>
 
-<style define:vars={{ primary, secondary, accent }}>
-  header {
-    padding: 1rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+<script>
+  const button = document.querySelector<HTMLButtonElement>(
+    '[aria-controls="nav-links"]',
+  );
+  const menu = document.getElementById("nav-links");
+  const nav = button?.closest("nav");
 
-  nav {
-    display: inline-flex;
-    align-items: center;
-    gap: 2.5rem;
-  }
+  const setState = (open: boolean) => {
+    nav?.toggleAttribute("data-open", open);
+    button?.setAttribute("aria-expanded", String(open));
+    button?.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  };
 
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
+  button?.addEventListener("click", () => {
+    setState(!nav?.hasAttribute("data-open"));
+  });
 
-  .nav-links a {
-    text-decoration: none;
-    color: #0d0d0d;
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.85;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-  }
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setState(false));
+  });
 
-  .nav-links a:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .nav-links a.active {
-    opacity: 1;
-    border: 1px solid;
-  }
-</style>
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setState(false);
+  });
+</script>
