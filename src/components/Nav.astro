@@ -4,53 +4,53 @@ const secondary = "#000";
 const accent = "#000";
 ---
 
-<header>
-    <nav>
-        <div class="nav-links">
-            <a href="/" class="active">Home</a>
-            <a href="/about">Sobre mim</a>
-            <a href="/services">Serviços</a>
-            <a href="/testimonials">Testemunhos</a>
-        </div>
-    </nav>
+<header class="h-[10vh]">
+  <nav>
+    <div class="nav-links">
+      <a href="/" class="active">Home</a>
+      <a href="/about">Sobre mim</a>
+      <a href="/services">Serviços</a>
+      <a href="/testimonials">Testemunhos</a>
+    </div>
+  </nav>
 </header>
 
 <style define:vars={{ primary, secondary, accent }}>
-    header {
-        padding: 2rem 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  header {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    nav {
-        display: inline-flex;
-        align-items: center;
-        gap: 2.5rem;
-    }
+  nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
 
-    .nav-links {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-    }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
 
-    .nav-links a {
-        text-decoration: none;
-        color: #0d0d0d;
-        font-size: 0.85rem;
-        font-weight: 500;
-        opacity: 0.85;
-        padding: 0.4rem 0.8rem;
-        border-radius: 8px;
-    }
+  .nav-links a {
+    text-decoration: none;
+    color: #0d0d0d;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.85;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+  }
 
-    .nav-links a:hover {
-        background: rgba(0, 0, 0, 0.05);
-    }
+  .nav-links a:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 
-    .nav-links a.active {
-        opacity: 1;
-        border: 1px solid;
-    }
+  .nav-links a.active {
+    opacity: 1;
+    border: 1px solid;
+  }
 </style>
