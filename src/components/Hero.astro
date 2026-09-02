@@ -32,7 +32,7 @@ const accent = "#000";
     <Image
       src={myImage}
       alt="Marina Saad."
-      class="hero-img absolute top-0 right-0 h-full max-h-[70vh] w-auto max-w-4/5 mask-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%202000%202000%22%3E%3Cpath%20d=%22M1912%201209c27-319-72-699-318-882-187-139-462-224-785-204S85%20468%2084%20880c0%20455%20481%20345%20636%20484s139%20514%20477%20516c386%203%20693-420%20715-671Z%22%20fill=%22%23808%22%3E%3C/path%3E%3C/svg%3E')] mask-contain mask-clip-border mask-center mask-no-repeat object-cover mix-blend-multiply grayscale"
+      class="hero-img absolute top-0 h-full max-h-[70vh] w-auto max-w-4/5 mask-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%202000%202000%22%3E%3Cpath%20d=%22M1912%201209c27-319-72-699-318-882-187-139-462-224-785-204S85%20468%2084%20880c0%20455%20481%20345%20636%20484s139%20514%20477%20516c386%203%20693-420%20715-671Z%22%20fill=%22%23808%22%3E%3C/path%3E%3C/svg%3E')] mask-contain mask-clip-border mask-center mask-no-repeat object-cover mix-blend-multiply grayscale"
     />
   </section>
 </main>
@@ -48,5 +48,9 @@ const accent = "#000";
 
   .cta {
     font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+
+  .hero-img {
+      right: clamp(1rem, 6vw, 10rem);
   }
 </style>
