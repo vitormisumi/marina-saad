@@ -1,39 +1,41 @@
 ---
 import { Image } from "astro:assets";
-import myImage from "../assets/marina.jpg";
+import marina from "../assets/marina.jpg";
 ---
 
 <main>
   <section class="h-[80vh]">
     <div
-      class="relative flex h-full flex-col justify-between gap-8 md:justify-around"
+      class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-around md:text-left"
     >
       <h1
         class="leading-10 font-bold tracking-tight md:leading-12 lg:leading-14 xl:leading-16 2xl:leading-18"
       >
         Marina Saad<br />
-        <span class="font-serif font-medium text-gray-700 italic">
+        <span class="text-primary/80 font-serif italic">
           Planejadora <br />Financeira
         </span>
       </h1>
 
-      <div class="space-y-4">
-        <p class="description leading-5 text-gray-700">
+      <div class="space-y-6">
+        <p
+          class="description text-primary/80 leading-6 md:leading-8 lg:leading-10"
+        >
           Transforme sua relação com o dinheiro <br />
           e construa o futuro que você merece.
         </p>
 
         <button
-          class="cta w-min cursor-pointer rounded-lg bg-accent px-4 py-2 font-bold whitespace-nowrap text-white drop-shadow-md transition-colors hover:bg-accent/80"
+          class="cta bg-accent hover:bg-accent/80 w-min cursor-pointer rounded-lg px-6 py-2 font-serif font-semibold whitespace-nowrap text-white drop-shadow-md transition-colors"
         >
           Agende seu Papo Inicial
         </button>
       </div>
 
       <Image
-        src={myImage}
+        src={marina}
         alt="Marina Saad."
-        class="hero-img absolute top-0 right-0 h-full object-cover mix-blend-multiply grayscale"
+        class="hero-img absolute top-0 right-1/2 h-full translate-x-1/2 object-cover mix-blend-multiply grayscale md:right-0 md:translate-x-0"
       />
     </div>
   </section>
@@ -44,15 +46,15 @@ import myImage from "../assets/marina.jpg";
     }
 
     h1 {
-      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-size: clamp(2rem, 5vw, 5rem);
     }
 
     .description {
-      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      font-size: clamp(0.8rem, 2vw, 1.5rem);
     }
 
     .cta {
-      font-size: clamp(0.8rem, 2vw, 1rem);
+      font-size: clamp(1rem, 2vw, 1.5rem);
     }
 
     .hero-img {

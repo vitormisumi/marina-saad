@@ -19,3 +19,14 @@ body {
   --color-accent: black;
   --color-background: #fff;
 }
+
+@theme inline {
+  --font-serif: var(--font-martel);
+}
+
+@layer base {
+  p {
+    font-family: var(--font-martel);
+    font-weight: 200;
+  }
+}
