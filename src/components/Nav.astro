@@ -1,4 +1,5 @@
 ---
+import type { GetStaticPaths } from "astro";
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "Sobre mim" },
@@ -44,7 +45,7 @@ const isActive = (href: string) =>
           <a
             href={href}
             aria-current={isActive(href) ? "page" : undefined}
-            class="rounded-lg px-3 py-2 text-base font-medium opacity-85 hover:bg-black/5 hover:opacity-100 aria-[current=page]:border aria-[current=page]:opacity-100 md:text-[0.85rem]"
+            class="hover:border-accent hover:before:border-accent hover:after:border-accent aria-[current=page]:border-primary aria-[current=page]:before:border-primary aria-[current=page]:after:border-primary relative rounded-tr-lg rounded-bl-lg border border-transparent px-3 py-1 text-base font-medium opacity-85 transition-colors duration-700 before:absolute before:top-0 before:left-0 before:size-3 before:-translate-x-3 before:-translate-y-3 before:rounded-l-full before:rounded-tr-full before:border before:border-transparent before:transition-colors before:duration-700 after:absolute after:right-0 after:bottom-0 after:size-3 after:translate-x-3 after:translate-y-3 after:rounded-r-full after:rounded-bl-full after:border after:border-transparent after:transition-colors after:duration-700 md:text-[0.85rem]"
           >
             {label}
           </a>

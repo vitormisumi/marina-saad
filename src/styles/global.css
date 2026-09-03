@@ -13,3 +13,9 @@ body {
   background-color: #fff;
   color: #000;
 }
+
+@theme {
+  --color-primary: #000;
+  --color-accent: gold;
+  --color-background: #fff;
+}
