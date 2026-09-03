@@ -27,7 +27,12 @@ body {
 
 @layer base {
   p {
-    font-family: var(--font-serif);
-    font-weight: 200;
+    @apply text-primary/80 font-serif font-extralight;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight;
   }
 }

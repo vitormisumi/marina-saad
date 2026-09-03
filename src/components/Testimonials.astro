@@ -1,0 +1,86 @@
+---
+// TODO: substituir por depoimentos reais de clientes.
+const testimonials = [
+  {
+    quote:
+      "A Marina me ajudou a organizar minhas finanças e, pela primeira vez, sinto que estou no controle do meu dinheiro. Hoje consigo poupar sem abrir mão do que amo.",
+    name: "Ana Beatriz Costa",
+    role: "Empreendedora",
+  },
+  {
+    quote:
+      "Depois de anos vivendo no vermelho, finalmente construí uma reserva de emergência. O acompanhamento da Marina fez toda a diferença.",
+    name: "Rafael Menezes",
+    role: "Servidor público",
+  },
+  {
+    quote:
+      "Com o planejamento dela, quitei minhas dívidas em um ano e comecei a investir com segurança. Recomendo de olhos fechados.",
+    name: "Juliana Prado",
+    role: "Designer autônoma",
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+---
+
+<section>
+  <div class="space-y-2 text-center md:text-left">
+    <h3 class="font-sans text-4xl font-bold">O que dizem meus clientes</h3>
+
+    <p class="tracking-tight italic">
+      Histórias de quem transformou sua relação com o dinheiro
+    </p>
+  </div>
+
+  <div class="mt-12 grid gap-8 md:grid-cols-3">
+    {
+      testimonials.map(({ quote, name, role }) => (
+        <figure class="flex flex-col justify-between gap-8 rounded-2xl border border-black/10 bg-white p-8 shadow-sm">
+          <blockquote class="before:text-primary/30 relative pt-8 before:absolute before:top-2 before:-left-2 before:font-serif before:text-5xl before:leading-8 before:italic before:content-['“']">
+            <p class="text-primary/80 leading-6 md:leading-7">{quote}</p>
+          </blockquote>
+
+          <figcaption class="flex items-center gap-4">
+            <span
+              class="bg-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-sans text-sm font-semibold text-white"
+              aria-hidden="true"
+            >
+              {initials(name)}
+            </span>
+
+            <span class="space-y-0.5">
+              <span class="block font-sans text-sm font-semibold">{name}</span>
+              <span class="text-primary/70 block font-serif text-sm font-light">
+                {role}
+              </span>
+            </span>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 4rem clamp(2rem, 10vw, 16rem);
+  }
+
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+  }
+
+  section > div:first-child p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  blockquote p {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  }
+</style>
