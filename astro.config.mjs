@@ -11,8 +11,15 @@ export default defineConfig({
     {
       provider: fontProviders.google(),
       name: "Martel",
-      cssVariable: "--font-martel",
+      cssVariable: "--font-serif",
       weights: [200, 300, 400, 500, 600, 700, 800, 900],
+      fallbacks: ["sans-serif"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Mukta",
+      cssVariable: "--font-sans",
+      weights: [200, 300, 400, 500, 600, 700, 800],
       fallbacks: ["sans-serif"],
     },
   ],

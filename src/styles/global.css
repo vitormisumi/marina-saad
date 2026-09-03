@@ -21,12 +21,13 @@ body {
 }
 
 @theme inline {
-  --font-serif: var(--font-martel);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 @layer base {
   p {
-    font-family: var(--font-martel);
+    font-family: var(--font-serif);
     font-weight: 200;
   }
 }

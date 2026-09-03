@@ -6,16 +6,15 @@ import marina from "../assets/marina.jpg";
 <main>
   <section class="h-[80vh]">
     <div
-      class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-around md:text-left"
+      class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
     >
-      <h1
-        class="leading-10 font-bold tracking-tight md:leading-12 lg:leading-14 xl:leading-16 2xl:leading-18"
-      >
-        Marina Saad<br />
-        <span class="text-primary/80 font-serif italic">
+      <div class="headers space-y-2">
+        <h1 class="font-sans font-extrabold tracking-tight">Marina Saad</h1>
+
+        <h2 class="text-primary/80 font-serif tracking-tighter italic">
           Planejadora <br />Financeira
-        </span>
-      </h1>
+        </h2>
+      </div>
 
       <div class="space-y-6">
         <p
@@ -26,7 +25,7 @@ import marina from "../assets/marina.jpg";
         </p>
 
         <button
-          class="cta bg-accent hover:bg-accent/80 w-min cursor-pointer rounded-lg px-6 py-2 font-serif font-semibold whitespace-nowrap text-white drop-shadow-md transition-colors"
+          class="cta bg-accent hover:bg-accent/80 w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap text-white font-sans drop-shadow-md transition-colors"
         >
           Agende seu Papo Inicial
         </button>
@@ -35,6 +34,7 @@ import marina from "../assets/marina.jpg";
       <Image
         src={marina}
         alt="Marina Saad."
+        loading="eager"
         class="hero-img absolute top-0 right-1/2 h-full translate-x-1/2 object-cover mix-blend-multiply grayscale md:right-0 md:translate-x-0"
       />
     </div>
@@ -46,7 +46,12 @@ import marina from "../assets/marina.jpg";
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 5rem);
+      font-size: clamp(3rem, 5.5vw, 5rem);
+    }
+
+    h2 {
+      line-height: 1.2;
+      font-size: clamp(2.5rem, 4.75vw, 4rem);
     }
 
     .description {
