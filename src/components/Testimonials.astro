@@ -19,9 +19,11 @@ const blobPaths = [
 ];
 ---
 
-<section class="reveal testimonials-reveal mt-10">
+<section class="reveal testimonials-reveal">
   <div class="space-y-2 text-center md:text-left">
-    <h3 class="reveal-item reveal-fade font-sans text-4xl font-bold">O que dizem meus clientes</h3>
+    <h3 class="reveal-item reveal-fade font-sans text-4xl font-bold">
+      O que dizem meus clientes
+    </h3>
 
     <p class="reveal-item reveal-fade tracking-tight italic">
       Histórias de quem transformou sua relação com o dinheiro
@@ -31,7 +33,7 @@ const blobPaths = [
   <div class="mt-12 grid gap-4 md:grid-cols-3">
     {
       testimonials.map(({ data: { name, role }, body }, index) => (
-        <figure class="reveal-item relative flex flex-col justify-between gap-8 p-10 transition-scale hover:scale-105 md:p-8 lg:p-12">
+        <figure class="reveal-item transition-scale relative flex flex-col justify-between gap-8 p-10 hover:scale-105 md:p-8 lg:p-12">
           <svg
             class="absolute inset-0 -z-10 h-full w-full"
             viewBox="0 0 2000 2000"
@@ -72,10 +74,6 @@ const blobPaths = [
 </section>
 
 <style>
-  section {
-    padding: 4rem clamp(2rem, 10vw, 16rem);
-  }
-
   h2 {
     font-size: clamp(2rem, 3.5vw, 3rem);
   }

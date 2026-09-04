@@ -14,6 +14,10 @@ body {
   color: #000;
 }
 
+section {
+  padding: 0 clamp(2rem, 10vw, 16rem);
+}
+
 @theme {
   --color-primary: #000;
   --color-accent: black;

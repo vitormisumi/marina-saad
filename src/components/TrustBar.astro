@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 const stats = [
   { value: "10+", label: "anos de experiência" },
@@ -42,9 +42,12 @@ const mediaMentions: MediaMention[] = [
 ];
 ---
 
-<section aria-label="Credenciais e resultados" class="reveal trustbar-reveal">
-  <div class="divide-y divide-black/10 border-y border-black/10">
-    <dl class="flex justify-around gap-6 py-10">
+<section
+  aria-label="Credenciais e resultados"
+  class="reveal trustbar-reveal bg-linear-to-b from-background to-background via-50% via-gray-400"
+>
+  <div>
+    <dl class="from-background flex justify-around gap-6 py-10">
       {
         stats.map(({ value, label }) => (
           <div class="reveal-item space-y-1 text-center">
@@ -90,7 +93,7 @@ const mediaMentions: MediaMention[] = [
                   class="reveal-item group hover:border-primary/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
                 >
                   <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
-                      <Icon name="circum:play-1" />
+                    <Icon name="circum:play-1" />
                     {mention.outlet}
                   </span>
 
@@ -112,7 +115,7 @@ const mediaMentions: MediaMention[] = [
                   class="reveal-item group hover:border-primary/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
                 >
                   <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
-                      <Icon name="circum:link" />
+                    <Icon name="circum:link" />
                     {mention.outlet}
                   </span>
 
@@ -156,7 +159,7 @@ const mediaMentions: MediaMention[] = [
       </svg>
     </button>
   </div>
-  <div class="aspect-video w-full bg-black">
+  <div class="aspect-video w-full p-4">
     <iframe
       id="video-frame"
       title="Reprodutor de vídeo"
@@ -167,10 +170,6 @@ const mediaMentions: MediaMention[] = [
 </dialog>
 
 <style>
-  section {
-    padding: 0 clamp(2rem, 10vw, 16rem);
-  }
-
   dialog.video-dialog {
     width: min(92vw, 760px);
     padding: 0;

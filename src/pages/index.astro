@@ -1,18 +1,24 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Nav from "../components/Nav.astro";
 import Testimonials from "../components/Testimonials.astro";
 import TrustBar from "../components/TrustBar.astro";
+import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 ---
 
 <Layout>
+  <header
+    class="relative flex h-[10vh] items-center justify-end px-6 md:justify-center md:px-0"
+  >
     <Nav />
+  </header>
 
+  <main class="space-y-8">
     <Hero />
 
     <TrustBar />
 
     <Testimonials />
+  </main>
 </Layout>

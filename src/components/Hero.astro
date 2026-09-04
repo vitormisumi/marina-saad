@@ -3,80 +3,83 @@ import { Image } from "astro:assets";
 import marina from "../assets/marina.jpg";
 ---
 
-<main>
-  <section class="h-[80vh]">
-    <div
-      class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
-    >
-      <div class="space-y-2">
-        <h1 class="font-sans font-extrabold">Marina Saad</h1>
+<section class="h-[80vh]">
+  <div
+    class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
+  >
+    <div class="space-y-2">
+      <h1 class="font-sans font-extrabold">Marina Saad</h1>
 
-        <h2 class="text-primary/80 font-serif italic">
-          Planejadora <br />Financeira
-        </h2>
-      </div>
-
-      <div class="space-y-6">
-        <p
-          class="description text-primary/80 leading-6 md:leading-8 lg:leading-10"
-        >
-          Transforme sua relação com o dinheiro <br />
-          e construa o futuro que você merece.
-        </p>
-
-        <button
-          class="cta bg-accent hover:bg-accent/80 w-min cursor-pointer rounded-lg px-6 py-2 font-sans font-semibold whitespace-nowrap text-white drop-shadow-md transition-colors"
-        >
-          Agende seu Papo Inicial
-        </button>
-      </div>
-
-      <Image
-        src={marina}
-        alt="Marina Saad."
-        priority
-        layout="constrained"
-        class="hero-img absolute top-0 right-1/2 h-full translate-x-1/2 object-cover mix-blend-multiply grayscale md:right-0 md:translate-x-0"
-      />
-
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="line absolute top-0 right-1/2 h-full translate-x-1/2 md:right-0 md:translate-x-0">
-          <path fill="none" stroke="lightgrey" stroke-width=0.2 d="M50,-46.8C63.2,-36.8,71.3,-18.4,69.5,-1.8C67.8,14.9,56.2,29.8,43,41.5C29.8,53.2,14.9,61.6,-3.3,64.9C-21.5,68.2,-42.9,66.3,-50.6,54.6C-58.3,42.9,-52.3,21.5,-49.6,2.7C-46.9,-16,-47.4,-32,-39.7,-42C-32,-52,-16,-56,1.2,-57.2C18.4,-58.4,36.8,-56.8,50,-46.8Z" transform="translate(95 85) scale(1.35)" />
-      </svg>
-
+      <h2 class="text-primary/80 font-serif italic">
+        Planejadora <br />Financeira
+      </h2>
     </div>
-  </section>
 
-  <style>
-    main {
-      padding: 2rem clamp(2rem, 10vw, 16rem);
-    }
+    <div class="space-y-6">
+      <p
+        class="description text-primary/80 leading-6 md:leading-8 lg:leading-10"
+      >
+        Transforme sua relação com o dinheiro <br />
+        e construa o futuro que você merece.
+      </p>
 
-    h1 {
-      font-size: clamp(3rem, 5.5vw, 5rem);
-    }
+      <button
+        class="cta bg-accent hover:bg-accent/80 w-min cursor-pointer rounded-lg px-6 py-2 font-sans font-semibold whitespace-nowrap text-white drop-shadow-md transition-colors"
+      >
+        Agende seu Papo Inicial
+      </button>
+    </div>
 
-    h2 {
-      line-height: 1.2;
-      font-size: clamp(2.5rem, 4.75vw, 4rem);
-    }
+    <Image
+      src={marina}
+      alt="Marina Saad."
+      priority
+      layout="constrained"
+      class="hero-img absolute top-0 right-1/2 h-full translate-x-1/2 object-cover mix-blend-multiply grayscale md:right-0 md:translate-x-0"
+    />
 
-    .description {
-      font-size: clamp(0.8rem, 2vw, 1.5rem);
-    }
+    <svg
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+      class="line absolute top-0 right-1/2 h-full translate-x-1/2 md:right-0 md:translate-x-0"
+    >
+      <path
+        fill="none"
+        stroke="lightgrey"
+        stroke-width="0.2"
+        d="M39.1,-45.8C54.8,-33.4,74.4,-25,80.1,-11.4C85.8,2.3,77.6,21.2,65.9,34.9C54.2,48.6,39.1,57.1,22.9,63.1C6.7,69.2,-10.5,72.7,-23.3,66.8C-36,61,-44.3,45.7,-52.8,30.7C-61.3,15.6,-70,0.9,-71,-15.8C-72,-32.6,-65.3,-51.2,-52.2,-64.1C-39.1,-76.9,-19.6,-83.9,-3.9,-79.2C11.7,-74.5,23.4,-58.2,39.1,-45.8Z"
+        transform="translate(105 90) scale(1.15)"></path>
+    </svg>
+  </div>
+</section>
 
-    .cta {
-      font-size: clamp(1rem, 2vw, 1.5rem);
-    }
+<style>
+  h1 {
+    font-size: clamp(3rem, 5.5vw, 5rem);
+  }
 
-    .hero-img, .line {
-      width: max(450px, 50%);
-      max-width: 80vw;
-    }
+  h2 {
+    line-height: 1.2;
+    font-size: clamp(2.5rem, 4.75vw, 4rem);
+  }
 
-    .hero-img {
-      mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><path d="M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z" fill="%23808"></path></svg>');
-      mask-position: center;
-      mask-repeat: no-repeat;
-    }
-  </style>
-</main>
+  .description {
+    font-size: clamp(0.8rem, 2vw, 1.5rem);
+  }
+
+  .cta {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .hero-img,
+  .line {
+    width: max(450px, 50%);
+    max-width: 80vw;
+  }
+
+  .hero-img {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><path d="M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z" fill="%23808"></path></svg>');
+    mask-position: center;
+    mask-repeat: no-repeat;
+  }
+</style>
