@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
   "features": {
-    "ghcr.io/devcontainers/features/sshd:1": {},
     "ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {},
     "ghcr.io/devcontainers-extra/features/fish-apt-get:1": {}
   },
@@ -15,15 +14,82 @@
   // "features": {},
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [2222, 4321],
+  "forwardPorts": [4321],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "yarn install",
 
   // Configure tool-specific properties.
   "customizations": {
-    "zed": {
-      "extensions": ["astro"]
+    "vscode": {
+      "extensions": [
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "johnpapa.vscode-peacock",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+        "teabyii.ayu",
+        "tobermory.es6-string-html",
+        "usernamehw.errorlens",
+        "vscode-icons-team.vscode-icons",
+        "yoavbls.pretty-ts-errors",
+        "astro-build.astro-vscode"
+      ],
+      "settings": {
+        "workbench.colorCustomizations": {
+          "activityBar.activeBackground": "#65c89b",
+          "activityBar.background": "#65c89b",
+          "activityBar.foreground": "#15202b",
+          "activityBar.inactiveForeground": "#15202b99",
+          "activityBarBadge.background": "#945bc4",
+          "activityBarBadge.foreground": "#e7e7e7",
+          "activityBarTop.activeBackground": "#65c89b",
+          "activityBarTop.background": "#65c89b",
+          "activityBarTop.foreground": "#15202b",
+          "activityBarTop.inactiveForeground": "#15202b99",
+          "commandCenter.border": "#15202b99",
+          "commandCenter.foreground": "#15202b",
+          "sash.hoverBorder": "#65c89b",
+          "statusBar.background": "#42b883",
+          "statusBar.debuggingBackground": "#42b883",
+          "statusBar.debuggingForeground": "#15202b",
+          "statusBar.foreground": "#15202b",
+          "statusBarItem.hoverBackground": "#359268",
+          "statusBarItem.remoteBackground": "#f0e8f7",
+          "statusBarItem.remoteForeground": "#15202b",
+          "titleBar.activeBackground": "#42b883",
+          "titleBar.activeForeground": "#15202b",
+          "titleBar.inactiveBackground": "#42b88399",
+          "titleBar.inactiveForeground": "#15202b99"
+        },
+        "peacock.remoteColor": "#42b883",
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit",
+          "source.organizeImports": "explicit",
+          "source.addMissingImports": "explicit"
+        },
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+          "package.json": ".prettier*, .gitignore, .env, package*, README*, tsconfig.json, astro.config.mjs, opencode.json, AGENTS.md"
+        },
+        "files.exclude": {
+          "**/.vscode": true,
+          "**/.astro": true,
+          "**/dist": true,
+          "**/node_modules": true
+        },
+        "explorer.sortOrder": "filesFirst",
+        "editor.fontSize": 12,
+        "window.zoomLevel": 1,
+        "cSpell.ignorePaths": [
+          "package.json",
+          ".prettierrc",
+          "package-lock.json",
+          "node_modules",
+          ".vscode",
+          ".devcontainer/**"
+        ]
+      }
     }
   }
 
