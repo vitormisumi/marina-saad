@@ -19,11 +19,11 @@ const blobPaths = [
 ];
 ---
 
-<section>
+<section class="reveal">
   <div class="space-y-2 text-center md:text-left">
-    <h3 class="font-sans text-4xl font-bold">O que dizem meus clientes</h3>
+    <h3 class="reveal-item reveal-fade font-sans text-4xl font-bold">O que dizem meus clientes</h3>
 
-    <p class="tracking-tight italic">
+    <p class="reveal-item reveal-fade tracking-tight italic">
       Histórias de quem transformou sua relação com o dinheiro
     </p>
   </div>
@@ -31,7 +31,7 @@ const blobPaths = [
   <div class="mt-12 grid gap-4 md:grid-cols-3">
     {
       testimonials.map(({ data: { name, role }, body }, index) => (
-        <figure class="relative flex flex-col justify-between gap-8 p-10 transition-all hover:scale-105 md:p-8 lg:p-12">
+        <figure class="reveal-item relative flex flex-col justify-between gap-8 p-10 transition-scale hover:scale-105 md:p-8 lg:p-12">
           <svg
             class="absolute inset-0 -z-10 h-full w-full"
             viewBox="0 0 2000 2000"
@@ -87,4 +87,53 @@ const blobPaths = [
   blockquote p {
     font-size: clamp(0.875rem, 1.5vw, 1.125rem);
   }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms),
+      scale 0.3s ease;
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  const section = document.querySelector(".reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    items.forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 250}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+  }
+</script>
