@@ -38,6 +38,11 @@ import marina from "../assets/marina.jpg";
         layout="constrained"
         class="hero-img absolute top-0 right-1/2 h-full translate-x-1/2 object-cover mix-blend-multiply grayscale md:right-0 md:translate-x-0"
       />
+
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="line absolute top-0 right-1/2 h-full translate-x-1/2 md:right-0 md:translate-x-0 scale-110 md:scale-130">
+          <path fill="none" stroke="lightgrey" stroke-width=0.2 d="M50,-46.8C63.2,-36.8,71.3,-18.4,69.5,-1.8C67.8,14.9,56.2,29.8,43,41.5C29.8,53.2,14.9,61.6,-3.3,64.9C-21.5,68.2,-42.9,66.3,-50.6,54.6C-58.3,42.9,-52.3,21.5,-49.6,2.7C-46.9,-16,-47.4,-32,-39.7,-42C-32,-52,-16,-56,1.2,-57.2C18.4,-58.4,36.8,-56.8,50,-46.8Z" transform="translate(100 85)" />
+      </svg>
+
     </div>
   </section>
 
@@ -63,8 +68,11 @@ import marina from "../assets/marina.jpg";
       font-size: clamp(1rem, 2vw, 1.5rem);
     }
 
-    .hero-img {
+    .hero-img, .line {
       width: max(450px, 50%);
+    }
+
+    .hero-img {
       mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><path d="M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z" fill="%23808"></path></svg>');
       mask-position: center;
       mask-repeat: no-repeat;
