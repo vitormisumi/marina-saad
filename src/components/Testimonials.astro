@@ -1,25 +1,9 @@
 ---
-// TODO: substituir por depoimentos reais de clientes.
-const testimonials = [
-  {
-    quote:
-      "A Marina me ajudou a organizar minhas finanças e, pela primeira vez, sinto que estou no controle do meu dinheiro. Hoje consigo poupar sem abrir mão do que amo.",
-    name: "Ana Beatriz Costa",
-    role: "Empreendedora",
-  },
-  {
-    quote:
-      "Depois de anos vivendo no vermelho, finalmente construí uma reserva de emergência. O acompanhamento da Marina fez toda a diferença.",
-    name: "Rafael Menezes",
-    role: "Servidor público",
-  },
-  {
-    quote:
-      "Com o planejamento dela, quitei minhas dívidas em um ano e comecei a investir com segurança. Recomendo de olhos fechados.",
-    name: "Juliana Prado",
-    role: "Designer autônoma",
-  },
-];
+import { getCollection } from "astro:content";
+
+const testimonials = (await getCollection("testimonials")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const initials = (name: string) =>
   name
@@ -46,8 +30,8 @@ const blobPaths = [
 
   <div class="mt-12 grid gap-4 md:grid-cols-3">
     {
-      testimonials.map(({ quote, name, role }, index) => (
-        <figure class="relative flex flex-col justify-between gap-8 p-10 md:p-8 lg:p-12 transition-all hover:scale-105">
+      testimonials.map(({ data: { name, role }, body }, index) => (
+        <figure class="relative flex flex-col justify-between gap-8 p-10 transition-all hover:scale-105 md:p-8 lg:p-12">
           <svg
             class="absolute inset-0 -z-10 h-full w-full"
             viewBox="0 0 2000 2000"
@@ -63,7 +47,7 @@ const blobPaths = [
           </svg>
 
           <blockquote class="before:text-primary/30 relative pt-8 before:absolute before:top-4 before:-left-2 before:font-serif before:text-5xl before:leading-8 before:italic before:content-['“']">
-            <p class="text-primary/80 leading-6 md:leading-7">{quote}</p>
+            <p class="text-primary/80 leading-6 md:leading-7">{body}</p>
           </blockquote>
 
           <figcaption class="relative flex items-center gap-4 md:flex-col md:text-center lg:flex-row lg:text-left">
