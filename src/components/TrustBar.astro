@@ -1,0 +1,92 @@
+---
+const stats = [
+  { value: "10+", label: "anos de experiência" },
+  { value: "60+", label: "clientes atendidos" },
+  { value: "R$ 10M+", label: "em patrimônio assessorado" },
+];
+
+const credentials = ["CFP®", "CVM", "ANBIMA"];
+---
+
+<section aria-label="Credenciais e resultados" class="reveal trustbar-reveal">
+  <div
+    class="grid gap-8 border-y border-black/10 py-10 md:grid-cols-[1fr_auto] md:items-center"
+  >
+    <dl class="grid grid-cols-3 gap-6">
+      {
+        stats.map(({ value, label }) => (
+          <div class="reveal-item space-y-1 text-center md:text-left">
+            <dd class="font-sans text-3xl font-extrabold tracking-tight md:text-4xl">
+              {value}
+            </dd>
+            <dt class="text-primary/70 font-serif text-sm font-light italic">
+              {label}
+            </dt>
+          </div>
+        ))
+      }
+    </dl>
+
+    <ul class="flex items-center justify-center gap-6 md:gap-8">
+      {
+        credentials.map((credential) => (
+          <li
+            class="border-primary/20 text-primary/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase"
+          >
+            {credential}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 0 clamp(2rem, 10vw, 16rem);
+  }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector<HTMLElement>(".trustbar-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    items.forEach((item, index) => {
+      (item as HTMLElement).style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+  }
+</script>
