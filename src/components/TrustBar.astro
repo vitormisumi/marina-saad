@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 const stats = [
   { value: "10+", label: "anos de experiência" },
   { value: "60+", label: "clientes atendidos" },
@@ -6,16 +8,46 @@ const stats = [
 ];
 
 const credentials = ["CFP®", "CVM", "ANBIMA"];
+
+type MediaMention =
+  | {
+      outlet: string;
+      title: string;
+      type: "video";
+      videoId: string;
+      start?: number;
+    }
+  | { outlet: string; title: string; type: "article"; url: string };
+
+const mediaMentions: MediaMention[] = [
+  {
+    outlet: "Podcast Paty Saad",
+    title: "Conversa com Marina Saad",
+    type: "video",
+    videoId: "htmWHPwwQW0",
+    start: 2360,
+  },
+  {
+    outlet: "Exame",
+    title: "Planejamento financeiro para empreendedoras",
+    type: "article",
+    url: "https://example.com/exame",
+  },
+  {
+    outlet: "Valor Econômico",
+    title: "A importância de um plano de previdência cedo",
+    type: "article",
+    url: "https://example.com/valor",
+  },
+];
 ---
 
 <section aria-label="Credenciais e resultados" class="reveal trustbar-reveal">
-  <div
-    class="grid gap-8 border-y border-black/10 py-10 md:grid-cols-[1fr_auto] md:items-center"
-  >
-    <dl class="grid grid-cols-3 gap-6">
+  <div class="divide-y divide-black/10 border-y border-black/10">
+    <dl class="flex justify-around gap-6 py-10">
       {
         stats.map(({ value, label }) => (
-          <div class="reveal-item space-y-1 text-center md:text-left">
+          <div class="reveal-item space-y-1 text-center">
             <dd class="font-sans text-3xl font-extrabold tracking-tight md:text-4xl">
               {value}
             </dd>
@@ -27,23 +59,131 @@ const credentials = ["CFP®", "CVM", "ANBIMA"];
       }
     </dl>
 
-    <ul class="flex items-center justify-center gap-6 md:gap-8">
+    <ul class="flex items-center justify-center gap-6 py-10 md:gap-8">
       {
         credentials.map((credential) => (
-          <li
-            class="border-primary/20 text-primary/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase"
-          >
+          <li class="border-primary/20 text-primary/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase">
             {credential}
           </li>
         ))
       }
     </ul>
+
+    <div class="py-10">
+      <h3
+        class="reveal-item font-sans text-sm font-semibold tracking-widest uppercase"
+      >
+        Na mídia
+      </h3>
+
+      <ul class="mt-6 grid gap-4 md:grid-cols-3">
+        {
+          mediaMentions.map((mention) =>
+            mention.type === "video" ? (
+              <li>
+                <button
+                  type="button"
+                  data-video-id={mention.videoId}
+                  data-video-start={mention.start}
+                  data-video-title={mention.title}
+                  aria-haspopup="dialog"
+                  class="reveal-item group hover:border-primary/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
+                >
+                  <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                      <Icon name="circum:play-1" />
+                    {mention.outlet}
+                  </span>
+
+                  <span class="font-sans leading-snug font-semibold">
+                    {mention.title}
+                  </span>
+
+                  <span class="text-primary/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                    Assistir vídeo
+                  </span>
+                </button>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={mention.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="reveal-item group hover:border-primary/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
+                >
+                  <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                      <Icon name="circum:link" />
+                    {mention.outlet}
+                  </span>
+
+                  <span class="font-sans leading-snug font-semibold">
+                    {mention.title}
+                  </span>
+
+                  <span class="text-primary/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                    Ler matéria
+                  </span>
+                </a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </div>
   </div>
 </section>
+
+<dialog id="video-dialog" class="video-dialog">
+  <div
+    class="flex items-center justify-between gap-4 border-b border-black/10 px-5 py-4"
+  >
+    <p id="video-dialog-title" class="font-sans font-semibold"></p>
+    <button
+      type="button"
+      data-close
+      aria-label="Fechar"
+      class="flex cursor-pointer items-center justify-center rounded-full p-2 transition-colors hover:bg-black/5"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="h-5 w-5"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="aspect-video w-full bg-black">
+    <iframe
+      id="video-frame"
+      title="Reprodutor de vídeo"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="h-full w-full border-0"></iframe>
+  </div>
+</dialog>
 
 <style>
   section {
     padding: 0 clamp(2rem, 10vw, 16rem);
+  }
+
+  dialog.video-dialog {
+    width: min(92vw, 760px);
+    padding: 0;
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #fff;
+    color: #000;
+    margin: auto;
+  }
+
+  dialog.video-dialog::backdrop {
+    background: rgb(0 0 0 / 0.6);
   }
 
   .reveal-item {
@@ -74,7 +214,10 @@ const credentials = ["CFP®", "CVM", "ANBIMA"];
     const items = [...section.querySelectorAll(".reveal-item")];
 
     items.forEach((item, index) => {
-      (item as HTMLElement).style.setProperty("--reveal-delay", `${index * 150}ms`);
+      (item as HTMLElement).style.setProperty(
+        "--reveal-delay",
+        `${index * 150}ms`,
+      );
     });
 
     const observer = new IntersectionObserver(
@@ -84,9 +227,46 @@ const credentials = ["CFP®", "CVM", "ANBIMA"];
           observer.disconnect();
         }
       },
-      { threshold: 0.4 },
+      { threshold: 0.5 },
     );
 
     observer.observe(section);
   }
+
+  const dialog = document.querySelector<HTMLDialogElement>("#video-dialog");
+  const frame = document.querySelector<HTMLIFrameElement>("#video-frame");
+  const dialogTitle = document.querySelector<HTMLParagraphElement>(
+    "#video-dialog-title",
+  );
+
+  const openVideo = (button: HTMLElement) => {
+    if (!dialog || !frame) return;
+
+    const id = button.dataset.videoId;
+    const start = button.dataset.videoStart;
+    const title = button.dataset.videoTitle;
+
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}${start ? `?start=${start}` : ""}`;
+    if (dialogTitle) dialogTitle.textContent = title ?? "";
+
+    dialog.showModal();
+  };
+
+  section
+    ?.querySelectorAll<HTMLElement>("[data-video-id]")
+    .forEach((button) => {
+      button.addEventListener("click", () => openVideo(button));
+    });
+
+  dialog?.querySelector("[data-close]")?.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+
+  dialog?.addEventListener("close", () => {
+    if (frame) frame.src = "";
+  });
 </script>
