@@ -4,34 +4,73 @@ const phrases = [
   "...quitar as dívidas?",
   "...controlar os gastos?",
   "...investir com segurança?",
-  "...organizar suas finanças?",
+  "...organizar seu negócio?",
 ];
 ---
 
-<section
-  class="reveal painpoint-reveal to-tertiary/5 from-tertiary/30 bg-linear-to-r py-16"
->
-  <div class="space-y-8 text-center md:text-left">
-    <p class="reveal-item reveal-fade text-foreground/60 eyebrow">
-      Quer ajuda para...
-    </p>
+<div class="painpoint-shell relative">
+  <svg
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+    class="organic-line organic-line-top text-tertiary/70"
+    aria-hidden="true"
+  >
+    <path
+      d="M0 6C10 2 18 0 28 5C35 9 41 10 48 6C57 2 64 0 73 6C82 12 91 9 100 4"
+      class="stroke-tertiary fill-none stroke-[0.3]"></path>
+  </svg>
 
-    <h3 class="reveal-item reveal-fade accent leading-2">
-      <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
-        >{phrases[0]}</span
-      ><span
-        class="animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
-        aria-hidden="true"></span>
-    </h3>
+  <svg
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+    class="organic-line organic-line-bottom text-tertiary/70"
+    aria-hidden="true"
+  >
+    <path
+      d="M0 94C10 98 18 100 28 95C35 91 42 90 50 95C58 99 65 100 73 94C82 88 91 91 100 93"
+      class="stroke-tertiary fill-none stroke-[0.3]"></path>
+  </svg>
 
-    <p class="reveal-item reveal-fade text-foreground/70">
-      Você não precisa de fórmulas prontas — precisa de um plano que caiba na
-      sua vida.
-    </p>
-  </div>
-</section>
+  <section
+    class="reveal painpoint-reveal painpoint-organic to-tertiary/5 from-tertiary/30 bg-linear-to-r py-16"
+  >
+    <div class="relative z-10 space-y-8 text-center md:text-left">
+      <p class="reveal-item reveal-fade text-foreground/60 eyebrow">
+        Quer ajuda para...
+      </p>
+
+      <h3 class="reveal-item reveal-fade accent leading-2">
+        <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
+          >{phrases[0]}</span
+        ><span
+          class="animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
+          aria-hidden="true"></span>
+      </h3>
+
+      <p class="reveal-item reveal-fade text-foreground/70">
+        Você não precisa de fórmulas prontas — precisa de um plano que caiba na
+        sua vida.
+      </p>
+    </div>
+  </section>
+</div>
 
 <style>
+  .organic-line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .painpoint-organic {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 7C18 2 31 11 48 7C66 3 81 12 100 5V94C82 98 67 89 50 94C31 99 17 89 0 95Z" fill="white"/></svg>');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
   h3 {
     font-size: clamp(2rem, 4vw, 3.25rem);
   }
@@ -83,7 +122,7 @@ const phrases = [
       return;
     }
 
-    const typeSpeed = 55;
+    const typeSpeed = 100;
     const deleteSpeed = 30;
     const holdTime = 2000;
 

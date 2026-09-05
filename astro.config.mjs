@@ -13,7 +13,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Martel",
       cssVariable: "--font-serif",
-      weights: [200, 500],
+      weights: [200, 500, 800],
       styles: ["normal", "italic"],
       fallbacks: ["serif"],
     },
