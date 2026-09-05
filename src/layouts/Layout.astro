@@ -1,9 +1,10 @@
 ---
 import { Font } from "astro:assets";
+import Nav from "../components/Nav.astro";
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scrollbar-gutter-stable">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -14,7 +15,10 @@ import { Font } from "astro:assets";
     <Font cssVariable="--font-serif" preload />
     <Font cssVariable="--font-sans" preload />
   </head>
+
   <body>
+    <Nav />
+
     <slot />
   </body>
 </html>
