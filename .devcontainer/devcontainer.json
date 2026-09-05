@@ -87,7 +87,8 @@
           "package-lock.json",
           "node_modules",
           ".vscode",
-          ".devcontainer/**"
+          ".devcontainer/**",
+          "global.css"
         ]
       }
     }
