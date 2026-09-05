@@ -3,7 +3,8 @@
 {
   "features": {
     "ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {},
-    "ghcr.io/devcontainers-extra/features/fish-apt-get:1": {}
+    "ghcr.io/devcontainers-extra/features/fish-apt-get:1": {},
+    "ghcr.io/devcontainers/features/sshd:1": {}
   },
   "name": "Node.js & TypeScript",
   "runArgs": ["--name=marina-saad"],
@@ -14,7 +15,7 @@
   // "features": {},
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [4321],
+  "forwardPorts": [2222, 4321],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "yarn install",
