@@ -2,7 +2,10 @@
 import { Icon } from "astro-icon/components";
 
 const stats = [
-  { value: "10+", label: "anos de experiência" },
+  {
+    value: `${new Date().getFullYear() - 2014}+`,
+    label: "anos de experiência",
+  },
   { value: "60+", label: "clientes atendidos" },
   { value: "R$ 10M+", label: "em patrimônio assessorado" },
 ];
@@ -136,7 +139,10 @@ const mediaMentions: MediaMention[] = [
   </div>
 </section>
 
-<dialog id="video-dialog" class="video-dialog">
+<dialog
+  id="video-dialog"
+  class="bg-background text-foreground m-auto w-[min(92vw,760px)] overflow-hidden rounded-xl p-0"
+>
   <div
     class="flex items-center justify-between gap-4 border-b border-black/10 px-5 py-4"
   >
@@ -167,21 +173,6 @@ const mediaMentions: MediaMention[] = [
 </dialog>
 
 <style>
-  dialog.video-dialog {
-    width: min(92vw, 760px);
-    padding: 0;
-    border: none;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    background: #fff;
-    color: #000;
-    margin: auto;
-  }
-
-  dialog.video-dialog::backdrop {
-    background: rgb(0 0 0 / 0.6);
-  }
-
   .reveal-item {
     opacity: 0;
     transform: translateY(2rem);
