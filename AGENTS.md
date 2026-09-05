@@ -39,6 +39,7 @@ src/
 
 - Language is **Portuguese (Brazil)** — keep content in pt-BR
 - Tailwind is imported via `@import "tailwindcss"` in CSS (v4 style)
+- Prefer styling with Tailwind classes whenever possible, use Astro's scoped styles only for more complex css
 - Use `.astro` components unless framework interactivity is needed
 - Format with Prettier before committing (astro + tailwind plugins configured)
 
