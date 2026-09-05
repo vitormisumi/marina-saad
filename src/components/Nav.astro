@@ -14,7 +14,7 @@ const isActive = (href: string) =>
 ---
 
 <header
-  class="relative flex h-[10vh] items-center justify-end px-6 md:justify-center md:px-0"
+  class="bg-background relative top-0 z-50 flex items-center justify-end p-6 md:sticky md:justify-center md:px-0 md:py-8"
 >
   <nav class="group">
     <button
@@ -37,7 +37,7 @@ const isActive = (href: string) =>
 
     <div
       id="nav-links"
-      class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b px-6 py-4 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
+      class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b p-6 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
     >
       {
         links.map(({ href, label }) => (

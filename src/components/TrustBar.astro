@@ -51,7 +51,7 @@ const mediaMentions: MediaMention[] = [
       {
         stats.map(({ value, label }) => (
           <div class="reveal-item space-y-1 text-center">
-            <dd class="stat text-3xl md:text-4xl">{value}</dd>
+            <dd class="stat text-foreground text-3xl md:text-4xl">{value}</dd>
             <dt class="text-foreground/70 accent text-sm">{label}</dt>
           </div>
         ))
@@ -82,14 +82,14 @@ const mediaMentions: MediaMention[] = [
                   data-video-start={mention.start}
                   data-video-title={mention.title}
                   aria-haspopup="dialog"
-                  class="reveal-item group hover:border-foreground/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
+                  class="media-card reveal-item group border-foreground/10 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border p-5 text-left"
                 >
                   <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
                     <Icon name="circum:play-1" />
                     {mention.outlet}
                   </span>
 
-                  <span class="leading-snug font-semibold">
+                  <span class="text-foreground leading-snug font-semibold">
                     {mention.title}
                   </span>
 
@@ -104,14 +104,14 @@ const mediaMentions: MediaMention[] = [
                   href={mention.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="reveal-item group hover:border-foreground/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
+                  class="media-card reveal-item group flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5"
                 >
                   <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
                     <Icon name="circum:link" />
                     {mention.outlet}
                   </span>
 
-                  <span class="leading-snug font-semibold">
+                  <span class="text-foreground leading-snug font-semibold">
                     {mention.title}
                   </span>
 
@@ -162,6 +162,52 @@ const mediaMentions: MediaMention[] = [
 </dialog>
 
 <style>
+  @property --media-border-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  .media-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .media-card::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--media-border-angle),
+      var(--color-tertiary),
+      var(--color-secondary),
+      var(--color-background),
+      var(--color-tertiary)
+    );
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .media-card:hover::before,
+  .media-card:focus-visible::before {
+    opacity: 1;
+    animation: media-border-spin 2.5s linear infinite;
+  }
+
+  @keyframes media-border-spin {
+    to {
+      --media-border-angle: 360deg;
+    }
+  }
+
   .reveal-item {
     opacity: 0;
     transform: translateY(2rem);
@@ -176,6 +222,15 @@ const mediaMentions: MediaMention[] = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .media-card::before {
+      transition: none;
+    }
+
+    .media-card:hover::before,
+    .media-card:focus-visible::before {
+      animation: none;
+    }
+
     .reveal-item {
       opacity: 1;
       transform: none;
