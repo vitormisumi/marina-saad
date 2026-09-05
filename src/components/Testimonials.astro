@@ -40,11 +40,11 @@ const blobPaths = [
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <path d={blobPaths[index]} class="fill-white" />
+            <path d={blobPaths[index]} class="fill-background" />
             <path
               d={blobPaths[index]}
-              fill="ghostwhite"
               vector-effect="non-scaling-stroke"
+              class="fill-tertiary/10"
             />
           </svg>
 
@@ -54,7 +54,7 @@ const blobPaths = [
 
           <figcaption class="relative flex items-center gap-4 md:flex-col md:text-center lg:flex-row lg:text-left">
             <span
-              class="bg-foreground flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-sans text-sm font-semibold text-white"
+              class="bg-tertiary flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-sans text-sm font-semibold text-white"
               aria-hidden="true"
             >
               {initials(name)}
@@ -118,7 +118,7 @@ const blobPaths = [
   if (section) {
     const items = [...section.querySelectorAll(".reveal-item")];
 
-    items.forEach((item, index) => {
+    (items as HTMLElement[]).forEach((item, index) => {
       item.style.setProperty("--reveal-delay", `${index * 250}ms`);
     });
 
