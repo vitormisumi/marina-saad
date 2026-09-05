@@ -22,26 +22,26 @@ const isActive = (href: string) =>
     aria-label="Abrir menu"
   >
     <span
-      class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:translate-y-1.75 group-data-open:rotate-45"
+      class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:translate-y-1.75 group-data-open:rotate-45"
     ></span>
     <span
-      class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:opacity-0"
+      class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:opacity-0"
     ></span>
     <span
-      class="h-0.5 w-6 bg-black transition-all duration-200 group-data-open:-translate-y-1.75 group-data-open:-rotate-45"
+      class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:-translate-y-1.75 group-data-open:-rotate-45"
     ></span>
   </button>
 
   <div
     id="nav-links"
-    class="pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-1 border-b border-black/10 bg-white px-6 py-4 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
+    class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b px-6 py-4 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
   >
     {
       links.map(({ href, label }) => (
         <a
           href={href}
           aria-current={isActive(href) ? "page" : undefined}
-          class="hover:border-accent aria-[current=page]:border-primary relative rounded-lg border border-transparent px-3 py-2 font-serif font-light opacity-85 transition-colors duration-700"
+          class="hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight transition-colors"
         >
           {label}
         </a>

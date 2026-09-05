@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: oklch(0.3564 0.0391 248.97);
+  --color-foreground: oklch(0.3564 0.0391 248.97);
+  --color-background: white;
   --color-accent: oklch(0.6783 0.1559 35.18);
   --color-secondary: oklch(0.8233 0.0986 64.75);
   --color-tertiary: oklch(0.734 0.0755 226.98);
+  --color-quaternary: oklch(0.582 0.0572 204.94);
 }
 
 @theme inline {
@@ -37,10 +39,10 @@
   }
 
   h1 {
-    @apply text-primary;
+    @apply text-foreground;
   }
 
   p {
-    @apply text-primary/80 font-serif font-extralight;
+    @apply text-foreground/80 font-serif font-extralight;
   }
 }

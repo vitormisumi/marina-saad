@@ -54,7 +54,7 @@ const mediaMentions: MediaMention[] = [
             <dd class="font-sans text-3xl font-extrabold tracking-tight md:text-4xl">
               {value}
             </dd>
-            <dt class="text-primary/70 font-serif text-sm font-light italic">
+            <dt class="text-foreground/70 font-serif text-sm font-light italic">
               {label}
             </dt>
           </div>
@@ -65,7 +65,7 @@ const mediaMentions: MediaMention[] = [
     <ul class="flex items-center justify-center gap-6 py-10 md:gap-8">
       {
         credentials.map((credential) => (
-          <li class="border-primary/20 text-primary/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase">
+          <li class="border-foreground/20 text-foreground/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase">
             {credential}
           </li>
         ))
@@ -90,9 +90,9 @@ const mediaMentions: MediaMention[] = [
                   data-video-start={mention.start}
                   data-video-title={mention.title}
                   aria-haspopup="dialog"
-                  class="reveal-item group hover:border-primary/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
+                  class="reveal-item group hover:border-foreground/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
                 >
-                  <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                  <span class="text-foreground/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
                     <Icon name="circum:play-1" />
                     {mention.outlet}
                   </span>
@@ -101,7 +101,7 @@ const mediaMentions: MediaMention[] = [
                     {mention.title}
                   </span>
 
-                  <span class="text-primary/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                  <span class="text-foreground/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
                     Assistir vídeo
                   </span>
                 </button>
@@ -112,9 +112,9 @@ const mediaMentions: MediaMention[] = [
                   href={mention.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="reveal-item group hover:border-primary/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
+                  class="reveal-item group hover:border-foreground/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
                 >
-                  <span class="text-primary/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                  <span class="text-foreground/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
                     <Icon name="circum:link" />
                     {mention.outlet}
                   </span>
@@ -123,7 +123,7 @@ const mediaMentions: MediaMention[] = [
                     {mention.title}
                   </span>
 
-                  <span class="text-primary/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                  <span class="text-foreground/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
                     Ler matéria
                   </span>
                 </a>
