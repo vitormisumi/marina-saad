@@ -17,6 +17,10 @@ const blobPaths = [
   "M370 116C760 122 1250 84 1655 110C1866 96 1948 300 1936 520C1928 830 1936 1180 1930 1490C1924 1768 1798 1932 1560 1940C1150 1920 795 1944 395 1940C188 1950 84 1792 74 1470C68 1120 90 762 74 442C60 192 168 130 370 116Z",
   "M380 110C800 86 1250 154 1640 122C1852 102 1944 240 1940 470C1936 800 1940 1200 1928 1510C1916 1778 1762 1922 1540 1930C1130 1942 815 1912 405 1944C200 1962 76 1806 70 1495C66 1150 94 790 78 455C66 215 180 126 380 110Z",
 ];
+
+function createBlobMaskUrl(path: string) {
+  return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" preserveAspectRatio="none"><path d="${path}" fill="black" /></svg>`)}")`;
+}
 ---
 
 <section class="reveal testimonials-reveal">
@@ -31,21 +35,10 @@ const blobPaths = [
   <div class="mt-12 grid gap-4 md:grid-cols-3">
     {
       testimonials.map(({ data: { name, role }, body }, index) => (
-        <figure class="reveal-item transition-scale relative flex flex-col justify-between gap-8 p-10 hover:scale-105 md:p-8 lg:p-12">
-          <svg
-            class="absolute inset-0 -z-10 h-full w-full"
-            viewBox="0 0 2000 2000"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path d={blobPaths[index]} class="fill-background" />
-            <path
-              d={blobPaths[index]}
-              vector-effect="non-scaling-stroke"
-              class="fill-tertiary/10"
-            />
-          </svg>
-
+        <figure
+          class="blob-mask reveal-item transition-scale from-background to-tertiary/10 relative flex flex-col justify-between gap-8 bg-radial p-10 hover:scale-105 md:p-8 lg:p-12"
+          style={`--blob-mask: ${createBlobMaskUrl(blobPaths[index])}`}
+        >
           <blockquote class="before:text-foreground/30 relative pt-8 before:absolute before:top-4 before:-left-2 before:font-serif before:text-5xl before:leading-8 before:italic before:content-['“']">
             <p class="text-foreground/80 leading-6 md:leading-7">{body}</p>
           </blockquote>
@@ -60,7 +53,9 @@ const blobPaths = [
 
             <span class="space-y-0.5">
               <span class="text-sm font-semibold">{name}</span>
-              <span class="text-foreground/70 accent block text-sm">{role}</span>
+              <span class="text-foreground/70 accent block text-sm">
+                {role}
+              </span>
             </span>
           </figcaption>
         </figure>
@@ -80,6 +75,13 @@ const blobPaths = [
 
   blockquote p {
     font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  }
+
+  .blob-mask {
+    mask-image: var(--blob-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
   }
 
   .reveal-item {
