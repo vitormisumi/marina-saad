@@ -21,11 +21,9 @@ const blobPaths = [
 
 <section class="reveal testimonials-reveal">
   <div class="space-y-2 text-center md:text-left">
-    <h3 class="reveal-item reveal-fade font-sans text-4xl font-bold">
-      O que dizem meus clientes
-    </h3>
+    <h3 class="reveal-item reveal-fade heading">O que dizem meus clientes</h3>
 
-    <p class="reveal-item reveal-fade tracking-tight italic">
+    <p class="reveal-item reveal-fade accent">
       Histórias de quem transformou sua relação com o dinheiro
     </p>
   </div>
@@ -54,17 +52,15 @@ const blobPaths = [
 
           <figcaption class="relative flex items-center gap-4 md:flex-col md:text-center lg:flex-row lg:text-left">
             <span
-              class="bg-tertiary flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-sans text-sm font-semibold text-white"
+              class="bg-tertiary text-background flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-semibold"
               aria-hidden="true"
             >
               {initials(name)}
             </span>
 
             <span class="space-y-0.5">
-              <span class="block font-sans text-sm font-semibold">{name}</span>
-              <span class="text-foreground/70 block font-serif text-sm font-light">
-                {role}
-              </span>
+              <span class="text-sm font-semibold">{name}</span>
+              <span class="text-foreground/70 accent block text-sm">{role}</span>
             </span>
           </figcaption>
         </figure>

@@ -1,0 +1,150 @@
+---
+const phrases = [
+  "...planejar a aposentadoria?",
+  "...quitar as dívidas?",
+  "...controlar os gastos?",
+  "...investir com segurança?",
+  "...organizar suas finanças?",
+];
+---
+
+<section
+  class="reveal painpoint-reveal to-tertiary/5 from-tertiary/30 bg-linear-to-r py-16"
+>
+  <div class="space-y-8 text-center md:text-left">
+    <p class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      Quer ajuda para...
+    </p>
+
+    <h3 class="reveal-item reveal-fade accent leading-2">
+      <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
+        >{phrases[0]}</span
+      ><span
+        class="animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
+        aria-hidden="true"></span>
+    </h3>
+
+    <p class="reveal-item reveal-fade text-foreground/70">
+      Você não precisa de fórmulas prontas — precisa de um plano que caiba na
+      sua vida.
+    </p>
+  </div>
+</section>
+
+<style>
+  h3 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  section > div > p:last-child {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms);
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .caret {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".painpoint-reveal");
+  const typewriter = document.querySelector<HTMLElement>("#typewriter-text");
+
+  const startTypewriter = (el: HTMLElement) => {
+    const phrases: string[] = JSON.parse(el.dataset.phrases ?? "[]");
+    if (
+      !phrases.length ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const typeSpeed = 55;
+    const deleteSpeed = 30;
+    const holdTime = 2000;
+
+    let phraseIndex = 0;
+    let charIndex = phrases[0].length;
+    let deleting = true;
+
+    const tick = () => {
+      const current = phrases[phraseIndex];
+
+      if (deleting) {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+
+        setTimeout(tick, deleteSpeed);
+      } else {
+        charIndex++;
+        el.textContent = phrases[phraseIndex].slice(0, charIndex);
+
+        if (charIndex === phrases[phraseIndex].length) {
+          deleting = true;
+          setTimeout(tick, holdTime);
+          return;
+        }
+
+        setTimeout(tick, typeSpeed);
+      }
+    };
+
+    setTimeout(tick, holdTime);
+  };
+
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 250}ms`);
+    });
+
+    let started = false;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+
+          if (typewriter && !started) {
+            started = true;
+            startTypewriter(typewriter);
+          }
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+  }
+</script>

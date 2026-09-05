@@ -54,12 +54,8 @@ const mediaMentions: MediaMention[] = [
       {
         stats.map(({ value, label }) => (
           <div class="reveal-item space-y-1 text-center">
-            <dd class="font-sans text-3xl font-extrabold tracking-tight md:text-4xl">
-              {value}
-            </dd>
-            <dt class="text-foreground/70 font-serif text-sm font-light italic">
-              {label}
-            </dt>
+            <dd class="stat text-3xl md:text-4xl">{value}</dd>
+            <dt class="text-foreground/70 accent text-sm">{label}</dt>
           </div>
         ))
       }
@@ -68,7 +64,7 @@ const mediaMentions: MediaMention[] = [
     <ul class="flex items-center justify-center gap-6 py-10 md:gap-8">
       {
         credentials.map((credential) => (
-          <li class="border-foreground/20 text-foreground/60 rounded-lg border px-4 py-2 font-sans text-sm font-semibold tracking-widest uppercase">
+          <li class="border-foreground/20 text-foreground/60 eyebrow rounded-lg border px-4 py-2 text-sm">
             {credential}
           </li>
         ))
@@ -76,11 +72,7 @@ const mediaMentions: MediaMention[] = [
     </ul>
 
     <div class="py-10">
-      <h3
-        class="reveal-item font-sans text-sm font-semibold tracking-widest uppercase"
-      >
-        Na mídia
-      </h3>
+      <h3 class="reveal-item eyebrow text-sm">Na mídia</h3>
 
       <ul class="mt-6 grid gap-4 md:grid-cols-3">
         {
@@ -95,16 +87,16 @@ const mediaMentions: MediaMention[] = [
                   aria-haspopup="dialog"
                   class="reveal-item group hover:border-foreground/40 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border border-black/10 p-5 text-left transition-colors duration-300"
                 >
-                  <span class="text-foreground/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                  <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
                     <Icon name="circum:play-1" />
                     {mention.outlet}
                   </span>
 
-                  <span class="font-sans leading-snug font-semibold">
+                  <span class="leading-snug font-semibold">
                     {mention.title}
                   </span>
 
-                  <span class="text-foreground/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                  <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
                     Assistir vídeo
                   </span>
                 </button>
@@ -117,16 +109,16 @@ const mediaMentions: MediaMention[] = [
                   rel="noopener noreferrer"
                   class="reveal-item group hover:border-foreground/40 flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5 transition-colors duration-300"
                 >
-                  <span class="text-foreground/60 flex items-center gap-2 font-sans text-xs font-semibold tracking-widest uppercase">
+                  <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
                     <Icon name="circum:link" />
                     {mention.outlet}
                   </span>
 
-                  <span class="font-sans leading-snug font-semibold">
+                  <span class="leading-snug font-semibold">
                     {mention.title}
                   </span>
 
-                  <span class="text-foreground/60 mt-auto font-serif text-sm font-light italic group-hover:underline">
+                  <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
                     Ler matéria
                   </span>
                 </a>
@@ -146,7 +138,7 @@ const mediaMentions: MediaMention[] = [
   <div
     class="flex items-center justify-between gap-4 border-b border-black/10 px-5 py-4"
   >
-    <p id="video-dialog-title" class="font-sans font-semibold"></p>
+    <p id="video-dialog-title" class="font-semibold"></p>
     <button
       type="button"
       data-close
