@@ -1,27 +1,10 @@
 @import "tailwindcss";
 
-body {
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "PingFang SC",
-    "Hiragino Sans GB",
-    "Microsoft YaHei",
-    sans-serif;
-  background-color: #fff;
-  color: #000;
-}
-
-section {
-  padding: 0 clamp(2rem, 10vw, 16rem);
-}
-
 @theme {
-  --color-primary: #000;
-  --color-accent: black;
-  --color-background: #fff;
+  --color-primary: oklch(0.3564 0.0391 248.97);
+  --color-accent: oklch(0.6783 0.1559 35.18);
+  --color-secondary: oklch(0.8233 0.0986 64.75);
+  --color-tertiary: oklch(0.734 0.0755 226.98);
 }
 
 @theme inline {
@@ -30,13 +13,34 @@ section {
 }
 
 @layer base {
-  p {
-    @apply text-primary/80 font-serif font-extralight;
+  body {
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "PingFang SC",
+      "Hiragino Sans GB",
+      "Microsoft YaHei",
+      sans-serif;
+    color: #000;
+  }
+
+  section {
+    padding: 0 clamp(2rem, 10vw, 16rem);
   }
 
   h1,
   h2,
   h3 {
     @apply tracking-tight;
+  }
+
+  h1 {
+    @apply text-primary;
+  }
+
+  p {
+    @apply text-primary/80 font-serif font-extralight;
   }
 }
