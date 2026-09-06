@@ -104,7 +104,7 @@ const mediaMentions: MediaMention[] = [
                   href={mention.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="media-card reveal-item group flex h-full flex-col gap-3 rounded-lg border border-black/10 p-5"
+                  class="media-card reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
                 >
                   <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
                     <Icon name="circum:link" />
@@ -133,7 +133,7 @@ const mediaMentions: MediaMention[] = [
   class="bg-background text-foreground m-auto w-[min(92vw,760px)] overflow-hidden rounded-xl p-0"
 >
   <div
-    class="flex items-center justify-between gap-4 border-b border-black/10 px-5 py-4"
+    class="border-foreground/10 flex items-center justify-between gap-4 border-b px-5 py-4"
   >
     <p id="video-dialog-title" class="font-semibold"></p>
     <button
@@ -171,13 +171,12 @@ const mediaMentions: MediaMention[] = [
   .media-card {
     position: relative;
     isolation: isolate;
-    overflow: hidden;
   }
 
   .media-card::before {
     position: absolute;
     z-index: -1;
-    inset: 0;
+    inset: -1px;
     border-radius: inherit;
     padding: 1px;
     background: conic-gradient(
