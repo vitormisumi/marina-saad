@@ -9,7 +9,7 @@ const phrases = [
 ];
 ---
 
-<div class="painpoint-shell relative">
+<div class="relative">
   <svg
     viewBox="0 0 100 100"
     preserveAspectRatio="none"
@@ -33,18 +33,20 @@ const phrases = [
   </svg>
 
   <section
-    class="reveal painpoint-reveal painpoint-organic bg-tertiary/10 py-16"
+    class="reveal painpoint-reveal painpoint-organic bg-tertiary/10 py-24"
   >
     <div class="relative z-10 space-y-8 text-center md:text-left">
       <p class="reveal-item reveal-fade text-foreground/60 eyebrow">
         Quer ajuda para...
       </p>
 
-      <h3 class="reveal-item reveal-fade accent text-foreground leading-2">
+      <h3
+        class="reveal-item reveal-fade accent text-foreground h-12 leading-2 md:h-16"
+      >
         <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
           >{phrases[0]}</span
         ><span
-          class="animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
+          class="animate-blink bg-secondary ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
           aria-hidden="true"></span>
       </h3>
 

@@ -1,0 +1,116 @@
+---
+import { Icon } from "astro-icon/components";
+
+const services = [
+  {
+    title: "Finanças para Autônomos",
+    icon: "circum:wallet",
+    tagline: "Seu negócio no azul",
+  },
+  {
+    title: "Planejamento de Sonhos",
+    icon: "circum:plane",
+    tagline: "Realize o que importa",
+  },
+  {
+    title: "Análise de Investimentos",
+    icon: "circum:bank",
+    tagline: "Investir com segurança",
+  },
+  {
+    title: "Gestão de Dívidas",
+    icon: "circum:credit-card-off",
+    tagline: "Um plano para sair do vermelho",
+  },
+];
+---
+
+<section class="reveal services-reveal min-h-[50vh]">
+  <div class="space-y-2 py-16 text-center md:text-left">
+    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      Como posso te ajudar
+    </h3>
+
+    <p class="reveal-item reveal-fade accent">
+      Cada planejamento é único, customizado para as suas necessidades e
+      objetivos. Aqui estão alguns exemplos de serviços que ofereço:
+    </p>
+  </div>
+
+  <div class="grid gap-6 pb-4 md:grid-cols-2 lg:grid-cols-4">
+    {
+      services.map(({ title, icon, tagline }) => (
+        <a
+          href="/services"
+          class="reveal-item group bg-tertiary/5 relative flex flex-col items-start gap-4 rounded-lg p-10 hover:scale-105 md:p-8"
+        >
+          <Icon name={icon} class="text-secondary size-8" />
+
+          <span class="text-foreground leading-snug font-semibold">
+            {title}
+          </span>
+
+          <span class="text-foreground/60 accent text-sm">{tagline}</span>
+        </a>
+      ))
+    }
+  </div>
+
+  <a
+    href="/services"
+    class="text-quaternary hover:text-accent font-serif text-sm transition-colors hover:underline hover:underline-offset-3"
+  >
+    Saiba mais »
+  </a>
+</section>
+
+<style>
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms),
+      scale 0.3s ease;
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".services-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+  }
+</script>
