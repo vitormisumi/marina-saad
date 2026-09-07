@@ -47,10 +47,10 @@ const mediaMentions: MediaMention[] = [
 
 <section
   aria-label="Credenciais e resultados"
-  class="reveal trustbar-reveal py-16"
+  class="reveal trustbar-reveal painpoint-organic bg-tertiary/10 py-16"
 >
   <div>
-    <dl class="flex justify-around gap-6 py-10">
+    <dl class="flex justify-around gap-6 py-8">
       {
         stats.map(({ value, label }) => (
           <div class="reveal-item space-y-1 text-center">
@@ -61,18 +61,22 @@ const mediaMentions: MediaMention[] = [
       }
     </dl>
 
-    <ul class="flex items-center justify-center gap-6 py-10 md:gap-8">
+    <hr class="border-tertiary/10" />
+
+    <ul class="flex items-center justify-center gap-6 py-8 md:gap-8">
       {
         credentials.map((credential) => (
-          <li class="border-foreground/20 text-foreground/60 eyebrow rounded-lg border px-4 py-2 text-sm">
+          <li class="border-foreground/20 text-foreground/60 eyebrow reveal-item rounded-lg border px-4 py-2 text-sm">
             {credential}
           </li>
         ))
       }
     </ul>
 
-    <div class="py-10">
-      <h3 class="reveal-item eyebrow text-sm">Na mídia</h3>
+    <hr class="border-tertiary/10" />
+
+    <div class="py-8">
+      <h3 class="reveal-item eyebrow text-foreground/60 text-sm">Na mídia</h3>
 
       <ul class="mt-6 grid gap-4 md:grid-cols-3">
         {
@@ -88,7 +92,7 @@ const mediaMentions: MediaMention[] = [
                   class="media-card reveal-item group border-foreground/10 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border p-5 text-left"
                 >
                   <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
-                    <Icon name="circum:play-1" />
+                    <Icon name="circum:play-1" class="text-accent text-lg" />
                     {mention.outlet}
                   </span>
 
@@ -110,7 +114,7 @@ const mediaMentions: MediaMention[] = [
                   class="media-card reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
                 >
                   <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
-                    <Icon name="circum:link" />
+                    <Icon name="circum:link" class="text-accent text-lg" />
                     {mention.outlet}
                   </span>
 
@@ -165,6 +169,12 @@ const mediaMentions: MediaMention[] = [
 </dialog>
 
 <style>
+  .painpoint-organic {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 7C18 2 31 11 48 7C66 3 81 12 100 5V94C82 98 67 89 50 94C31 99 17 89 0 95Z" fill="white"/></svg>');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
   @property --media-border-angle {
     syntax: "<angle>";
     inherits: false;
