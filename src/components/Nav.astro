@@ -1,0 +1,118 @@
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "Sobre mim" },
+  { href: "/services", label: "Serviços" },
+  { href: "/contact", label: "Contato" },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isHome = currentPath === "/";
+const isActive = (href: string) =>
+  href === "/"
+    ? currentPath === "/"
+    : currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<header
+  class="bg-background relative top-0 z-50 flex items-center justify-end p-6 md:sticky md:justify-center md:px-0 md:py-8"
+>
+  <nav class="group">
+    <button
+      type="button"
+      class="flex cursor-pointer flex-col gap-1.25 p-2 md:hidden"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Abrir menu"
+    >
+      <span
+        class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:translate-y-1.75 group-data-open:rotate-45"
+      ></span>
+      <span
+        class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:opacity-0"
+      ></span>
+      <span
+        class="bg-foreground h-0.5 w-6 transition-all duration-200 group-data-open:-translate-y-1.75 group-data-open:-rotate-45"
+      ></span>
+    </button>
+
+    <div
+      id="nav-links"
+      class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b p-6 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
+    >
+      {
+        links.map(({ href, label }) => (
+          <a
+            href={href}
+            aria-current={isActive(href) ? "page" : undefined}
+            class:list={[
+              "transition-colors",
+              href === "/contact"
+                ? [
+                    "contact-cta",
+                    isHome
+                      ? "hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight"
+                      : "border-accent bg-accent text-background hover:bg-accent/90 rounded-lg border px-4 py-2 font-semibold",
+                  ]
+                : "hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight",
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(
+    '[aria-controls="nav-links"]',
+  );
+  const menu = document.getElementById("nav-links");
+  const nav = button?.closest("nav");
+
+  const setState = (open: boolean) => {
+    nav?.toggleAttribute("data-open", open);
+    button?.setAttribute("aria-expanded", String(open));
+    button?.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  };
+
+  button?.addEventListener("click", () => {
+    setState(!nav?.hasAttribute("data-open"));
+  });
+
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setState(false));
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setState(false);
+  });
+
+  const contactCta = document.querySelector<HTMLAnchorElement>(".contact-cta");
+  const heroCta = document.getElementById("hero-cta");
+
+  const plainClasses =
+    "font-serif font-extralight px-4 py-2 hover:text-accent aria-[current=page]:text-quaternary".split(
+      " ",
+    );
+  const accentClasses =
+    "font-serif font-medium rounded-lg px-4 py-2 bg-accent text-background hover:bg-accent/90".split(
+      " ",
+    );
+
+  if (contactCta && heroCta) {
+    const setAccent = (active: boolean) => {
+      contactCta.classList.remove(...(active ? plainClasses : accentClasses));
+      contactCta.classList.add(...(active ? accentClasses : plainClasses));
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setAccent(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+
+    observer.observe(heroCta);
+  }
+</script>

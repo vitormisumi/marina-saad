@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+
+const services = [
+  {
+    title: "Finanças para Autônomos",
+    icon: "circum:wallet",
+    tagline: "Seu negócio no azul",
+  },
+  {
+    title: "Planejamento de Sonhos",
+    icon: "circum:plane",
+    tagline: "Realize o que importa",
+  },
+  {
+    title: "Análise de Investimentos",
+    icon: "circum:bank",
+    tagline: "Investir com segurança",
+  },
+  {
+    title: "Gestão de Dívidas",
+    icon: "circum:credit-card-off",
+    tagline: "Um plano para sair do vermelho",
+  },
+];
+---
+
+<section
+  class="reveal services-reveal from-background via-tertiary/10 to-background min-h-[50vh] bg-linear-to-b py-16"
+>
+  <div class="space-y-2 py-8 text-center md:text-left">
+    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      Como posso te ajudar
+    </h3>
+
+    <p class="reveal-item reveal-fade accent">
+      Cada planejamento é único, customizado para as suas necessidades e
+      objetivos. Aqui estão alguns exemplos de serviços que ofereço:
+    </p>
+  </div>
+
+  <div class="grid gap-6 pb-4 md:grid-cols-2 lg:grid-cols-4">
+    {
+      services.map(({ title, icon, tagline }) => (
+        <a
+          href="/services"
+          class="reveal-item group bg-background relative flex flex-col items-center gap-4 overflow-hidden rounded-lg p-10 text-center md:p-8"
+        >
+          <Icon name={icon} class="text-secondary size-8" />
+
+          <span class="text-foreground leading-snug font-semibold">
+            {title}
+          </span>
+
+          <span class="curtain absolute inset-x-0 top-0 -bottom-7 -translate-y-full transition-transform duration-700 ease-in-out group-hover:translate-y-0">
+            <span class="text-foreground accent bg-secondary absolute inset-x-0 top-0 bottom-7 flex items-center justify-center px-6 text-lg">
+              {tagline}
+            </span>
+
+            <span class="text-foreground absolute right-2 bottom-9 font-serif text-xs">
+              Saiba mais »
+            </span>
+
+            <svg
+              viewBox="0 0 100 28"
+              preserveAspectRatio="none"
+              class="text-secondary absolute inset-x-0 bottom-0 h-7 w-full"
+              aria-hidden="true"
+            >
+              <path
+                d="M0 0 H100 V12 C82 26 68 6 50 18 C32 28 16 8 0 20 Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms),
+      scale 0.3s ease;
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .reveal-item .curtain {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".services-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+  }
+</script>
