@@ -34,7 +34,8 @@
         "usernamehw.errorlens",
         "vscode-icons-team.vscode-icons",
         "yoavbls.pretty-ts-errors",
-        "astro-build.astro-vscode"
+        "astro-build.astro-vscode",
+        "wallabyjs.console-ninja"
       ],
       "settings": {
         "workbench.colorCustomizations": {
