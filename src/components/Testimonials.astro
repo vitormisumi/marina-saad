@@ -36,7 +36,7 @@ function createBlobMaskUrl(path: string) {
     {
       testimonials.map(({ data: { name, role }, body }, index) => (
         <figure
-          class="blob-mask reveal-item transition-scale from-background to-tertiary/10 relative flex flex-col justify-between gap-8 bg-radial p-10 hover:scale-105 md:p-8 lg:p-12"
+          class="blob-mask reveal-item transition-scale bg-tertiary/10 relative flex flex-col justify-between gap-8 p-10 hover:scale-105 md:p-8 lg:p-12"
           style={`--blob-mask: ${createBlobMaskUrl(blobPaths[index])}`}
         >
           <blockquote class="before:text-secondary relative pt-8 before:absolute before:top-4 before:-left-2 before:font-serif before:text-5xl before:leading-8 before:italic before:content-['“']">
