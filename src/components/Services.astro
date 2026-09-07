@@ -44,7 +44,7 @@ const services = [
       services.map(({ title, icon, tagline }) => (
         <a
           href="/services"
-          class="reveal-item group bg-background relative flex flex-col items-start gap-4 rounded-lg p-10 hover:scale-105 md:p-8"
+          class="reveal-item group bg-background border-secondary relative flex flex-col items-center gap-4 overflow-hidden rounded-lg border p-10 text-center md:p-8"
         >
           <Icon name={icon} class="text-secondary size-8" />
 
@@ -52,18 +52,31 @@ const services = [
             {title}
           </span>
 
-          <span class="text-foreground/60 accent text-sm">{tagline}</span>
+          <span class="curtain absolute inset-x-0 top-0 -bottom-7 -translate-y-full transition-transform duration-700 ease-in-out group-hover:translate-y-0">
+            <span class="text-foreground accent bg-secondary absolute inset-x-0 top-0 bottom-7 flex items-center justify-center px-6 text-lg">
+              {tagline}
+            </span>
+
+            <span class="text-foreground absolute right-2 bottom-9 font-serif text-xs transition-colors hover:underline hover:underline-offset-3">
+              Saiba mais »
+            </span>
+
+            <svg
+              viewBox="0 0 100 28"
+              preserveAspectRatio="none"
+              class="text-secondary absolute inset-x-0 bottom-0 h-7 w-full"
+              aria-hidden="true"
+            >
+              <path
+                d="M0 0 H100 V12 C82 26 68 6 50 18 C32 28 16 8 0 20 Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
         </a>
       ))
     }
   </div>
-
-  <a
-    href="/services"
-    class="text-quaternary hover:text-accent font-serif text-sm transition-colors hover:underline hover:underline-offset-3"
-  >
-    Saiba mais »
-  </a>
 </section>
 
 <style>
@@ -89,6 +102,10 @@ const services = [
     .reveal-item {
       opacity: 1;
       transform: none;
+      transition: none;
+    }
+
+    .reveal-item .curtain {
       transition: none;
     }
   }
