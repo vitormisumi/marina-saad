@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import marinaAbout from "../assets/marina-about.png";
+---
+
+<section
+  class="reveal about-reveal from-secondary/20 via-background to-background bg-radial py-16"
+>
+  <div class="grid items-center md:grid-cols-2 md:gap-8">
+    <div class="reveal-item relative flex justify-end">
+      <Image
+        src={marinaAbout}
+        alt="Marina Saad."
+        class="about-img w-full max-w-lg"
+      />
+    </div>
+
+    <div class="space-y-4 md:space-y-6">
+      <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+        Sobre mim
+      </h3>
+
+      <h2 class="reveal-item reveal-fade heading">Prazer, sou a Marina</h2>
+
+      <p class="reveal-item reveal-fade accent">Planejadora financeira CFP®</p>
+
+      <p class="reveal-item reveal-fade text-foreground/70 max-w-xl">
+        Acredito que dinheiro é ferramenta para construir a vida que você quer —
+        não uma fonte de ansiedade. Por isso, meu trabalho é traduzir números em
+        planos simples, realistas e alinhados aos seus valores.
+      </p>
+
+      <a
+        href="/about"
+        class="reveal-item reveal-fade hover:text-accent text-foreground/80 accent inline-block font-medium transition-colors"
+      >
+        Saiba mais →
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-img {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z" transform="translate(100 115) scale(1.5)" fill="%23808"></path></svg>');
+    mask-position: center;
+    mask-repeat: no-repeat;
+  }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms);
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".about-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 200}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(section);
+  }
+</script>
