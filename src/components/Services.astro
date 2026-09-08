@@ -32,9 +32,7 @@ const blobPaths = [
   class="reveal services-blob-reveal from-background via-tertiary/10 to-background min-h-[50vh] bg-linear-to-b py-16"
 >
   <div class="space-y-2 py-8 text-center md:text-left">
-    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
-      Como posso te ajudar
-    </h3>
+    <h3 class="reveal-item reveal-fade heading">Como posso te ajudar</h3>
 
     <p class="reveal-item reveal-fade accent">
       Cada planejamento é único, customizado para as suas necessidades e
@@ -47,11 +45,9 @@ const blobPaths = [
       services.map(({ title, tagline }, index) => (
         <a
           href="/services"
-          class="reveal-item group bg-background relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg px-8 py-16 text-center text-xl md:text-2xl"
+          class="reveal-item group bg-background relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg px-8 py-16 text-center text-xl md:text-2xl hover:scale-105"
         >
-          <span class="text-foreground flex items-center leading-snug font-semibold">
-            {title}
-          </span>
+          <span class="text-foreground accent flex items-center">{title}</span>
 
           <span
             class="blob-reveal text-background accent bg-tertiary absolute inset-0 flex items-center justify-center px-6 text-lg"
@@ -80,13 +76,13 @@ const blobPaths = [
 
   @media (hover: hover) {
     .group:hover .blob-reveal {
-      mask-size: 700% 700%;
+      mask-size: 800% 800%;
     }
   }
 
   .group:focus-visible .blob-reveal,
   .group.is-open .blob-reveal {
-    mask-size: 700% 700%;
+    mask-size: 800% 800%;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -112,7 +108,7 @@ const blobPaths = [
           observer.disconnect();
         }
       },
-      { threshold: 0.4 },
+      { threshold: 0.5 },
     );
 
     observer.observe(section);
