@@ -28,13 +28,15 @@ const social = [
 ];
 ---
 
-<footer class="border-foreground/10 text-foreground border-t">
+<footer
+  class="footer-organic from-tertiary/10 to-tertiary/30 text-foreground bg-linear-to-b"
+>
   <div
     class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:px-12"
   >
     <div class="space-y-4">
       <p class="heading text-xl md:text-2xl">Marina Saad</p>
-      <p class="text-foreground/70 accent">Planejadora financeira CFP®</p>
+      <p class="text-foreground/70 accent">Planejadora financeira</p>
       <p class="text-foreground/60 max-w-xs text-sm">
         Dinheiro como ferramenta para construir a vida que você quer.
       </p>
@@ -82,34 +84,38 @@ const social = [
     </nav>
   </div>
 
-  <div class="border-foreground/10 border-t">
-    <div
-      class="text-foreground/50 mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 text-xs md:flex-row md:items-center md:justify-between md:px-12"
-    >
-      <p>
-        © {new Date().getFullYear()} Marina Saad. Todos os direitos reservados.
-      </p>
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 text-xs md:flex-row md:items-center md:justify-between md:px-12"
+  >
+    <p>
+      © {new Date().getFullYear()} Marina Saad. Todos os direitos reservados.
+    </p>
 
-      <p>
-        Desenvolvido por{" "}
-        <a
-          href="https://www.vitormisumi.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-accent transition-colors"
-        >
-          Vitor Misumi
-        </a>
-      </p>
-    </div>
+    <p>
+      Desenvolvido por{" "}
+      <a
+        href="https://www.vitormisumi.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-accent transition-colors"
+      >
+        Vitor Misumi
+      </a>
+    </p>
   </div>
 </footer>
 
 <style>
+  .footer-organic {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 7C18 2 31 11 48 7C66 3 81 12 100 5V100H0Z" fill="white"/></svg>');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
   .social-blob {
     position: absolute;
     inset: 0;
-    background: var(--color-tertiary);
+    background: var(--color-background);
     mask-image: var(--blob-mask);
     mask-repeat: no-repeat;
     mask-position: center;
@@ -122,14 +128,9 @@ const social = [
     transition: color 0.3s ease;
   }
 
-  .social-link:hover .social-blob,
-  .social-link:focus-visible .social-blob {
-    background: var(--color-secondary);
-  }
-
   .social-link:hover .social-icon,
   .social-link:focus-visible .social-icon {
-    color: var(--color-background);
+    color: var(--color-accent);
   }
 
   @media (prefers-reduced-motion: reduce) {
