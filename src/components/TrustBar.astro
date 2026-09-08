@@ -220,19 +220,6 @@ const mediaMentions: MediaMention[] = [
     }
   }
 
-  .reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-      opacity 0.7s ease var(--reveal-delay, 0ms),
-      transform 0.7s ease var(--reveal-delay, 0ms);
-  }
-
-  .reveal.is-visible .reveal-item {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .media-card::before {
       transition: none;
@@ -241,12 +228,6 @@ const mediaMentions: MediaMention[] = [
     .media-card:hover::before,
     .media-card:focus-visible::before {
       animation: none;
-    }
-
-    .reveal-item {
-      opacity: 1;
-      transform: none;
-      transition: none;
     }
   }
 </style>

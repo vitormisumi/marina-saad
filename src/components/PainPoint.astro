@@ -15,7 +15,9 @@ const phrases = [
       Quer ajuda para...
     </p>
 
-    <h3 class="reveal-item reveal-fade accent text-foreground h-16 leading-8">
+    <h3
+      class="reveal-item reveal-fade accent text-query text-foreground h-16 leading-8"
+    >
       <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
         >{phrases[0]}</span
       ><span
@@ -23,51 +25,12 @@ const phrases = [
         aria-hidden="true"></span>
     </h3>
 
-    <p class="reveal-item reveal-fade text-foreground/70">
+    <p class="reveal-item reveal-fade text-body text-foreground/70">
       Você não precisa de fórmulas prontas — precisa de um plano que caiba na
       sua vida.
     </p>
   </div>
 </section>
-
-<style>
-  h3 {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-  }
-
-  section > div > p:last-child {
-    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
-  }
-
-  .reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-      opacity 0.7s ease var(--reveal-delay, 0ms),
-      transform 0.7s ease var(--reveal-delay, 0ms);
-  }
-
-  .reveal-item.reveal-fade {
-    transform: none;
-  }
-
-  .reveal.is-visible .reveal-item {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal-item {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-
-    .caret {
-      animation: none;
-    }
-  }
-</style>
 
 <script>
   const section = document.querySelector(".painpoint-reveal");

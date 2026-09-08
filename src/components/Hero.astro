@@ -1,6 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import marina from "../assets/marina.jpg";
+import { blobMaskUrl } from "../lib/blobMask";
+
+const heroMask = blobMaskUrl(
+  "M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z",
+  { viewBox: "0 0 2000 2000" },
+);
 ---
 
 <section
@@ -10,15 +16,15 @@ import marina from "../assets/marina.jpg";
     class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
   >
     <div>
-      <h1 class="display">Marina Saad</h1>
+      <h1 class="display text-display">Marina Saad</h1>
 
-      <h2 class="text-foreground/80 accent">
+      <h2 class="text-foreground/80 accent text-hero-sub leading-[1.2]">
         Planejadora <br />Financeira
       </h2>
     </div>
 
     <div class="space-y-6">
-      <p class="description leading-6 md:leading-8 lg:leading-10">
+      <p class="text-lead leading-6 md:leading-8 lg:leading-10">
         Transforme sua relação com o <span
           class="after:bg-tertiary relative font-extrabold after:absolute after:top-0 after:left-0 after:-z-10 after:size-full after:scale-105 after:-skew-2"
           >dinheiro</span
@@ -29,7 +35,7 @@ import marina from "../assets/marina.jpg";
 
       <button
         id="hero-cta"
-        class="cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-colors"
+        class="text-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-colors"
       >
         Agende seu Papo Inicial
       </button>
@@ -40,6 +46,7 @@ import marina from "../assets/marina.jpg";
       alt="Marina Saad."
       priority
       layout="constrained"
+      style={`--blob-mask: ${heroMask}`}
       class="hero-img absolute top-4 right-1/2 h-full translate-x-1/2 object-cover md:top-0 md:right-0 md:translate-x-0"
     />
 
@@ -57,23 +64,6 @@ import marina from "../assets/marina.jpg";
 </section>
 
 <style>
-  h1 {
-    font-size: clamp(3rem, 5.5vw, 5rem);
-  }
-
-  h2 {
-    line-height: 1.2;
-    font-size: clamp(2.25rem, 4.75vw, 4rem);
-  }
-
-  .description {
-    font-size: clamp(0.8rem, 2vw, 1.5rem);
-  }
-
-  .cta {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-  }
-
   .hero-img,
   .line {
     width: max(450px, 50%);
@@ -81,7 +71,7 @@ import marina from "../assets/marina.jpg";
   }
 
   .hero-img {
-    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><path d="M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z" fill="%23808"></path></svg>');
+    mask-image: var(--blob-mask);
     mask-position: center;
     mask-repeat: no-repeat;
   }
