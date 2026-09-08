@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "Sobre mim" },
+  { href: "/services", label: "Serviços" },
+  { href: "/contact", label: "Contato" },
+];
+
+const social = [
+  {
+    href: "https://instagram.com/marinasaad",
+    label: "Instagram",
+    icon: "circum:instagram",
+  },
+  {
+    href: "https://linkedin.com/in/marinasaad",
+    label: "LinkedIn",
+    icon: "circum:linkedin",
+  },
+];
+---
+
+<footer class="border-foreground/10 text-foreground border-t">
+  <div
+    class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:px-12"
+  >
+    <div class="space-y-4">
+      <p class="heading text-xl md:text-2xl">Marina Saad</p>
+      <p class="text-foreground/70 accent">Planejadora financeira CFP®</p>
+      <p class="text-foreground/60 max-w-xs text-sm">
+        Dinheiro como ferramenta para construir a vida que você quer.
+      </p>
+
+      <ul class="flex items-center gap-3">
+        {
+          social.map(({ href, label, icon }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                class="social-link relative flex size-11 items-center justify-center"
+              >
+                <span
+                  class="social-blob"
+                  style={`--blob-mask: url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z" transform="translate(95 120) scale(1.5)" fill="%23808"></path></svg>')}")`}
+                  aria-hidden="true"
+                />
+                <Icon name={icon} class="social-icon relative z-10 text-xl" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <nav aria-label="Rodapé">
+      <h3 class="eyebrow text-foreground/60 mb-4 text-sm">Navegação</h3>
+      <ul class="space-y-2">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="hover:text-accent text-foreground/80 transition-colors"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-foreground/10 border-t">
+    <div
+      class="text-foreground/50 mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 text-xs md:flex-row md:items-center md:justify-between md:px-12"
+    >
+      <p>
+        © {new Date().getFullYear()} Marina Saad. Todos os direitos reservados.
+      </p>
+
+      <p>
+        Desenvolvido por{" "}
+        <a
+          href="https://www.vitormisumi.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-accent transition-colors"
+        >
+          Vitor Misumi
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .social-blob {
+    position: absolute;
+    inset: 0;
+    background: var(--color-tertiary);
+    mask-image: var(--blob-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .social-icon {
+    color: var(--color-foreground);
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover .social-blob,
+  .social-link:focus-visible .social-blob {
+    background: var(--color-secondary);
+  }
+
+  .social-link:hover .social-icon,
+  .social-link:focus-visible .social-icon {
+    color: var(--color-background);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-blob,
+    .social-icon {
+      transition: none;
+    }
+  }
+</style>

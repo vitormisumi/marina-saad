@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import marinaAbout from "../assets/marina-about.png";
+import marinaAbout from "../assets/marina-about.jpg";
 ---
 
 <section
@@ -11,6 +11,7 @@ import marinaAbout from "../assets/marina-about.png";
       <Image
         src={marinaAbout}
         alt="Marina Saad."
+        loading="lazy"
         class="about-img w-full max-w-lg"
       />
     </div>
@@ -22,7 +23,7 @@ import marinaAbout from "../assets/marina-about.png";
 
       <h2 class="reveal-item reveal-fade heading">Prazer, sou a Marina</h2>
 
-      <p class="reveal-item reveal-fade accent">Planejadora financeira CFP®</p>
+      <p class="reveal-item reveal-fade accent">Planejadora financeira</p>
 
       <p class="reveal-item reveal-fade text-foreground/70 max-w-xl">
         Acredito que dinheiro é ferramenta para construir a vida que você quer —
