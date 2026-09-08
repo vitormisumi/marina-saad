@@ -51,17 +51,17 @@ function createBlobMaskUrl(path: string) {
           href="/services"
           class="reveal-item group bg-background relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg px-8 py-16 text-center text-xl md:text-2xl"
         >
-          <span class="text-foreground leading-snug font-semibold">
+          <span class="text-foreground flex items-center leading-snug font-semibold">
             {title}
           </span>
 
           <span
-            class="blob-reveal text-foreground accent bg-secondary absolute inset-0 flex items-center justify-center px-6 text-lg"
+            class="blob-reveal text-background accent bg-tertiary absolute inset-0 flex items-center justify-center px-6 text-lg"
             style={`--blob-mask: ${createBlobMaskUrl(blobPaths[index])}`}
           >
             {tagline}
 
-            <span class="text-foreground absolute right-2 bottom-2 font-serif text-xs">
+            <span class="text-background absolute right-2 bottom-2 font-serif text-xs">
               Saiba mais »
             </span>
           </span>
@@ -104,6 +104,7 @@ function createBlobMaskUrl(path: string) {
     }
   }
 
+  .group:focus-visible .blob-reveal,
   .group.is-open .blob-reveal {
     mask-size: 700% 700%;
   }
