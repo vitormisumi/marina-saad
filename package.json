@@ -22,6 +22,7 @@
     "esbuild": true
   },
   "devDependencies": {
+    "@iconify-json/cib": "^1.2.3",
     "@iconify-json/circum": "^1.2.2",
     "astro-icon": "^1.2.0",
     "prettier": "^3.9.6",
