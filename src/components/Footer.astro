@@ -18,12 +18,17 @@ const social = [
   {
     href: "https://instagram.com/marinasaad",
     label: "Instagram",
-    icon: "circum:instagram",
+    icon: "cib:instagram",
+  },
+  {
+    href: "https://wa.me/+351924035352",
+    label: "WhatsApp",
+    icon: "cib:whatsapp",
   },
   {
     href: "https://linkedin.com/in/marinasaad",
     label: "LinkedIn",
-    icon: "circum:linkedin",
+    icon: "cib:linkedin",
   },
 ];
 ---
@@ -32,37 +37,14 @@ const social = [
   class="footer-organic from-tertiary/10 to-tertiary/30 text-foreground bg-linear-to-b"
 >
   <div
-    class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:px-12"
+    class="mx-auto grid max-w-6xl md:justify-items-end gap-10 px-6 py-14 md:grid-cols-3 md:px-12"
   >
-    <div class="space-y-4">
+    <div class="space-y-4 justify-self-start">
       <p class="heading text-xl md:text-2xl">Marina Saad</p>
       <p class="text-foreground/70 accent">Planejadora financeira</p>
       <p class="text-foreground/60 max-w-xs text-sm">
         Dinheiro como ferramenta para construir a vida que você quer.
       </p>
-
-      <ul class="flex items-center gap-3">
-        {
-          social.map(({ href, label, icon }) => (
-            <li>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                class="social-link relative flex size-11 items-center justify-center"
-              >
-                <span
-                  class="social-blob"
-                  style={`--blob-mask: ${socialBlobMask}`}
-                  aria-hidden="true"
-                />
-                <Icon name={icon} class="social-icon relative z-10 text-xl" />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
 
     <nav aria-label="Rodapé">
@@ -82,6 +64,40 @@ const social = [
         }
       </ul>
     </nav>
+
+    <div class="flex md:items-end flex-col">
+      <h3 class="eyebrow text-foreground/60 mb-4 text-sm">Contato</h3>
+
+      <ul class="flex items-center gap-3 pb-4">
+        {
+          social.map(({ href, label, icon }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                class="social-link relative flex size-10 items-center justify-center"
+              >
+                <span
+                  class="social-blob"
+                  style={`--blob-mask: ${socialBlobMask}`}
+                  aria-hidden="true"
+                />
+                <Icon name={icon} class="social-icon relative z-10" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <button
+        id="hero-cta"
+        class="bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap drop-shadow-md transition-colors"
+      >
+        Agende seu Papo Inicial
+      </button>
+    </div>
   </div>
 
   <div
