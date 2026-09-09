@@ -92,6 +92,8 @@ const phrases = [
 
     let started = false;
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -104,7 +106,7 @@ const phrases = [
           }
         }
       },
-      { threshold: 0.6 },
+      { rootMargin: isMobile ? "0px 0px -180px 0px" : "0px 0px -180px 0px" },
     );
 
     observer.observe(section);

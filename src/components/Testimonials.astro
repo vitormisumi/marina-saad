@@ -81,6 +81,8 @@ const blobPaths = [
       item.style.setProperty("--reveal-delay", `${index * 250}ms`);
     });
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -88,7 +90,7 @@ const blobPaths = [
           observer.disconnect();
         }
       },
-      { threshold: 0.4 },
+      { rootMargin: isMobile ? "0px 0px -200px 0px" : "0px 0px -120px 0px" },
     );
 
     observer.observe(section);

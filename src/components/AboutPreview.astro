@@ -65,6 +65,8 @@ const aboutMask = blobMaskUrl(
       item.style.setProperty("--reveal-delay", `${index * 200}ms`);
     });
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -72,7 +74,7 @@ const aboutMask = blobMaskUrl(
           observer.disconnect();
         }
       },
-      { threshold: 0.5 },
+      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -320px 0px" },
     );
 
     observer.observe(section);

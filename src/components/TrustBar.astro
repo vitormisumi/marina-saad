@@ -244,6 +244,8 @@ const mediaMentions: MediaMention[] = [
       );
     });
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -251,7 +253,7 @@ const mediaMentions: MediaMention[] = [
           observer.disconnect();
         }
       },
-      { threshold: 0.5 },
+      { rootMargin: isMobile ? "0px 0px -300px 0px" : "0px 0px -200px 0px" },
     );
 
     observer.observe(section);
