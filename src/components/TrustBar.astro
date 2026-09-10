@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 const stats = [
   {
     value: `${new Date().getFullYear() - 2014}+`,
@@ -11,38 +9,6 @@ const stats = [
 ];
 
 const credentials = ["CFP®", "CVM", "ANBIMA"];
-
-type MediaMention =
-  | {
-      outlet: string;
-      title: string;
-      type: "video";
-      videoId: string;
-      start?: number;
-    }
-  | { outlet: string; title: string; type: "article"; url: string };
-
-const mediaMentions: MediaMention[] = [
-  {
-    outlet: "Podcast Paty Saad",
-    title: "Conversa com Marina Saad",
-    type: "video",
-    videoId: "htmWHPwwQW0",
-    start: 2360,
-  },
-  {
-    outlet: "Exame",
-    title: "Planejamento financeiro para empreendedoras",
-    type: "article",
-    url: "https://example.com/exame",
-  },
-  {
-    outlet: "Valor Econômico",
-    title: "A importância de um plano de previdência cedo",
-    type: "article",
-    url: "https://example.com/valor",
-  },
-];
 ---
 
 <section
@@ -72,163 +38,14 @@ const mediaMentions: MediaMention[] = [
         ))
       }
     </ul>
-
-    <hr class="border-tertiary/10" />
-
-    <div class="py-8">
-      <h3 class="reveal-item eyebrow text-foreground/60 text-sm">Na mídia</h3>
-
-      <ul class="mt-6 grid gap-4 md:grid-cols-3">
-        {
-          mediaMentions.map((mention) =>
-            mention.type === "video" ? (
-              <li>
-                <button
-                  type="button"
-                  data-video-id={mention.videoId}
-                  data-video-start={mention.start}
-                  data-video-title={mention.title}
-                  aria-haspopup="dialog"
-                  class="media-card reveal-item group border-foreground/10 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border p-5 text-left"
-                >
-                  <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
-                    <Icon name="circum:play-1" class="text-accent text-lg" />
-                    {mention.outlet}
-                  </span>
-
-                  <span class="text-foreground leading-snug font-semibold">
-                    {mention.title}
-                  </span>
-
-                  <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
-                    Assistir vídeo
-                  </span>
-                </button>
-              </li>
-            ) : (
-              <li>
-                <a
-                  href={mention.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="media-card reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
-                >
-                  <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
-                    <Icon name="circum:link" class="text-accent text-lg" />
-                    {mention.outlet}
-                  </span>
-
-                  <span class="text-foreground leading-snug font-semibold">
-                    {mention.title}
-                  </span>
-
-                  <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
-                    Ler matéria
-                  </span>
-                </a>
-              </li>
-            ),
-          )
-        }
-      </ul>
-    </div>
   </div>
 </section>
-
-<dialog
-  id="video-dialog"
-  class="bg-background text-foreground m-auto w-[min(92vw,760px)] overflow-hidden rounded-xl p-0"
->
-  <div
-    class="border-foreground/10 flex items-center justify-between gap-4 border-b px-5 py-4"
-  >
-    <p id="video-dialog-title" class="font-semibold"></p>
-    <button
-      type="button"
-      data-close
-      aria-label="Fechar"
-      class="hover:bg-foreground/5 flex cursor-pointer items-center justify-center rounded-full p-2 transition-colors"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        class="stroke-foreground h-5 w-5 stroke-2"
-        aria-hidden="true"
-      >
-        <path d="M18 6 6 18M6 6l12 12"></path>
-      </svg>
-    </button>
-  </div>
-  <div class="aspect-video w-full p-4">
-    <iframe
-      id="video-frame"
-      title="Reprodutor de vídeo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      class="h-full w-full border-0"></iframe>
-  </div>
-</dialog>
 
 <style>
   .painpoint-organic {
     mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 7C18 2 31 11 48 7C66 3 81 12 100 5V94C82 98 67 89 50 94C31 99 17 89 0 95Z" fill="white"/></svg>');
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
-  }
-
-  @property --media-border-angle {
-    syntax: "<angle>";
-    inherits: false;
-    initial-value: 0deg;
-  }
-
-  .media-card {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .media-card::before {
-    position: absolute;
-    z-index: -1;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(
-      from var(--media-border-angle),
-      var(--color-tertiary),
-      var(--color-secondary),
-      var(--color-background),
-      var(--color-tertiary)
-    );
-    content: "";
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
-  }
-
-  .media-card:hover::before,
-  .media-card:focus-visible::before {
-    opacity: 1;
-    animation: media-border-spin 2.5s linear infinite;
-  }
-
-  @keyframes media-border-spin {
-    to {
-      --media-border-angle: 360deg;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .media-card::before {
-      transition: none;
-    }
-
-    .media-card:hover::before,
-    .media-card:focus-visible::before {
-      animation: none;
-    }
   }
 </style>
 
@@ -258,41 +75,4 @@ const mediaMentions: MediaMention[] = [
 
     observer.observe(section);
   }
-
-  const dialog = document.querySelector<HTMLDialogElement>("#video-dialog");
-  const frame = document.querySelector<HTMLIFrameElement>("#video-frame");
-  const dialogTitle = document.querySelector<HTMLParagraphElement>(
-    "#video-dialog-title",
-  );
-
-  const openVideo = (button: HTMLElement) => {
-    if (!dialog || !frame) return;
-
-    const id = button.dataset.videoId;
-    const start = button.dataset.videoStart;
-    const title = button.dataset.videoTitle;
-
-    frame.src = `https://www.youtube-nocookie.com/embed/${id}${start ? `?start=${start}` : ""}`;
-    if (dialogTitle) dialogTitle.textContent = title ?? "";
-
-    dialog.showModal();
-  };
-
-  section
-    ?.querySelectorAll<HTMLElement>("[data-video-id]")
-    .forEach((button) => {
-      button.addEventListener("click", () => openVideo(button));
-    });
-
-  dialog?.querySelector("[data-close]")?.addEventListener("click", () => {
-    dialog.close();
-  });
-
-  dialog?.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-
-  dialog?.addEventListener("close", () => {
-    if (frame) frame.src = "";
-  });
 </script>

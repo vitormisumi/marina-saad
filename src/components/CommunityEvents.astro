@@ -1,0 +1,338 @@
+---
+import { Icon } from "astro-icon/components";
+
+type Event = {
+  date: string;
+  month: string;
+  title: string;
+  description: string;
+  format: "Online" | "Presencial";
+};
+
+const events: Event[] = [
+  {
+    date: "12",
+    month: "MAR",
+    title: "Oficina: Organize suas finanças",
+    description:
+      "Um passo a passo prático para montar seu orçamento e começar o ano no azul.",
+    format: "Online",
+  },
+  {
+    date: "27",
+    month: "ABR",
+    title: "Café com Planejamento",
+    description:
+      "Encontro descontraído para trocar ideias sobre dinheiro, metas e hábitos.",
+    format: "Presencial",
+  },
+  {
+    date: "15",
+    month: "MAI",
+    title: "Live: Investimentos para iniciantes",
+    description:
+      "Descomplicando os primeiros passos para investir com segurança e confiança.",
+    format: "Online",
+  },
+  {
+    date: "03",
+    month: "JUN",
+    title: "Finanças para empreendedoras",
+    description:
+      "Workshop focado em separar as contas da empresa das contas pessoais.",
+    format: "Presencial",
+  },
+];
+
+type MediaMention =
+  | {
+      outlet: string;
+      title: string;
+      type: "video";
+      videoId: string;
+      start?: number;
+    }
+  | { outlet: string; title: string; type: "article"; url: string };
+
+const mediaMentions: MediaMention[] = [
+  {
+    outlet: "Podcast Paty Saad",
+    title: "Conversa com Marina Saad",
+    type: "video",
+    videoId: "htmWHPwwQW0",
+    start: 2360,
+  },
+  {
+    outlet: "Exame",
+    title: "Planejamento financeiro para empreendedoras",
+    type: "article",
+    url: "https://example.com/exame",
+  },
+];
+---
+
+<section
+  class="reveal community-reveal from-quaternary/10 via-background to-background bg-radial py-16"
+>
+  <div class="space-y-2 text-center">
+    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      Comunidade e Eventos
+    </h3>
+
+    <p class="reveal-item reveal-fade accent">
+      Encontros, oficinas e conversas para aprender e se conectar
+    </p>
+  </div>
+
+  <ul class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    {
+      events.map((event) => (
+        <li class="reveal-item group border-foreground/10 bg-background relative flex h-full flex-col gap-4 overflow-hidden rounded-lg border p-6">
+          <div class="flex items-start justify-between gap-4">
+            <span class="stat text-foreground flex flex-col leading-none">
+              <span class="text-4xl">{event.date}</span>
+              <span class="eyebrow text-foreground/50 mt-1 text-xs">
+                {event.month}
+              </span>
+            </span>
+
+            <span
+              class:list={[
+                "eyebrow rounded-full px-3 py-1 text-[10px]",
+                event.format === "Online"
+                  ? "bg-tertiary/15 text-tertiary"
+                  : "bg-secondary/20 text-foreground/70",
+              ]}
+            >
+              {event.format}
+            </span>
+          </div>
+
+          <h4 class="text-foreground text-lg leading-snug font-semibold">
+            {event.title}
+          </h4>
+
+          <p class="text-foreground/70 mt-auto text-sm leading-6">
+            {event.description}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="reveal-item mt-16">
+    <h3 class="reveal-item eyebrow text-foreground/60 text-sm">
+      Recentemente nas redes sociais
+    </h3>
+
+    <ul class="mt-6 flex flex-col gap-4 md:flex-row">
+      {
+        mediaMentions.map((mention) =>
+          mention.type === "video" ? (
+            <li class="w-full">
+              <button
+                type="button"
+                data-video-id={mention.videoId}
+                data-video-start={mention.start}
+                data-video-title={mention.title}
+                aria-haspopup="dialog"
+                class="media-card reveal-item group border-foreground/10 flex h-full w-full cursor-pointer flex-col gap-3 rounded-lg border p-5 text-left"
+              >
+                <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
+                  <Icon name="circum:play-1" class="text-accent text-lg" />
+                  {mention.outlet}
+                </span>
+
+                <span class="text-foreground leading-snug font-semibold">
+                  {mention.title}
+                </span>
+
+                <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
+                  Assistir vídeo
+                </span>
+              </button>
+            </li>
+          ) : (
+            <li class="w-full">
+              <a
+                href={mention.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="media-card reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
+              >
+                <span class="text-foreground/60 eyebrow flex items-center gap-2 text-xs">
+                  <Icon name="circum:link" class="text-accent text-lg" />
+                  {mention.outlet}
+                </span>
+
+                <span class="text-foreground leading-snug font-semibold">
+                  {mention.title}
+                </span>
+
+                <span class="text-foreground/60 accent mt-auto text-sm group-hover:underline">
+                  Ler matéria
+                </span>
+              </a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<dialog
+  id="video-dialog"
+  class="bg-background text-foreground m-auto w-[min(92vw,760px)] overflow-hidden rounded-xl p-0"
+>
+  <div
+    class="border-foreground/10 flex items-center justify-between gap-4 border-b px-5 py-4"
+  >
+    <p id="video-dialog-title" class="font-semibold"></p>
+    <button
+      type="button"
+      data-close
+      aria-label="Fechar"
+      class="hover:bg-foreground/5 flex cursor-pointer items-center justify-center rounded-full p-2 transition-colors"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        class="stroke-foreground h-5 w-5 stroke-2"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="aspect-video w-full p-4">
+    <iframe
+      id="video-frame"
+      title="Reprodutor de vídeo"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="h-full w-full border-0"></iframe>
+  </div>
+</dialog>
+
+<style>
+  @property --media-border-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  .media-card {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .media-card::before {
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--media-border-angle),
+      var(--color-tertiary),
+      var(--color-secondary),
+      var(--color-background),
+      var(--color-tertiary)
+    );
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .media-card:hover::before,
+  .media-card:focus-visible::before {
+    opacity: 1;
+    animation: media-border-spin 2.5s linear infinite;
+  }
+
+  @keyframes media-border-spin {
+    to {
+      --media-border-angle: 360deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-card::before {
+      transition: none;
+    }
+
+    .media-card:hover::before,
+    .media-card:focus-visible::before {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".community-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    items.forEach((item, index) => {
+      (item as HTMLElement).style.setProperty(
+        "--reveal-delay",
+        `${index * 150}ms`,
+      );
+    });
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { rootMargin: isMobile ? "0px 0px -300px 0px" : "0px 0px -200px 0px" },
+    );
+
+    observer.observe(section);
+  }
+
+  const dialog = document.querySelector<HTMLDialogElement>("#video-dialog");
+  const frame = document.querySelector<HTMLIFrameElement>("#video-frame");
+  const dialogTitle = document.querySelector<HTMLParagraphElement>(
+    "#video-dialog-title",
+  );
+
+  const openVideo = (button: HTMLElement) => {
+    if (!dialog || !frame) return;
+
+    const id = button.dataset.videoId;
+    const start = button.dataset.videoStart;
+    const title = button.dataset.videoTitle;
+
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}${start ? `?start=${start}` : ""}`;
+    if (dialogTitle) dialogTitle.textContent = title ?? "";
+
+    dialog.showModal();
+  };
+
+  section
+    ?.querySelectorAll<HTMLElement>("[data-video-id]")
+    .forEach((button) => {
+      button.addEventListener("click", () => openVideo(button));
+    });
+
+  dialog?.querySelector("[data-close]")?.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+
+  dialog?.addEventListener("close", () => {
+    if (frame) frame.src = "";
+  });
+</script>
