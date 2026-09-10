@@ -21,7 +21,8 @@ const phrases = [
       <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
         >{phrases[0]}</span
       ><span
-        class="animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
+        id="typewriter-caret"
+        class="motion-safe:animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
         aria-hidden="true"></span>
     </h3>
 
@@ -38,10 +39,16 @@ const phrases = [
 
   const startTypewriter = (el: HTMLElement) => {
     const phrases: string[] = JSON.parse(el.dataset.phrases ?? "[]");
-    if (
-      !phrases.length ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
+    if (!phrases.length) {
+      return;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let index = 0;
+      setInterval(() => {
+        index = (index + 1) % phrases.length;
+        el.textContent = phrases[index];
+      }, 3000);
       return;
     }
 
