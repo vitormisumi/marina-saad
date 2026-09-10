@@ -1,18 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import { blobMaskUrl } from "../lib/blobMask";
+import { navLinks } from "../lib/navigation";
 
 const socialBlobMask = blobMaskUrl(
   "M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z",
   { transform: "translate(95 120) scale(1.5)" },
 );
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "Sobre mim" },
-  { href: "/services", label: "Serviços" },
-  { href: "/contact", label: "Contato" },
-];
 
 const social = [
   {
@@ -51,7 +45,7 @@ const social = [
       <h3 class="eyebrow text-foreground/60 mb-4 text-sm">Navegação</h3>
       <ul class="space-y-2">
         {
-          links.map(({ href, label }) => (
+          navLinks.map(({ href, label }) => (
             <li>
               <a
                 href={href}

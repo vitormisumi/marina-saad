@@ -1,10 +1,5 @@
 ---
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "Sobre mim" },
-  { href: "/services", label: "Serviços" },
-  { href: "/contact", label: "Contato" },
-];
+import { navLinks } from "../lib/navigation";
 
 const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isHome = currentPath === "/";
@@ -41,7 +36,7 @@ const isActive = (href: string) =>
       class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b p-6 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
     >
       {
-        links.map(({ href, label }) => (
+        navLinks.map(({ href, label }) => (
           <a
             href={href}
             aria-current={isActive(href) ? "page" : undefined}
