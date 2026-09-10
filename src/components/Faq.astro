@@ -24,56 +24,84 @@ const faqs = [
 ---
 
 <section
-  class="reveal faq-reveal from-tertiary/10 via-background to-background bg-radial py-16"
+  class="reveal faqwave-reveal from-tertiary/10 via-background bg-radial"
 >
-  <div class="space-y-2 text-center">
-    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
-      Perguntas Frequentes
-    </h3>
+  <svg
+    class="w-1/2 translate-x-1/2"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,50 C240,15 480,85 720,50 C960,15 1200,85 1440,50"
+      class="stroke-tertiary fill-none stroke-1"></path>
+  </svg>
 
-    <p class="reveal-item reveal-fade accent">
-      Respostas rápidas para as dúvidas mais comuns
-    </p>
-  </div>
+  <div class="py-16">
+    <div class="space-y-2 text-center">
+      <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+        Perguntas Frequentes
+      </h3>
 
-  <div class="mx-auto mt-12 max-w-2xl space-y-4">
-    {
-      faqs.map(({ question, answer }, index) => (
-        <div class="reveal-item faq-item border-foreground/10 bg-background rounded-lg border">
-          <button
-            type="button"
-            class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-5 text-left"
-            aria-expanded="false"
-            aria-controls={`faq-answer-${index}`}
-          >
-            <span class="text-foreground accent font-medium">{question}</span>
+      <p class="reveal-item reveal-fade accent">
+        Respostas rápidas para as dúvidas mais comuns
+      </p>
+    </div>
 
-            <span
-              class="marker relative shrink-0 text-2xl leading-none"
-              aria-hidden="true"
+    <div class="mx-auto mt-12 max-w-2xl">
+      {
+        faqs.map(({ question, answer }, index) => (
+          <div class="reveal-item faq-item">
+            <button
+              type="button"
+              class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-4 text-left"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${index}`}
             >
-              +
-            </span>
-          </button>
+              <span class="text-foreground font-sans text-lg font-semibold">
+                {question}
+              </span>
 
-          <div class="faq-body" id={`faq-answer-${index}`}>
-            <div class="faq-body-inner">
-              <p class="text-foreground/70 px-6 pb-6 leading-7">{answer}</p>
+              <span
+                class="marker text-secondary relative shrink-0 text-2xl leading-none"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </button>
+
+            <div class="faq-body" id={`faq-answer-${index}`}>
+              <div class="faq-body-inner">
+                <p class="text-foreground/70 px-6 pb-6 leading-7">{answer}</p>
+              </div>
             </div>
+
+            {index !== faqs.length - 1 && <hr class="border-tertiary/10" />}
           </div>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
+
+    <div class="reveal-item mt-12 text-center">
+      <a
+        href="/faq"
+        class="hover:text-accent text-foreground/80 accent inline-block font-medium"
+      >
+        Ver todas as perguntas →
+      </a>
+    </div>
   </div>
 
-  <div class="reveal-item mt-12 text-center">
-    <a
-      href="/faq"
-      class="hover:text-accent text-foreground/80 accent inline-block font-medium"
-    >
-      Ver todas as perguntas →
-    </a>
-  </div>
+  <svg
+    class="w-1/2 translate-x-1/2"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,50 C240,85 480,15 720,50 C960,85 1200,15 1440,50"
+      class="stroke-tertiary fill-none stroke-1"></path>
+  </svg>
 </section>
 
 <style>
@@ -109,7 +137,7 @@ const faqs = [
 </style>
 
 <script>
-  const section = document.querySelector(".faq-reveal");
+  const section = document.querySelector(".faqwave-reveal");
   if (section) {
     const items = [...section.querySelectorAll(".reveal-item")];
 
@@ -126,7 +154,7 @@ const faqs = [
           observer.disconnect();
         }
       },
-      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -150px 0px" },
+      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -350px 0px" },
     );
 
     observer.observe(section);
