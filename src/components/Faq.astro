@@ -1,0 +1,142 @@
+---
+const faqs = [
+  {
+    question: "Preciso ter muito dinheiro para contratar?",
+    answer:
+      "Não. O planejamento financeiro é para qualquer fase da vida — inclusive para quem está começando a organizar as contas. O que importa é a sua intenção de construir um plano.",
+  },
+  {
+    question: "O Papo Inicial é gratuito?",
+    answer:
+      "Sim. O Papo Inicial é uma conversa gratuita e sem compromisso, para entender sua situação e seus objetivos antes de qualquer decisão.",
+  },
+  {
+    question: "O atendimento é online ou presencial?",
+    answer:
+      "Da forma que for melhor para você. Atendo tanto online quanto presencialmente, conforme sua preferência e disponibilidade.",
+  },
+  {
+    question: "Vou precisar cortar todos os meus gastos?",
+    answer:
+      "Não. Um bom plano equilibra seus objetivos com aquilo que importa para você — a ideia é gastar com consciência, não viver em restrição.",
+  },
+];
+---
+
+<section
+  class="reveal faq-reveal from-tertiary/10 via-background to-background bg-radial py-16"
+>
+  <div class="space-y-2 text-center">
+    <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      Perguntas Frequentes
+    </h3>
+
+    <p class="reveal-item reveal-fade accent">
+      Respostas rápidas para as dúvidas mais comuns
+    </p>
+  </div>
+
+  <div class="mx-auto mt-12 max-w-2xl space-y-4">
+    {
+      faqs.map(({ question, answer }, index) => (
+        <div class="reveal-item faq-item border-foreground/10 bg-background rounded-lg border">
+          <button
+            type="button"
+            class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-5 text-left"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <span class="text-foreground accent font-medium">{question}</span>
+
+            <span
+              class="marker relative shrink-0 text-2xl leading-none"
+              aria-hidden="true"
+            >
+              +
+            </span>
+          </button>
+
+          <div class="faq-body" id={`faq-answer-${index}`}>
+            <div class="faq-body-inner">
+              <p class="text-foreground/70 px-6 pb-6 leading-7">{answer}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="reveal-item mt-12 text-center">
+    <a
+      href="/faq"
+      class="hover:text-accent text-foreground/80 accent inline-block font-medium"
+    >
+      Ver todas as perguntas →
+    </a>
+  </div>
+</section>
+
+<style>
+  .faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+
+  .faq-body-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .marker {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item[data-open] .faq-body {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-item[data-open] .marker {
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-body,
+    .marker {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".faq-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -150px 0px" },
+    );
+
+    observer.observe(section);
+  }
+
+  section?.querySelectorAll(".faq-item").forEach((item) => {
+    const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
+    trigger?.addEventListener("click", () => {
+      const isOpen = item.toggleAttribute("data-open");
+      trigger.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+</script>
