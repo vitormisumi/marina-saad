@@ -9,36 +9,44 @@ const heroMask = blobMaskUrl(
 );
 ---
 
-<section
-  class="from-tertiary/20 to-background via-background h-[80vh] bg-radial"
->
+<section class="hero-reveal reveal relative isolate h-[80vh] overflow-visible">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="hero-bg-blob hero-bg-blob-1"></span>
+    <span class="hero-bg-blob hero-bg-blob-2"></span>
+    <span class="hero-bg-blob hero-bg-blob-3"></span>
+    <span class="hero-bg-blob hero-bg-blob-4"></span>
+  </div>
+
   <div
     class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
   >
     <div>
-      <h1 class="display text-display">Marina Saad</h1>
+      <h1 class="reveal-item display text-display">Marina Saad</h1>
 
-      <h2 class="text-foreground/80 accent text-hero-sub leading-[1.2]">
+      <h2
+        class="reveal-item text-foreground/80 accent text-hero-sub leading-[1.2]"
+      >
         Planejadora <br />Financeira
       </h2>
     </div>
 
     <div class="space-y-6">
-      <p class="text-lead leading-6 md:leading-8 lg:leading-10">
+      <p class="reveal-item text-lead leading-6 md:leading-8 lg:leading-10">
         Transforme sua relação com o <span
-          class="after:bg-tertiary relative font-extrabold after:absolute after:top-0 after:left-0 after:-z-10 after:size-full after:scale-105 after:-skew-2"
-          >dinheiro</span
+          class="highlight relative isolate font-extrabold">dinheiro</span
         >
         <br />
         e construa o futuro que você merece.
       </p>
 
-      <button
-        id="hero-cta"
-        class="text-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-colors"
-      >
-        Agende seu Papo Inicial
-      </button>
+      <div class="reveal-item">
+        <button
+          id="hero-cta"
+          class="text-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          Agende seu Papo Inicial
+        </button>
+      </div>
     </div>
 
     <Image
@@ -47,7 +55,7 @@ const heroMask = blobMaskUrl(
       priority
       layout="constrained"
       style={`--blob-mask: ${heroMask}`}
-      class="hero-img absolute top-4 right-1/2 h-full translate-x-1/2 object-cover md:top-0 md:right-0 md:translate-x-0"
+      class="hero-img absolute top-4 right-1/2 h-full translate-x-1/2 object-cover hover:-translate-y-1 md:top-0 md:right-0 md:translate-x-0"
     />
 
     <svg
@@ -64,6 +72,115 @@ const heroMask = blobMaskUrl(
 </section>
 
 <style>
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    filter: blur(70px);
+  }
+
+  .hero-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .hero-bg-blob-1 {
+    width: 55%;
+    height: 55%;
+    top: 12%;
+    left: -8%;
+    background: color-mix(in oklab, var(--color-tertiary) 10%, transparent);
+    animation: blob-1 26s ease-in-out infinite;
+  }
+
+  .hero-bg-blob-2 {
+    width: 45%;
+    height: 45%;
+    top: 10%;
+    right: -6%;
+    background: color-mix(in oklab, var(--color-tertiary) 20%, transparent);
+    animation: blob-2 22s ease-in-out infinite;
+  }
+
+  .hero-bg-blob-3 {
+    width: 50%;
+    height: 50%;
+    bottom: -18%;
+    left: 8%;
+    background: color-mix(in oklab, var(--color-secondary) 10%, transparent);
+    animation: blob-3 24s ease-in-out infinite;
+  }
+
+  .hero-bg-blob-4 {
+    width: 60%;
+    height: 60%;
+    bottom: -20%;
+    right: -10%;
+    background: color-mix(in oklab, var(--color-quaternary) 10%, transparent);
+    animation: blob-4 28s ease-in-out infinite;
+  }
+
+  @keyframes blob-1 {
+    0% {
+      translate: 0 0;
+      scale: 1;
+    }
+    33% {
+      translate: 75% 50%;
+      scale: 1.2;
+    }
+    66% {
+      translate: -40% 70%;
+      scale: 0.85;
+    }
+  }
+
+  @keyframes blob-2 {
+    0% {
+      translate: 0 0;
+      scale: 1;
+    }
+    33% {
+      translate: -70% 55%;
+      scale: 1.25;
+    }
+    66% {
+      translate: 25% 80%;
+      scale: 0.8;
+    }
+  }
+
+  @keyframes blob-3 {
+    0% {
+      translate: 0 0;
+      scale: 1;
+    }
+    33% {
+      translate: 55% -70%;
+      scale: 1.15;
+    }
+    66% {
+      translate: -45% -40%;
+      scale: 0.85;
+    }
+  }
+
+  @keyframes blob-4 {
+    0% {
+      translate: 0 0;
+      scale: 1;
+    }
+    33% {
+      translate: -70% -60%;
+      scale: 1.1;
+    }
+    66% {
+      translate: 35% -35%;
+      scale: 1.25;
+    }
+  }
+
   .hero-img,
   .line {
     width: max(450px, 50%);
@@ -74,5 +191,72 @@ const heroMask = blobMaskUrl(
     mask-image: var(--blob-mask);
     mask-position: center;
     mask-repeat: no-repeat;
+    animation: hero-fade-in 0.9s ease 0.2s both;
+    transition: translate 0.6s ease;
+  }
+
+  .line {
+    animation: hero-fade-in 0.9s ease 0.2s both;
+  }
+
+  .highlight::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--color-tertiary);
+    scale: 1.05;
+    transform: skewX(-2deg);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.7s ease 0.6s;
+  }
+
+  .hero-reveal.is-visible .highlight::after {
+    clip-path: inset(0 0 0 0);
+  }
+
+  @keyframes hero-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg-blob,
+    .hero-img,
+    .line {
+      animation: none;
+    }
+
+    .hero-img {
+      transition: none;
+    }
+
+    .highlight::after {
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  const hero = document.querySelector(".hero-reveal");
+  if (hero) {
+    const items = [...hero.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        hero.classList.add("is-visible");
+      });
+    });
+  }
+</script>

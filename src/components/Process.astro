@@ -96,6 +96,13 @@ const steps = [
     clip-path: inset(0 0 100% 0);
     transition: clip-path 0.8s ease;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process-line {
+      clip-path: none;
+      transition: none;
+    }
+  }
 </style>
 
 <script>
@@ -165,6 +172,9 @@ const steps = [
     document.fonts?.ready.then(fitLine);
 
     const items = [...section.querySelectorAll<HTMLElement>(".reveal-item")];
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     let revealedFraction = 0;
 
@@ -177,7 +187,7 @@ const steps = [
           observer.unobserve(entry.target);
 
           const fraction = fractionByLi.get(entry.target as HTMLElement);
-          if (fraction !== undefined && line) {
+          if (fraction !== undefined && line && !reduceMotion) {
             revealedFraction = Math.max(revealedFraction, fraction);
             line.style.clipPath = `inset(0 0 ${(1 - revealedFraction) * 100}% 0)`;
           }
