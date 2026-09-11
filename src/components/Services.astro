@@ -34,22 +34,20 @@ const blobPaths = [
 
     <p class="reveal-item reveal-fade accent">
       Cada planejamento é único, customizado para as suas necessidades e
-      objetivos. Aqui estão alguns exemplos de serviços que ofereço:
+      objetivos. Descubra abaixo alguns dos serviços que ofereço:
     </p>
   </div>
 
   <div
-    class="mt-8 grid place-content-center gap-6 pb-4 md:grid-cols-2 xl:grid-cols-4"
+    class="mt-8 grid place-content-center place-items-center gap-6 pb-4 md:grid-cols-2 xl:grid-cols-4"
   >
     {
       services.map(({ title, tagline }, index) => (
         <a
           href="/services"
-          class="reveal-item group border-tertiary/50 bg-background relative flex aspect-square max-w-xs flex-col gap-4 overflow-hidden rounded-3xl border p-6"
+          class="reveal-item group border-tertiary/20 bg-background hover:border-tertiary after:text-secondary hover:after:text-tertiary/10 relative flex aspect-square w-full max-w-xs flex-col gap-4 overflow-hidden rounded-2xl border p-8 text-center transition-colors duration-1000 after:absolute after:right-8 after:bottom-8 after:text-5xl after:content-['...'] hover:after:content-['']"
         >
-          <span class="text-foreground text-xl font-semibold lg:text-lg">
-            {title}
-          </span>
+          <span class="text-foreground text-xl font-semibold">{title}</span>
 
           <span
             class="blob-reveal text-foreground accent bg-tertiary/10 absolute inset-0 flex items-center justify-center px-6 text-lg"
@@ -57,7 +55,7 @@ const blobPaths = [
           >
             {tagline}
 
-            <span class="text-accent absolute right-6 bottom-6 font-serif text-sm group-hover:underline">
+            <span class="text-foreground absolute right-6 bottom-6 font-serif text-sm group-hover:underline">
               Saiba mais »
             </span>
           </span>
@@ -74,7 +72,7 @@ const blobPaths = [
   >
     <path
       d="M0,50 C240,15 480,85 720,50 C960,15 1200,85 1440,50"
-      class="stroke-tertiary/50 fill-none stroke-1"></path>
+      class="stroke-tertiary/20 fill-none stroke-1"></path>
   </svg>
 </section>
 
