@@ -1,4 +1,8 @@
 {
+  "cSpell.words": [
+    "Misumi",
+    "Saad"
+  ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#65c89b",
     "activityBar.activeBorder": "#15202b",
@@ -26,6 +30,5 @@
     "titleBar.activeForeground": "#15202b",
     "titleBar.inactiveBackground": "#42b88399",
     "titleBar.inactiveForeground": "#15202b99"
-  },
-  "cSpell.words": ["Misumi", "Saad"]
+  }
 }

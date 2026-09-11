@@ -3,20 +3,20 @@ import { blobMaskUrl } from "../lib/blobMask";
 
 const services = [
   {
-    title: "Finanças para Autônomos",
-    tagline: "Seu negócio no azul",
+    title: "Gestão de Dívidas",
+    tagline: "Um plano para sair do vermelho",
   },
   {
-    title: "Planejamento de Sonhos",
-    tagline: "Realize o que importa",
+    title: "Finanças para Autônomos",
+    tagline: "Seu negócio no azul",
   },
   {
     title: "Análise de Investimentos",
     tagline: "Investir com segurança",
   },
   {
-    title: "Gestão de Dívidas",
-    tagline: "Um plano para sair do vermelho",
+    title: "Planejamento de Sonhos",
+    tagline: "Realize o que importa",
   },
 ];
 
@@ -28,9 +28,7 @@ const blobPaths = [
 ];
 ---
 
-<section
-  class="reveal services-blob-reveal from-background via-secondary/10 to-background min-h-[50vh] bg-linear-to-b py-16"
->
+<section class="reveal services-blob-reveal relative min-h-[50vh] py-16">
   <div class="space-y-2 py-8 text-center md:text-left">
     <h3 class="reveal-item reveal-fade heading">Como posso te ajudar</h3>
 
@@ -40,22 +38,26 @@ const blobPaths = [
     </p>
   </div>
 
-  <div class="grid gap-6 pb-4 md:grid-cols-2 lg:grid-cols-4 mt-8">
+  <div
+    class="mt-8 grid place-content-center gap-6 pb-4 md:grid-cols-2 xl:grid-cols-4"
+  >
     {
       services.map(({ title, tagline }, index) => (
         <a
           href="/services"
-          class="reveal-item group bg-background relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg px-8 py-16 text-center text-xl hover:scale-105 md:text-2xl"
+          class="reveal-item group border-tertiary/50 bg-background relative flex aspect-square max-w-xs flex-col gap-4 overflow-hidden rounded-3xl border p-6"
         >
-          <span class="text-foreground accent flex items-center">{title}</span>
+          <span class="text-foreground text-xl font-semibold lg:text-lg">
+            {title}
+          </span>
 
           <span
-            class="blob-reveal text-background accent bg-tertiary absolute inset-0 flex items-center justify-center px-6 text-lg"
+            class="blob-reveal text-foreground accent bg-tertiary/10 absolute inset-0 flex items-center justify-center px-6 text-lg"
             style={`--blob-mask: ${blobMaskUrl(blobPaths[index], { transform: "translate(100 100)" })}`}
           >
             {tagline}
 
-            <span class="text-background absolute right-2 bottom-2 font-serif text-xs">
+            <span class="text-accent absolute right-6 bottom-6 font-serif text-sm group-hover:underline">
               Saiba mais »
             </span>
           </span>
@@ -63,6 +65,17 @@ const blobPaths = [
       ))
     }
   </div>
+
+  <svg
+    class="reveal-item absolute top-1/2 right-1/2 -z-10 w-6/7 translate-x-1/2"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,50 C240,15 480,85 720,50 C960,15 1200,85 1440,50"
+      class="stroke-tertiary/50 fill-none stroke-1"></path>
+  </svg>
 </section>
 
 <style>
@@ -76,13 +89,13 @@ const blobPaths = [
 
   @media (hover: hover) {
     .group:hover .blob-reveal {
-      mask-size: 800% 800%;
+      mask-size: 500% 500%;
     }
   }
 
   .group:focus-visible .blob-reveal,
   .group.is-open .blob-reveal {
-    mask-size: 800% 800%;
+    mask-size: 500% 500%;
   }
 
   @media (prefers-reduced-motion: reduce) {

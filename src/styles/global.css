@@ -37,19 +37,19 @@
 }
 
 @utility heading {
-  @apply text-foreground font-sans text-3xl font-semibold tracking-tight;
+  @apply text-foreground font-sans text-4xl font-semibold tracking-tight;
 }
 
 @utility accent {
-  @apply font-serif font-medium italic;
+  @apply font-serif text-lg font-medium italic;
 }
 
 @utility eyebrow {
-  @apply text-foreground/60 font-sans font-semibold tracking-widest uppercase;
+  @apply text-foreground/60 font-sans text-lg font-semibold tracking-widest uppercase;
 }
 
 @utility stat {
-  @apply font-sans font-bold tracking-tight;
+  @apply text-foreground font-sans font-bold tracking-tight;
 }
 
 @layer base {
