@@ -45,7 +45,7 @@
 }
 
 @utility eyebrow {
-  @apply font-sans font-semibold tracking-widest uppercase;
+  @apply text-foreground/60 font-sans font-semibold tracking-widest uppercase;
 }
 
 @utility stat {
