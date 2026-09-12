@@ -76,7 +76,7 @@ const blobPaths = [
   </div>
 
   <div
-    class="mt-8 grid grid-cols-2 place-content-center place-items-center gap-6 pb-4 xl:grid-cols-4"
+    class="mt-8 grid grid-cols-2 place-content-center place-items-center gap-4 md:gap-6 pb-4 xl:grid-cols-4"
   >
     {
       services.map(({ title, tagline, img }, index) => {
@@ -105,9 +105,9 @@ const blobPaths = [
 
               <span class="bg-tertiary/5 absolute inset-0" />
 
-              <span class="relative">{tagline}</span>
+              <span class="relative text-sm md:text-base">{tagline}</span>
 
-              <span class="text-foreground absolute right-2 bottom-2 font-serif text-sm group-hover:underline xl:right-6 xl:bottom-6">
+              <span class="text-foreground absolute right-2 bottom-2 font-serif text-xs group-hover:underline md:text-sm xl:right-6 xl:bottom-6">
                 Saiba mais »
               </span>
             </span>
@@ -166,6 +166,13 @@ const blobPaths = [
   .group.is-open .card-bg {
     opacity: 1;
     transform: scale(1);
+  }
+
+  .group:focus-visible::after,
+  .group.is-open::after {
+    opacity: 0;
+    transition-delay: 0s;
+    transition-duration: 0s;
   }
 
   @media (prefers-reduced-motion: reduce) {
