@@ -1,10 +1,5 @@
 ---
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "Sobre mim" },
-  { href: "/services", label: "Serviços" },
-  { href: "/contact", label: "Contato" },
-];
+import { navLinks } from "../lib/navigation";
 
 const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isHome = currentPath === "/";
@@ -14,8 +9,18 @@ const isActive = (href: string) =>
     : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
+<script is:inline>
+  try {
+    if (sessionStorage.getItem("nav-intro-seen")) {
+      document.documentElement.setAttribute("data-nav-settled", "");
+    } else {
+      sessionStorage.setItem("nav-intro-seen", "1");
+    }
+  } catch {}
+</script>
+
 <header
-  class="bg-background relative top-0 z-50 flex items-center justify-end p-6 md:sticky md:justify-center md:px-0 md:py-8"
+  class="site-header bg-background relative top-0 z-50 flex items-center justify-end p-6 md:sticky md:justify-center md:px-0 md:py-8"
 >
   <nav class="group">
     <button
@@ -41,7 +46,7 @@ const isActive = (href: string) =>
       class="border-foreground/10 bg-background pointer-events-none invisible absolute inset-x-0 top-full z-20 flex -translate-y-2 flex-col gap-4 border-b p-6 opacity-0 shadow-lg transition-all duration-200 ease-out group-data-open:pointer-events-auto group-data-open:visible group-data-open:translate-y-0 group-data-open:opacity-100 md:pointer-events-auto md:visible md:static md:flex md:translate-y-0 md:flex-row md:items-center md:gap-16 md:border-0 md:bg-transparent md:px-0 md:py-0 md:opacity-100 md:shadow-none"
     >
       {
-        links.map(({ href, label }) => (
+        navLinks.map(({ href, label }) => (
           <a
             href={href}
             aria-current={isActive(href) ? "page" : undefined}
@@ -51,8 +56,8 @@ const isActive = (href: string) =>
                 ? [
                     "contact-cta",
                     isHome
-                      ? "hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight"
-                      : "border-accent bg-accent text-background hover:bg-accent/90 rounded-lg border px-4 py-2 font-semibold",
+                      ? "hover:text-accent aria-[current=page]:text-quaternary px-4 py-2 font-serif font-extralight"
+                      : "bg-accent text-background hover:bg-accent/90 rounded-lg px-4 py-2 font-serif font-medium",
                   ]
                 : "hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight",
             ]}
@@ -64,6 +69,33 @@ const isActive = (href: string) =>
     </div>
   </nav>
 </header>
+
+<style>
+  .site-header {
+    animation: nav-in 0.7s ease 0.15s backwards;
+  }
+
+  html[data-nav-settled] .site-header {
+    animation: none;
+  }
+
+  @keyframes nav-in {
+    from {
+      opacity: 0;
+      translate: 0 -1rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      animation: none;
+    }
+  }
+</style>
 
 <script>
   const button = document.querySelector<HTMLButtonElement>(

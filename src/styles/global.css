@@ -7,6 +7,24 @@
   --color-secondary: oklch(0.8233 0.0986 64.75);
   --color-tertiary: oklch(0.734 0.0755 226.98);
   --color-quaternary: oklch(0.582 0.0572 204.94);
+
+  --text-display: clamp(3rem, 5.5vw, 5rem);
+  --text-hero-sub: clamp(2.25rem, 4.75vw, 4rem);
+  --text-query: clamp(2.5rem, 4vw, 4rem);
+  --text-cta: clamp(1rem, 2vw, 1.5rem);
+  --text-lead: clamp(0.9rem, 2vw, 1.5rem);
+  --text-body: clamp(0.875rem, 1.5vw, 1.125rem);
+
+  --animate-blink: blink 1s step-end infinite;
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 @theme inline {
@@ -19,19 +37,19 @@
 }
 
 @utility heading {
-  @apply text-foreground font-sans text-3xl font-semibold tracking-tight;
+  @apply text-foreground font-sans text-4xl font-semibold tracking-tight;
 }
 
 @utility accent {
-  @apply font-serif font-medium italic;
+  @apply font-serif text-lg font-medium italic;
 }
 
 @utility eyebrow {
-  @apply font-sans font-semibold tracking-widest uppercase;
+  @apply text-foreground/60 font-sans text-lg font-semibold tracking-widest uppercase;
 }
 
 @utility stat {
-  @apply font-sans font-bold tracking-tight;
+  @apply text-foreground font-sans font-bold tracking-tight;
 }
 
 @layer base {
@@ -52,26 +70,32 @@
   p {
     @apply text-foreground/80 font-serif font-extralight;
   }
-
-  .organic-line {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 20;
-  }
 }
 
-@theme {
-  --animate-blink: blink 1s step-end infinite;
-  @keyframes blink {
-    0%,
-    100% {
+@layer components {
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms),
+      scale 0.3s ease;
+  }
+
+  .reveal-item.reveal-fade {
+    transform: none;
+  }
+
+  .reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
       opacity: 1;
-    }
-    50% {
-      opacity: 0;
+      transform: none;
+      transition: none;
     }
   }
 }

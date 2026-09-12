@@ -1,0 +1,153 @@
+---
+import { Icon } from "astro-icon/components";
+import { blobMaskUrl } from "../lib/blobMask";
+import { navLinks } from "../lib/navigation";
+
+const socialBlobMask = blobMaskUrl(
+  "M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z",
+  { transform: "translate(95 120) scale(1.5)" },
+);
+
+const social = [
+  {
+    href: "https://instagram.com/marinasaad",
+    label: "Instagram",
+    icon: "cib:instagram",
+  },
+  {
+    href: "https://wa.me/+351924035352",
+    label: "WhatsApp",
+    icon: "cib:whatsapp",
+  },
+  {
+    href: "https://linkedin.com/in/marinasaad",
+    label: "LinkedIn",
+    icon: "cib:linkedin",
+  },
+];
+---
+
+<footer
+  class="footer-organic from-tertiary/10 to-tertiary/30 text-foreground bg-linear-to-b"
+>
+  <div
+    class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3 md:justify-items-end md:px-12"
+  >
+    <div class="space-y-4 justify-self-start">
+      <p class="heading text-xl md:text-2xl">Marina Saad</p>
+      <p class="text-foreground/70 accent">Planejadora financeira</p>
+      <p class="text-foreground/60 max-w-xs text-sm">
+        Dinheiro como ferramenta para construir a vida que você quer.
+      </p>
+    </div>
+
+    <nav aria-label="Rodapé">
+      <h3 class="eyebrow mb-4 text-sm">Navegação</h3>
+      <ul class="space-y-2">
+        {
+          navLinks.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="hover:text-accent text-foreground/80 transition-colors"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex flex-col md:items-end">
+      <h3 class="eyebrow mb-4 text-sm">Contato</h3>
+
+      <ul class="flex items-center gap-3 pb-4">
+        {
+          social.map(({ href, label, icon }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                class="social-link relative flex size-10 items-center justify-center"
+              >
+                <span
+                  class="social-blob"
+                  style={`--blob-mask: ${socialBlobMask}`}
+                  aria-hidden="true"
+                />
+                <Icon name={icon} class="social-icon relative z-10" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a
+        id="footer-cta"
+        href="/contact"
+        class="bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap drop-shadow-md transition-colors"
+      >
+        Agende seu Papo Inicial
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 text-xs md:flex-row md:items-center md:justify-between md:px-12"
+  >
+    <p>
+      © {new Date().getFullYear()} Marina Saad. Todos os direitos reservados.
+    </p>
+
+    <p>
+      Desenvolvido por{" "}
+      <a
+        href="https://www.vitormisumi.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-accent transition-colors"
+      >
+        Vitor Misumi
+      </a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer-organic {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 7C18 2 31 11 48 7C66 3 81 12 100 5V100H0Z" fill="white"/></svg>');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
+  .social-blob {
+    position: absolute;
+    inset: 0;
+    background: var(--color-background);
+    mask-image: var(--blob-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .social-icon {
+    color: var(--color-foreground);
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover .social-icon,
+  .social-link:focus-visible .social-icon {
+    color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-blob,
+    .social-icon {
+      transition: none;
+    }
+  }
+</style>
