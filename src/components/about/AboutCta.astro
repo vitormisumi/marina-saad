@@ -1,0 +1,48 @@
+<section class="reveal about-cta-reveal py-16">
+  <div class="space-y-6 text-center">
+    <h2 class="reveal-item reveal-fade text-style-h1">
+      Vamos planejar o seu futuro?
+    </h2>
+
+    <p
+      class="reveal-item reveal-fade text-foreground/70 text-style-lead text-style-accent"
+    >
+      Um papo inicial gratuito é o primeiro passo para organizar a sua vida
+      financeira.
+    </p>
+
+    <div class="reveal-item reveal-fade pt-2">
+      <a
+        href="/contact"
+        class="text-style-cta bg-accent hover:bg-accent/90 text-background inline-block cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
+      >
+        Agende seu Papo Inicial
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector(".about-cta-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 200}ms`);
+    });
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -320px 0px" },
+    );
+
+    observer.observe(section);
+  }
+</script>
