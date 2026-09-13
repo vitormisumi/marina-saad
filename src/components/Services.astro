@@ -75,46 +75,48 @@ const blobPaths = [
     </p>
   </div>
 
-  <div
-    class="mt-8 grid grid-cols-2 place-content-center place-items-center gap-4 md:gap-6 pb-4 xl:grid-cols-4"
-  >
-    {
-      services.map(({ title, tagline, img }, index) => {
-        return (
-          <a
-            href="/services"
-            data-parallax={index % 2 === 0 ? "slow" : "fast"}
-            class="reveal-item group border-tertiary/20 bg-background hover:border-tertiary after:text-secondary hover:after:text-tertiary/10 services-card relative flex aspect-square w-full max-w-xs items-center justify-center gap-4 overflow-hidden rounded-2xl border p-2 text-center after:absolute after:right-2 after:bottom-2 after:text-5xl after:opacity-100 after:transition-opacity after:delay-1000 after:duration-300 after:content-['...'] hover:after:opacity-0 hover:after:delay-0 hover:after:duration-0 xl:p-8 xl:after:right-6 xl:after:bottom-6"
-          >
-            <span class="text-foreground text-lg font-semibold xl:text-2xl">
-              {title}
-            </span>
-
-            <span
-              class="blob-reveal text-foreground accent bg-background absolute inset-0 flex items-center justify-center px-6 text-base xl:text-lg"
-              style={`--blob-mask: ${blobMaskUrl(blobPaths[index], { transform: "translate(100 100)" })};`}
+  <div class="flex justify-center">
+    <div
+      class="mt-8 grid grid-cols-2 place-content-center place-items-center gap-4 pb-4 md:gap-6 xl:grid-cols-4"
+    >
+      {
+        services.map(({ title, tagline, img }, index) => {
+          return (
+            <a
+              href="/services"
+              data-parallax={index % 2 === 0 ? "slow" : "fast"}
+              class="reveal-item group border-tertiary/20 bg-background hover:border-tertiary after:text-secondary hover:after:text-tertiary/10 services-card relative flex aspect-square w-full max-w-xs items-center justify-center gap-4 overflow-hidden rounded-2xl border p-2 text-center after:absolute after:right-2 after:bottom-2 after:text-5xl after:opacity-100 after:transition-opacity after:delay-1000 after:duration-300 after:content-['...'] hover:after:opacity-0 hover:after:delay-0 hover:after:duration-0 xl:p-8 xl:after:right-6 xl:after:bottom-6"
             >
-              <Image
-                src={img}
-                alt={title}
-                priority={false}
-                quality="low"
-                layout="constrained"
-                class="absolute inset-0 h-full object-cover opacity-10"
-              />
-
-              <span class="bg-tertiary/5 absolute inset-0" />
-
-              <span class="relative text-sm md:text-base">{tagline}</span>
-
-              <span class="text-foreground absolute right-2 bottom-2 font-serif text-xs group-hover:underline md:text-sm xl:right-6 xl:bottom-6">
-                Saiba mais »
+              <span class="text-foreground text-lg font-semibold xl:text-2xl">
+                {title}
               </span>
-            </span>
-          </a>
-        );
-      })
-    }
+
+              <span
+                class="blob-reveal text-foreground accent bg-background absolute inset-0 flex items-center justify-center px-6 text-base xl:text-lg"
+                style={`--blob-mask: ${blobMaskUrl(blobPaths[index], { transform: "translate(100 100)" })};`}
+              >
+                <Image
+                  src={img}
+                  alt={title}
+                  priority={false}
+                  quality="low"
+                  layout="constrained"
+                  class="absolute inset-0 h-full object-cover opacity-10"
+                />
+
+                <span class="bg-tertiary/5 absolute inset-0" />
+
+                <span class="relative text-sm md:text-base">{tagline}</span>
+
+                <span class="text-foreground absolute right-2 bottom-2 font-serif text-xs group-hover:underline md:text-sm xl:right-6 xl:bottom-6">
+                  Saiba mais »
+                </span>
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
   </div>
 </section>
 
