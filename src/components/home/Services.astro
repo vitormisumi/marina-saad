@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { blobMaskUrl } from "../lib/blobMask";
+import { blobMaskUrl } from "../../lib/blobMask";
 import { Image } from "astro:assets";
 
 const services = (await getCollection("services")).sort(
