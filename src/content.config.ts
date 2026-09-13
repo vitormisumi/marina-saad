@@ -43,4 +43,46 @@ const mediaMentions = defineCollection({
   ]),
 });
 
-export const collections = { testimonials, events, mediaMentions };
+const faqs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/faqs" }),
+  schema: z.object({
+    order: z.number(),
+    question: z.string(),
+  }),
+});
+
+const services = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/services" }),
+  schema: ({ image }) =>
+    z.object({
+      order: z.number(),
+      title: z.string(),
+      tagline: z.string(),
+      img: image(),
+    }),
+});
+
+const processSteps = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/process" }),
+  schema: z.object({
+    order: z.number(),
+    title: z.string(),
+  }),
+});
+
+const painPoints = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/pain-points" }),
+  schema: z.object({
+    order: z.number(),
+  }),
+});
+
+export const collections = {
+  testimonials,
+  events,
+  mediaMentions,
+  faqs,
+  services,
+  processSteps,
+  painPoints,
+};

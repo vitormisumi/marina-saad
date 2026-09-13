@@ -1,57 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import { blobMaskUrl } from "../lib/blobMask";
-import budget from "../assets/budget.jpg";
-import emergency from "../assets/emergency.jpg";
-import debt from "../assets/debt.jpg";
-import investment from "../assets/investment.jpg";
-import freelance from "../assets/freelance.jpg";
-import dream from "../assets/dream.jpg";
-import retirement from "../assets/retirement.jpg";
-import family from "../assets/family.jpg";
 import { Image } from "astro:assets";
 
-const services = [
-  {
-    title: "Gestão de Dívidas",
-    tagline: "Um plano para sair do vermelho",
-    img: debt,
-  },
-  {
-    title: "Finanças para Autônomos",
-    tagline: "Seu negócio no azul",
-    img: freelance,
-  },
-  {
-    title: "Análise de Investimentos",
-    tagline: "Investir com segurança",
-    img: investment,
-  },
-  {
-    title: "Planejamento de Sonhos",
-    tagline: "Realize o que importa",
-    img: dream,
-  },
-  {
-    title: "Organização do Orçamento",
-    tagline: "Clareza todo mês",
-    img: budget,
-  },
-  {
-    title: "Reserva de Emergência",
-    tagline: "Sua rede de segurança",
-    img: emergency,
-  },
-  {
-    title: "Planejamento da Aposentadoria",
-    tagline: "Futuro sem aperto",
-    img: retirement,
-  },
-  {
-    title: "Finanças a Dois e em Família",
-    tagline: "Decidir juntos",
-    img: family,
-  },
-];
+const services = (await getCollection("services")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const blobPaths = [
   "M25.6,-32C37.8,-26.4,55.4,-25.1,64.4,-16.4C73.4,-7.8,73.8,8.1,67.1,19.8C60.5,31.4,47,38.7,34.6,50.3C22.3,62,11.1,78,-4.1,83.6C-19.3,89.3,-38.6,84.5,-44.7,70.8C-50.8,57.1,-43.7,34.5,-43.8,18C-43.8,1.6,-51.1,-8.7,-50.8,-18.7C-50.5,-28.6,-42.7,-38.3,-33,-44.7C-23.2,-51.1,-11.6,-54.2,-2.5,-50.8C6.7,-47.4,13.4,-37.6,25.6,-32Z",
@@ -80,7 +34,7 @@ const blobPaths = [
       class="mt-8 grid grid-cols-2 place-content-center place-items-center gap-4 pb-4 md:gap-6 xl:grid-cols-4"
     >
       {
-        services.map(({ title, tagline, img }, index) => {
+        services.map(({ data: { title, tagline, img } }, index) => {
           return (
             <a
               href="/services"

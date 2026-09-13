@@ -1,26 +1,9 @@
 ---
-const steps = [
-  {
-    title: "Papo inicial",
-    description:
-      "Uma conversa gratuita e sem compromisso para entender sua situação, seus objetivos e suas dúvidas.",
-  },
-  {
-    title: "Desenvolvimento do plano",
-    description:
-      "Traduzo seus números em um plano personalizado, realista e alinhado aos seus valores.",
-  },
-  {
-    title: "Implementação",
-    description:
-      "Colocamos o plano em prática, com passos claros e acompanhamento de perto.",
-  },
-  {
-    title: "Revisões contínuas",
-    description:
-      "Ajustes periódicos para manter o plano no rumo certo conforme sua vida muda.",
-  },
-];
+import { getCollection } from "astro:content";
+
+const steps = (await getCollection("processSteps")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <section
@@ -49,7 +32,7 @@ const steps = [
     </svg>
 
     {
-      steps.map(({ title, description }, index) => (
+      steps.map(({ data: { title }, body }, index) => (
         <li class="reveal-item relative flex gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-12">
           <span
             class="step-marker bg-tertiary text-background text-style-stat relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full md:col-start-2 md:row-start-1 md:size-16 md:justify-self-center"
@@ -67,7 +50,7 @@ const steps = [
             ]}
           >
             <h4 class="text-foreground text-style-h2">{title}</h4>
-            <p class="text-foreground/70 text-style-body">{description}</p>
+            <p class="text-foreground/70 text-style-body">{body}</p>
           </div>
         </li>
       ))

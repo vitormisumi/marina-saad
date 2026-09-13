@@ -1,26 +1,9 @@
 ---
-const faqs = [
-  {
-    question: "Preciso ter muito dinheiro para contratar?",
-    answer:
-      "Não. O planejamento financeiro é para qualquer fase da vida — inclusive para quem está começando a organizar as contas. O que importa é a sua intenção de construir um plano.",
-  },
-  {
-    question: "O Papo Inicial é gratuito?",
-    answer:
-      "Sim. O Papo Inicial é uma conversa gratuita e sem compromisso, para entender sua situação e seus objetivos antes de qualquer decisão.",
-  },
-  {
-    question: "O atendimento é online ou presencial?",
-    answer:
-      "Da forma que for melhor para você. Atendo tanto online quanto presencialmente, conforme sua preferência e disponibilidade.",
-  },
-  {
-    question: "Vou precisar cortar todos os meus gastos?",
-    answer:
-      "Não. Um bom plano equilibra seus objetivos com aquilo que importa para você — a ideia é gastar com consciência, não viver em restrição.",
-  },
-];
+import { getCollection } from "astro:content";
+
+const faqs = (await getCollection("faqs")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <section
@@ -50,7 +33,7 @@ const faqs = [
 
     <div class="mx-auto mt-12 max-w-2xl">
       {
-        faqs.map(({ question, answer }, index) => (
+        faqs.map(({ data: { question }, body }, index) => (
           <div class="reveal-item faq-item">
             <button
               type="button"
@@ -71,7 +54,7 @@ const faqs = [
             <div class="faq-body" id={`faq-answer-${index}`}>
               <div class="faq-body-inner">
                 <p class="text-foreground/70 text-style-body px-6 pb-6">
-                  {answer}
+                  {body}
                 </p>
               </div>
             </div>

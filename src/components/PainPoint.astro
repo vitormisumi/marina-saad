@@ -1,12 +1,9 @@
 ---
-const phrases = [
-  "...planejar a aposentadoria?",
-  "...quitar as dívidas?",
-  "...controlar os gastos?",
-  "...investir com segurança?",
-  "...organizar seu negócio?",
-  "...alcançar seus sonhos?",
-];
+import { getCollection } from "astro:content";
+
+const phrases = (await getCollection("painPoints"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => entry.body?.trim() ?? "");
 ---
 
 <section class="reveal painpoint-reveal py-16">
