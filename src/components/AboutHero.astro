@@ -1,0 +1,101 @@
+---
+import { Image } from "astro:assets";
+import marina from "../assets/marina-about.jpg";
+import { blobMaskUrl } from "../lib/blobMask";
+
+const aboutMask = blobMaskUrl(
+  "M40.7,-52.9C52.2,-47.7,60.7,-35.1,63.9,-21.6C67.1,-8.2,64.9,6.1,62.9,23C60.9,39.8,59.1,59.3,48.6,70.8C38.1,82.4,19.1,86.1,4.6,79.8C-9.9,73.5,-19.8,57.2,-29.6,45.4C-39.4,33.6,-49.1,26.3,-55,16C-60.9,5.7,-63.1,-7.8,-58.7,-18.4C-54.3,-29,-43.3,-36.8,-32.5,-42.3C-21.6,-47.8,-10.8,-50.9,1.9,-53.6C14.6,-56.2,29.2,-58.2,40.7,-52.9Z",
+  { transform: "translate(100 92) scale(1.24)" },
+);
+---
+
+<section
+  class="reveal about-hero-reveal from-secondary/10 via-background to-background bg-radial pt-24 pb-16"
+>
+  <div class="grid items-center gap-10 md:grid-cols-2 md:gap-12">
+    <div class="reveal-item relative flex justify-center md:justify-end">
+      <Image
+        src={marina}
+        alt="Marina Saad, planejadora financeira."
+        priority
+        quality="mid"
+        layout="full-width"
+        style={`--blob-mask: ${aboutMask}`}
+        class="about-hero-img w-full max-w-lg"
+      />
+    </div>
+
+    <div class="space-y-4 md:space-y-6">
+      <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+        Sobre mim
+      </h3>
+
+      <h1 class="reveal-item reveal-fade text-style-h1">
+        Prazer, sou a Marina
+      </h1>
+
+      <p class="reveal-item reveal-fade text-style-body text-style-accent">
+        Planejadora financeira
+      </p>
+
+      <p
+        class="reveal-item reveal-fade text-foreground/70 text-style-body max-w-xl"
+      >
+        Acredito que dinheiro é ferramenta para construir a vida que você quer —
+        não uma fonte de ansiedade. Por isso, meu trabalho é traduzir números em
+        planos simples, realistas e alinhados aos seus valores.
+      </p>
+
+      <p
+        class="reveal-item reveal-fade text-foreground/70 text-style-body max-w-xl"
+      >
+        Há mais de uma década eu acompanho pessoas e famílias em cada etapa da
+        vida: sair das dívidas, organizar o mês, investir com segurança e
+        realizar sonhos. Cada plano nasce da sua história — nunca de uma fórmula
+        pronta.
+      </p>
+
+      <div class="reveal-item reveal-fade pt-2">
+        <a
+          href="/contact"
+          class="text-style-cta bg-accent hover:bg-accent/90 text-background inline-block cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
+        >
+          Agende seu Papo Inicial
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero-img {
+    mask-image: var(--blob-mask);
+    mask-position: center;
+    mask-repeat: no-repeat;
+  }
+</style>
+
+<script>
+  const section = document.querySelector(".about-hero-reveal");
+  if (section) {
+    const items = [...section.querySelectorAll(".reveal-item")];
+
+    (items as HTMLElement[]).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
+    });
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -320px 0px" },
+    );
+
+    observer.observe(section);
+  }
+</script>

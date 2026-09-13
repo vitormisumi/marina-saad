@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import marinaAbout from "../assets/marina-about.jpg";
+import marina from "../assets/marina-about-preview.jpg";
 import { blobMaskUrl } from "../lib/blobMask";
 
 const aboutMask = blobMaskUrl(
@@ -15,7 +15,7 @@ const aboutMask = blobMaskUrl(
   <div class="grid items-center md:grid-cols-2 md:gap-8">
     <div class="reveal-item relative flex justify-end">
       <Image
-        src={marinaAbout}
+        src={marina}
         alt="Marina Saad."
         loading="lazy"
         quality="mid"
