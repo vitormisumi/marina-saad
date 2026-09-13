@@ -148,28 +148,14 @@ const blobPaths = [
 </style>
 
 <script>
-  const section = document.querySelector(".services-blob-reveal");
+  import { initReveal } from "../../lib/reveal";
+
+  const section = initReveal({
+    selector: ".services-blob-reveal",
+    desktopMargin: "0px 0px -350px 0px",
+  });
+
   if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
-
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
-    });
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -350px 0px" },
-    );
-
-    observer.observe(section);
-
     if (window.matchMedia("(hover: none)").matches) {
       const cards = [
         ...section.querySelectorAll("a[href='/services']"),

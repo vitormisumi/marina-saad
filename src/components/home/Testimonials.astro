@@ -73,26 +73,12 @@ const blobPaths = [
 </style>
 
 <script>
-  const section = document.querySelector(".testimonials-reveal");
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  import { initReveal } from "../../lib/reveal";
 
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 250}ms`);
-    });
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -200px 0px" : "0px 0px -120px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  initReveal({
+    selector: ".testimonials-reveal",
+    step: 250,
+    mobileMargin: "0px 0px -200px 0px",
+    desktopMargin: "0px 0px -120px 0px",
+  });
 </script>

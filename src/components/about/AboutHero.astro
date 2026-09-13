@@ -76,26 +76,7 @@ const aboutMask = blobMaskUrl(
 </style>
 
 <script>
-  const section = document.querySelector(".about-hero-reveal");
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  import { initReveal } from "../../lib/reveal";
 
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 150}ms`);
-    });
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -320px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  initReveal({ selector: ".about-hero-reveal" });
 </script>

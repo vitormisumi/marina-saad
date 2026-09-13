@@ -228,31 +228,13 @@ today.setHours(0, 0, 0, 0);
 </style>
 
 <script>
-  const section = document.querySelector(".community-reveal");
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  import { initReveal } from "../../lib/reveal";
 
-    items.forEach((item, index) => {
-      (item as HTMLElement).style.setProperty(
-        "--reveal-delay",
-        `${index * 150}ms`,
-      );
-    });
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -300px 0px" : "0px 0px -200px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  const section = initReveal({
+    selector: ".community-reveal",
+    mobileMargin: "0px 0px -300px 0px",
+    desktopMargin: "0px 0px -200px 0px",
+  });
 
   const dialog = document.querySelector<HTMLDialogElement>("#video-dialog");
   const frame = document.querySelector<HTMLIFrameElement>("#video-frame");

@@ -31,7 +31,8 @@ const phrases = (await getCollection("painPoints"))
 </section>
 
 <script>
-  const section = document.querySelector(".painpoint-reveal");
+  import { initReveal } from "../../lib/reveal";
+
   const typewriter = document.querySelector<HTMLElement>("#typewriter-text");
 
   const startTypewriter = (el: HTMLElement) => {
@@ -87,32 +88,18 @@ const phrases = (await getCollection("painPoints"))
     setTimeout(tick, holdTime);
   };
 
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  let started = false;
 
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 250}ms`);
-    });
-
-    let started = false;
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-
-          if (typewriter && !started) {
-            started = true;
-            startTypewriter(typewriter);
-          }
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -180px 0px" : "0px 0px -180px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  initReveal({
+    selector: ".painpoint-reveal",
+    step: 250,
+    mobileMargin: "0px 0px -180px 0px",
+    desktopMargin: "0px 0px -180px 0px",
+    onReveal: () => {
+      if (typewriter && !started) {
+        started = true;
+        startTypewriter(typewriter);
+      }
+    },
+  });
 </script>
