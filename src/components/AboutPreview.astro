@@ -19,22 +19,28 @@ const aboutMask = blobMaskUrl(
         alt="Marina Saad."
         loading="lazy"
         quality="mid"
-        layout="constrained"
+        layout="full-width"
         style={`--blob-mask: ${aboutMask}`}
         class="about-img w-full max-w-lg"
       />
     </div>
 
     <div class="space-y-4 md:space-y-6">
-      <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
         Sobre mim
       </h3>
 
-      <h2 class="reveal-item reveal-fade heading">Prazer, sou a Marina</h2>
+      <h2 class="reveal-item reveal-fade text-style-h1">
+        Prazer, sou a Marina
+      </h2>
 
-      <p class="reveal-item reveal-fade accent">Planejadora financeira</p>
+      <p class="reveal-item reveal-fade text-style-body text-style-accent">
+        Planejadora financeira
+      </p>
 
-      <p class="reveal-item reveal-fade text-foreground/70 max-w-xl">
+      <p
+        class="reveal-item reveal-fade text-foreground/70 text-style-body max-w-xl"
+      >
         Acredito que dinheiro é ferramenta para construir a vida que você quer —
         não uma fonte de ansiedade. Por isso, meu trabalho é traduzir números em
         planos simples, realistas e alinhados aos seus valores.
@@ -42,7 +48,7 @@ const aboutMask = blobMaskUrl(
 
       <a
         href="/about"
-        class="reveal-item reveal-fade hover:text-accent text-foreground/80 accent inline-block font-medium"
+        class="reveal-item reveal-fade hover:text-accent text-foreground/80 text-style-body text-style-accent inline-block"
       >
         Saiba mais »
       </a>

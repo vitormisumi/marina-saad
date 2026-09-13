@@ -22,24 +22,24 @@ const blobPaths = [
 
 <section class="reveal testimonials-reveal">
   <div class="space-y-2 text-center md:text-left">
-    <h3 class="reveal-item reveal-fade heading">O que dizem meus clientes</h3>
+    <h2 class="reveal-item reveal-fade text-style-h1">
+      O que dizem meus clientes
+    </h2>
 
-    <p class="reveal-item reveal-fade accent">
+    <p class="reveal-item reveal-fade text-style-lead text-style-accent">
       Histórias de quem transformou sua relação com o dinheiro
     </p>
   </div>
 
-  <div class="mt-12 grid gap-4 md:grid-cols-3">
+  <div class="mt-12 grid gap-4 lg:grid-cols-3">
     {
       testimonials.map(({ data: { name, role }, body }, index) => (
         <figure
-          class="blob-mask reveal-item bg-tertiary/10 relative flex flex-col justify-between gap-8 p-10 hover:scale-105 md:p-8 lg:p-12"
+          class="blob-mask reveal-item bg-tertiary/10 relative flex flex-col justify-between gap-8 p-10 hover:scale-105 md:p-12"
           style={`--blob-mask: ${blobMaskUrl(blobPaths[index], { viewBox: "0 0 2000 2000", preserveAspectRatio: "none" })}`}
         >
           <blockquote class="before:text-secondary relative pt-8 before:absolute before:top-4 before:-left-2 before:font-serif before:text-5xl before:leading-8 before:italic before:content-['“']">
-            <p class="text-body text-foreground/80 leading-6 md:leading-7">
-              {body}
-            </p>
+            <p class="text-style-body text-foreground/80">{body}</p>
           </blockquote>
 
           <figcaption class="relative flex items-center gap-4 md:flex-col md:text-center lg:flex-row lg:text-left">
@@ -51,8 +51,8 @@ const blobPaths = [
             </span>
 
             <span class="space-y-0.5">
-              <span class="font-semibold">{name}</span>
-              <span class="text-foreground/70 accent block text-sm">
+              <span class="text-style-body font-semibold">{name}</span>
+              <span class="text-foreground/70 text-style-small text-style-accent block">
                 {role}
               </span>
             </span>

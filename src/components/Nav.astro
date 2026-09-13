@@ -56,10 +56,10 @@ const isActive = (href: string) =>
                 ? [
                     "contact-cta",
                     isHome
-                      ? "hover:text-accent aria-[current=page]:text-quaternary px-4 py-2 font-serif font-extralight"
-                      : "bg-accent text-background hover:bg-accent/90 rounded-lg px-4 py-2 font-serif font-medium",
+                      ? "hover:text-accent aria-[current=page]:text-quaternary text-style-body px-4 py-2"
+                      : "bg-accent text-background hover:bg-accent/90 text-style-body rounded-lg px-4 py-2 font-medium",
                   ]
-                : "hover:text-accent aria-[current=page]:text-quaternary font-serif font-extralight",
+                : "hover:text-accent aria-[current=page]:text-quaternary text-style-body",
             ]}
           >
             {label}
@@ -126,11 +126,11 @@ const isActive = (href: string) =>
   const heroCta = document.getElementById("hero-cta");
 
   const plainClasses =
-    "font-serif font-extralight px-4 py-2 hover:text-accent aria-[current=page]:text-quaternary".split(
+    "text-style-body px-4 py-2 hover:text-accent aria-[current=page]:text-quaternary".split(
       " ",
     );
   const accentClasses =
-    "font-serif font-medium rounded-lg px-4 py-2 bg-accent text-background hover:bg-accent/90".split(
+    "text-style-body font-medium rounded-lg px-4 py-2 bg-accent text-background hover:bg-accent/90".split(
       " ",
     );
 

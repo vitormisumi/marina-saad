@@ -39,9 +39,11 @@ const faqs = [
 
   <div class="py-16">
     <div class="space-y-2 text-center">
-      <h3 class="reveal-item reveal-fade eyebrow">Perguntas Frequentes</h3>
+      <h2 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+        Perguntas Frequentes
+      </h2>
 
-      <p class="reveal-item reveal-fade accent">
+      <p class="reveal-item reveal-fade text-style-lead text-style-accent">
         Respostas rápidas para as dúvidas mais comuns
       </p>
     </div>
@@ -56,9 +58,7 @@ const faqs = [
               aria-expanded="false"
               aria-controls={`faq-answer-${index}`}
             >
-              <span class="text-foreground font-sans text-lg font-semibold">
-                {question}
-              </span>
+              <span class="text-foreground text-style-h3">{question}</span>
 
               <span
                 class="marker text-secondary relative shrink-0 text-2xl leading-none"
@@ -70,7 +70,9 @@ const faqs = [
 
             <div class="faq-body" id={`faq-answer-${index}`}>
               <div class="faq-body-inner">
-                <p class="text-foreground/70 px-6 pb-6 leading-7">{answer}</p>
+                <p class="text-foreground/70 text-style-body px-6 pb-6">
+                  {answer}
+                </p>
               </div>
             </div>
 
@@ -83,7 +85,7 @@ const faqs = [
     <div class="reveal-item mt-12 text-center">
       <a
         href="/faq"
-        class="hover:text-accent text-foreground/80 accent inline-block font-medium"
+        class="hover:text-accent text-foreground/80 text-style-body text-style-accent inline-block"
       >
         Ver todas as perguntas »
       </a>

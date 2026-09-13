@@ -20,8 +20,10 @@ const credentials = ["CFP®", "CVM", "ANBIMA"];
       {
         stats.map(({ value, label }) => (
           <div class="reveal-item space-y-1 text-center">
-            <dd class="stat text-foreground text-3xl md:text-4xl">{value}</dd>
-            <dt class="text-foreground/70 accent text-sm">{label}</dt>
+            <dd class="text-foreground text-style-stat">{value}</dd>
+            <dt class="text-foreground/70 text-style-small text-style-accent">
+              {label}
+            </dt>
           </div>
         ))
       }
@@ -32,7 +34,7 @@ const credentials = ["CFP®", "CVM", "ANBIMA"];
     <ul class="flex items-center justify-center gap-6 py-8 md:gap-8">
       {
         credentials.map((credential) => (
-          <li class="border-foreground/20 eyebrow reveal-item rounded-lg border px-4 py-2 text-sm">
+          <li class="border-foreground/20 text-style-small text-style-eyebrow reveal-item rounded-lg border px-4 py-2">
             {credential}
           </li>
         ))

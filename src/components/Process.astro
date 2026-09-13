@@ -27,9 +27,11 @@ const steps = [
   class="reveal process-reveal from-tertiary/10 via-background bg-radial-[at_25%_50%] py-16"
 >
   <div class="space-y-2 text-center">
-    <h3 class="reveal-item reveal-fade eyebrow">Como funciona</h3>
+    <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+      Como funciona
+    </h3>
 
-    <p class="reveal-item reveal-fade accent">
+    <p class="reveal-item reveal-fade text-style-lead text-style-accent">
       Sem mistério: um processo simples e transparente, do primeiro papo às
       revisões contínuas.
     </p>
@@ -50,7 +52,7 @@ const steps = [
       steps.map(({ title, description }, index) => (
         <li class="reveal-item relative flex gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-12">
           <span
-            class="step-marker bg-tertiary text-background stat relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full text-2xl md:col-start-2 md:row-start-1 md:size-16 md:justify-self-center md:text-3xl"
+            class="step-marker bg-tertiary text-background text-style-stat relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full md:col-start-2 md:row-start-1 md:size-16 md:justify-self-center"
             aria-hidden="true"
           >
             {String(index + 1).padStart(2, "0")}
@@ -64,12 +66,8 @@ const steps = [
                 : "md:col-start-3 md:row-start-1 md:justify-self-start md:pt-0",
             ]}
           >
-            <h3 class="text-foreground text-2xl font-semibold lg:text-3xl">
-              {title}
-            </h3>
-            <p class="text-foreground/70 leading-6 lg:leading-7">
-              {description}
-            </p>
+            <h4 class="text-foreground text-style-h2">{title}</h4>
+            <p class="text-foreground/70 text-style-body">{description}</p>
           </div>
         </li>
       ))
@@ -79,7 +77,7 @@ const steps = [
   <div class="reveal-item mt-16 text-center">
     <a
       href="/contact"
-      class="text-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap transition-colors"
+      class="text-style-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
     >
       Agende seu Papo Inicial
     </a>

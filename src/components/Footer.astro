@@ -28,28 +28,30 @@ const social = [
 ---
 
 <footer
-  class="footer-organic from-tertiary/10 to-tertiary/30 text-foreground bg-linear-to-b"
+  class="footer-organic from-tertiary/10 to-tertiary/30 text-foreground bg-linear-to-b pt-4"
 >
   <div
     class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3 md:justify-items-end md:px-12"
   >
     <div class="space-y-4 justify-self-start">
-      <p class="heading text-xl md:text-2xl">Marina Saad</p>
-      <p class="text-foreground/70 accent">Planejadora financeira</p>
-      <p class="text-foreground/60 max-w-xs text-sm">
+      <p class="text-style-h3">Marina Saad</p>
+      <p class="text-foreground/70 text-style-body text-style-accent">
+        Planejadora financeira
+      </p>
+      <p class="text-foreground/60 text-style-small max-w-xs">
         Dinheiro como ferramenta para construir a vida que você quer.
       </p>
     </div>
 
     <nav aria-label="Rodapé">
-      <h3 class="eyebrow mb-4 text-sm">Navegação</h3>
+      <h3 class="text-style-small text-style-eyebrow mb-4">Navegação</h3>
       <ul class="space-y-2">
         {
           navLinks.map(({ href, label }) => (
             <li>
               <a
                 href={href}
-                class="hover:text-accent text-foreground/80 transition-colors"
+                class="text-style-small hover:text-accent text-foreground/80 transition-colors"
               >
                 {label}
               </a>
@@ -60,7 +62,7 @@ const social = [
     </nav>
 
     <div class="flex flex-col md:items-end">
-      <h3 class="eyebrow mb-4 text-sm">Contato</h3>
+      <h3 class="text-style-small text-style-eyebrow mb-4">Contato</h3>
 
       <ul class="flex items-center gap-3 pb-4">
         {
@@ -88,7 +90,7 @@ const social = [
       <a
         id="footer-cta"
         href="/contact"
-        class="bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap drop-shadow-md transition-colors"
+        class="bg-accent hover:bg-accent/90 text-background text-style-small w-min cursor-pointer rounded-lg px-4 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-colors"
       >
         Agende seu Papo Inicial
       </a>
@@ -96,13 +98,13 @@ const social = [
   </div>
 
   <div
-    class="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 text-xs md:flex-row md:items-center md:justify-between md:px-12"
+    class="text-style-small mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 md:flex-row md:items-center md:justify-between md:px-12"
   >
-    <p>
+    <p class="text-style-small">
       © {new Date().getFullYear()} Marina Saad. Todos os direitos reservados.
     </p>
 
-    <p>
+    <p class="text-style-small">
       Desenvolvido por{" "}
       <a
         href="https://www.vitormisumi.com"
