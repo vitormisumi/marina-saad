@@ -59,6 +59,9 @@ const services = defineCollection({
       title: z.string(),
       tagline: z.string(),
       img: image(),
+      description: z.string(),
+      audience: z.array(z.string()),
+      includes: z.array(z.string()),
     }),
 });
 
