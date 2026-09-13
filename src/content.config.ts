@@ -48,6 +48,13 @@ const faqs = defineCollection({
   schema: z.object({
     order: z.number(),
     question: z.string(),
+    category: z.enum([
+      "comecando",
+      "organizacao",
+      "investimentos",
+      "atendimento",
+    ]),
+    home: z.boolean().default(false),
   }),
 });
 

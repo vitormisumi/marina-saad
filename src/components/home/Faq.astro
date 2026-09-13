@@ -1,9 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import FaqAccordion from "../faq/FaqAccordion.astro";
 
-const faqs = (await getCollection("faqs")).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+const faqs = (await getCollection("faqs"))
+  .filter(({ data }) => data.home)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data: { question }, body }) => ({ question, text: body ?? "" }));
 ---
 
 <section
@@ -31,38 +33,8 @@ const faqs = (await getCollection("faqs")).sort(
       </p>
     </div>
 
-    <div class="mx-auto mt-12 max-w-2xl">
-      {
-        faqs.map(({ data: { question }, body }, index) => (
-          <div class="reveal-item faq-item">
-            <button
-              type="button"
-              class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-4 text-left"
-              aria-expanded="false"
-              aria-controls={`faq-answer-${index}`}
-            >
-              <span class="text-foreground text-style-h3">{question}</span>
-
-              <span
-                class="marker text-secondary relative shrink-0 text-2xl leading-none"
-                aria-hidden="true"
-              >
-                +
-              </span>
-            </button>
-
-            <div class="faq-body" id={`faq-answer-${index}`}>
-              <div class="faq-body-inner">
-                <p class="text-foreground/70 text-style-body px-6 pb-6">
-                  {body}
-                </p>
-              </div>
-            </div>
-
-            {index !== faqs.length - 1 && <hr class="border-tertiary/10" />}
-          </div>
-        ))
-      }
+    <div class="mt-12">
+      <FaqAccordion faqs={faqs} idPrefix="faq-home" />
     </div>
 
     <div class="reveal-item mt-12 text-center">
@@ -87,51 +59,11 @@ const faqs = (await getCollection("faqs")).sort(
   </svg>
 </section>
 
-<style>
-  .faq-body {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease;
-  }
-
-  .faq-body-inner {
-    overflow: hidden;
-    min-height: 0;
-  }
-
-  .marker {
-    transition: transform 0.3s ease;
-  }
-
-  .faq-item[data-open] .faq-body {
-    grid-template-rows: 1fr;
-  }
-
-  .faq-item[data-open] .marker {
-    transform: rotate(45deg);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .faq-body,
-    .marker {
-      transition: none;
-    }
-  }
-</style>
-
 <script>
   import { initReveal } from "../../lib/reveal";
 
-  const section = initReveal({
+  initReveal({
     selector: ".faqwave-reveal",
     desktopMargin: "0px 0px -350px 0px",
-  });
-
-  section?.querySelectorAll(".faq-item").forEach((item) => {
-    const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
-    trigger?.addEventListener("click", () => {
-      const isOpen = item.toggleAttribute("data-open");
-      trigger.setAttribute("aria-expanded", String(isOpen));
-    });
   });
 </script>

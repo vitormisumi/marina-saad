@@ -1,0 +1,26 @@
+---
+import FaqAccordion from "./FaqAccordion.astro";
+
+interface FaqEntry {
+  question: string;
+  text: string;
+}
+
+interface Props {
+  slug: string;
+  label: string;
+  faqs: FaqEntry[];
+}
+
+const { slug, label, faqs } = Astro.props;
+---
+
+<div class="space-y-6">
+  <h2
+    class="reveal-item reveal-fade text-style-small text-style-eyebrow text-center"
+  >
+    {label}
+  </h2>
+
+  <FaqAccordion faqs={faqs} idPrefix={`faq-${slug}`} />
+</div>
