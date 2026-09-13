@@ -3,8 +3,12 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig, fontProviders } from "astro/config";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
+  // TO-DO: modify the site with actual domain once bought
+  site: "https://marina-saad-financas.netlify.app",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -25,5 +29,5 @@ export default defineConfig({
       fallbacks: ["sans-serif"],
     },
   ],
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
 });

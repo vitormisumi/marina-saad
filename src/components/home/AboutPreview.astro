@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import marinaAbout from "../assets/marina-about.jpg";
-import { blobMaskUrl } from "../lib/blobMask";
+import marina from "../../assets/marina-about-preview.jpg";
+import { blobMaskUrl } from "../../lib/blobMask";
 
 const aboutMask = blobMaskUrl(
   "M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z",
@@ -15,26 +15,32 @@ const aboutMask = blobMaskUrl(
   <div class="grid items-center md:grid-cols-2 md:gap-8">
     <div class="reveal-item relative flex justify-end">
       <Image
-        src={marinaAbout}
+        src={marina}
         alt="Marina Saad."
         loading="lazy"
         quality="mid"
-        layout="constrained"
+        layout="full-width"
         style={`--blob-mask: ${aboutMask}`}
         class="about-img w-full max-w-lg"
       />
     </div>
 
     <div class="space-y-4 md:space-y-6">
-      <h3 class="reveal-item reveal-fade text-foreground/60 eyebrow">
+      <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
         Sobre mim
       </h3>
 
-      <h2 class="reveal-item reveal-fade heading">Prazer, sou a Marina</h2>
+      <h2 class="reveal-item reveal-fade text-style-h1">
+        Prazer, sou a Marina
+      </h2>
 
-      <p class="reveal-item reveal-fade accent">Planejadora financeira</p>
+      <p class="reveal-item reveal-fade text-style-body text-style-accent">
+        Planejadora financeira
+      </p>
 
-      <p class="reveal-item reveal-fade text-foreground/70 max-w-xl">
+      <p
+        class="reveal-item reveal-fade text-foreground/70 text-style-body max-w-xl"
+      >
         Acredito que dinheiro é ferramenta para construir a vida que você quer —
         não uma fonte de ansiedade. Por isso, meu trabalho é traduzir números em
         planos simples, realistas e alinhados aos seus valores.
@@ -42,7 +48,7 @@ const aboutMask = blobMaskUrl(
 
       <a
         href="/about"
-        class="reveal-item reveal-fade hover:text-accent text-foreground/80 accent inline-block font-medium"
+        class="reveal-item reveal-fade hover:text-accent text-foreground/80 text-style-body text-style-accent inline-block"
       >
         Saiba mais »
       </a>
@@ -59,26 +65,7 @@ const aboutMask = blobMaskUrl(
 </style>
 
 <script>
-  const section = document.querySelector(".about-reveal");
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  import { initReveal } from "../../lib/reveal";
 
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 200}ms`);
-    });
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -250px 0px" : "0px 0px -320px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  initReveal({ selector: ".about-reveal", step: 200 });
 </script>

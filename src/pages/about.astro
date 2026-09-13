@@ -1,10 +1,20 @@
 ---
+import AboutCta from "../components/about/AboutCta.astro";
+import AboutHero from "../components/about/AboutHero.astro";
+import AboutStory from "../components/about/AboutStory.astro";
+import AboutValues from "../components/about/AboutValues.astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 ---
 
 <Layout>
-  <main class="space-y-16">
-    <p>teste</p>
+  <main class="space-y-24">
+    <AboutHero />
+
+    <AboutStory />
+
+    <AboutValues />
+
+    <AboutCta />
   </main>
 </Layout>

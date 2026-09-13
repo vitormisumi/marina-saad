@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import FaqCategory from "../components/faq/FaqCategory.astro";
+import FaqCta from "../components/faq/FaqCta.astro";
+import FaqHero from "../components/faq/FaqHero.astro";
+import Layout from "../layouts/Layout.astro";
+import { faqCategories } from "../lib/faqs";
+import "../styles/global.css";
+
+const entries = (await getCollection("faqs")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const groups = faqCategories
+  .map((category) => ({
+    ...category,
+    faqs: entries
+      .filter((entry) => entry.data.category === category.slug)
+      .map(({ data: { question }, body }) => ({ question, text: body ?? "" })),
+  }))
+  .filter((group) => group.faqs.length > 0);
+---
+
+<Layout>
+  <main class="space-y-24">
+    <FaqHero />
+
+    <section class="reveal faq-page-reveal space-y-16">
+      {
+        groups.map(({ slug, label, faqs }) => (
+          <FaqCategory slug={slug} label={label} faqs={faqs} />
+        ))
+      }
+    </section>
+
+    <FaqCta />
+  </main>
+</Layout>
+
+<script>
+  import { initReveal } from "../lib/reveal";
+
+  initReveal({ selector: ".faq-page-reveal", step: 60 });
+</script>

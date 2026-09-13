@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import marina from "../assets/marina.jpg";
-import { blobMaskUrl } from "../lib/blobMask";
+import marina from "../../assets/marina.jpg";
+import { blobMaskUrl } from "../../lib/blobMask";
 
 const heroMask = blobMaskUrl(
   "M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z",
@@ -18,20 +18,18 @@ const heroMask = blobMaskUrl(
   </div>
 
   <div
-    class="relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
+    class="hero-inner relative flex h-full flex-col items-center justify-between gap-8 text-center md:items-start md:justify-evenly md:text-left"
   >
-    <div>
-      <h1 class="reveal-item display text-display">Marina Saad</h1>
+    <div class="hero-title">
+      <h1 class="reveal-item text-style-display">Marina Saad</h1>
 
-      <h2
-        class="reveal-item text-foreground/80 accent text-hero-sub leading-[1.2]"
-      >
+      <h2 class="reveal-item text-foreground/80 text-style-feature">
         Planejadora <br />Financeira
       </h2>
     </div>
 
-    <div class="space-y-6">
-      <p class="reveal-item text-lead leading-6 md:leading-8 lg:leading-10">
+    <div class="hero-copy space-y-6">
+      <p class="reveal-item text-style-lead">
         Transforme sua relação com o <span
           class="highlight relative isolate font-extrabold">dinheiro</span
         >
@@ -42,7 +40,7 @@ const heroMask = blobMaskUrl(
       <div class="reveal-item">
         <button
           id="hero-cta"
-          class="text-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 font-semibold whitespace-nowrap transition-colors"
+          class="text-style-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
         >
           Agende seu Papo Inicial
         </button>
@@ -198,6 +196,64 @@ const heroMask = blobMaskUrl(
 
   .line {
     animation: hero-fade-in 0.9s ease 0.2s both;
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    .hero-reveal {
+      --type-display: clamp(1.75rem, 9vh, 2.75rem);
+      --type-feature: clamp(1rem, 5.5vh, 1.75rem);
+      --type-lead: clamp(0.85rem, 3.4vh, 1.05rem);
+      --type-cta: clamp(0.9rem, 3.8vh, 1.1rem);
+
+      display: flex;
+      align-items: center;
+      height: auto;
+      min-height: 80vh;
+      padding-inline: clamp(1.5rem, 6vw, 5rem);
+      padding-block: 1.5rem;
+    }
+
+    .hero-reveal .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+      grid-template-rows: auto auto;
+      align-content: center;
+      align-items: center;
+      column-gap: 2rem;
+      row-gap: 0.75rem;
+      height: auto;
+      text-align: left;
+    }
+
+    .hero-reveal .hero-title {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .hero-reveal .hero-copy {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .hero-reveal .hero-img,
+    .hero-reveal .line {
+      position: static;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+      justify-self: center;
+      width: 100%;
+      max-width: none;
+      height: min(58vh, 220px);
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      transform: none;
+      translate: 0 0;
+    }
+
+    .hero-reveal .hero-copy button {
+      min-height: 2.5rem;
+    }
   }
 
   .highlight::after {

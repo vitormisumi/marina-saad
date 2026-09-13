@@ -1,20 +1,19 @@
 ---
-const phrases = [
-  "...planejar a aposentadoria?",
-  "...quitar as dívidas?",
-  "...controlar os gastos?",
-  "...investir com segurança?",
-  "...organizar seu negócio?",
-  "...alcançar seus sonhos?",
-];
+import { getCollection } from "astro:content";
+
+const phrases = (await getCollection("painPoints"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => entry.body?.trim() ?? "");
 ---
 
 <section class="reveal painpoint-reveal py-16">
   <div class="relative z-10 space-y-8 text-center md:text-left">
-    <p class="reveal-item reveal-fade eyebrow">Quer ajuda para...</p>
+    <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+      Quer ajuda para...
+    </h3>
 
-    <h3
-      class="reveal-item reveal-fade accent text-query text-foreground h-16 leading-8"
+    <h2
+      class="reveal-item reveal-fade text-style-feature text-foreground min-h-[calc(var(--type-feature)_*_1.1)]"
     >
       <span id="typewriter-text" data-phrases={JSON.stringify(phrases)}
         >{phrases[0]}</span
@@ -22,9 +21,9 @@ const phrases = [
         id="typewriter-caret"
         class="motion-safe:animate-blink bg-accent ml-1 inline-block h-[1em] w-[0.05em] translate-y-0.5 align-baseline"
         aria-hidden="true"></span>
-    </h3>
+    </h2>
 
-    <p class="reveal-item reveal-fade text-body text-foreground/70">
+    <p class="reveal-item reveal-fade text-style-body text-foreground/70">
       Você não precisa de fórmulas prontas — precisa de um plano que caiba na
       sua vida.
     </p>
@@ -32,7 +31,8 @@ const phrases = [
 </section>
 
 <script>
-  const section = document.querySelector(".painpoint-reveal");
+  import { initReveal } from "../../lib/reveal";
+
   const typewriter = document.querySelector<HTMLElement>("#typewriter-text");
 
   const startTypewriter = (el: HTMLElement) => {
@@ -88,32 +88,18 @@ const phrases = [
     setTimeout(tick, holdTime);
   };
 
-  if (section) {
-    const items = [...section.querySelectorAll(".reveal-item")];
+  let started = false;
 
-    (items as HTMLElement[]).forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${index * 250}ms`);
-    });
-
-    let started = false;
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("is-visible");
-          observer.disconnect();
-
-          if (typewriter && !started) {
-            started = true;
-            startTypewriter(typewriter);
-          }
-        }
-      },
-      { rootMargin: isMobile ? "0px 0px -180px 0px" : "0px 0px -180px 0px" },
-    );
-
-    observer.observe(section);
-  }
+  initReveal({
+    selector: ".painpoint-reveal",
+    step: 250,
+    mobileMargin: "0px 0px -180px 0px",
+    desktopMargin: "0px 0px -180px 0px",
+    onReveal: () => {
+      if (typewriter && !started) {
+        started = true;
+        startTypewriter(typewriter);
+      }
+    },
+  });
 </script>

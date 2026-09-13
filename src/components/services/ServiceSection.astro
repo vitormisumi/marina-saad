@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { blobMaskUrl } from "../../lib/blobMask";
+
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  img: ImageMetadata;
+  audience: string[];
+  includes: string[];
+  index: number;
+}
+
+const { title, tagline, description, img, audience, includes, index } =
+  Astro.props;
+
+const blobPaths = [
+  "M25.6,-32C37.8,-26.4,55.4,-25.1,64.4,-16.4C73.4,-7.8,73.8,8.1,67.1,19.8C60.5,31.4,47,38.7,34.6,50.3C22.3,62,11.1,78,-4.1,83.6C-19.3,89.3,-38.6,84.5,-44.7,70.8C-50.8,57.1,-43.7,34.5,-43.8,18C-43.8,1.6,-51.1,-8.7,-50.8,-18.7C-50.5,-28.6,-42.7,-38.3,-33,-44.7C-23.2,-51.1,-11.6,-54.2,-2.5,-50.8C6.7,-47.4,13.4,-37.6,25.6,-32Z",
+  "M19.8,-25.7C29,-20.6,42.1,-19.3,45.6,-13.6C49,-8,43,2,41.2,15.2C39.4,28.4,42,44.9,35.9,56.1C29.7,67.3,14.9,73.3,2,70.6C-11,67.9,-21.9,56.6,-35.3,47.7C-48.7,38.9,-64.5,32.5,-73.7,20.2C-82.9,7.9,-85.5,-10.4,-75,-18.7C-64.5,-27,-40.9,-25.5,-26.3,-28.8C-11.6,-32.2,-5.8,-40.4,-0.2,-40.1C5.3,-39.8,10.6,-30.8,19.8,-25.7Z",
+  "M29,-41.8C40.3,-31.7,54.1,-26.9,56.7,-18.5C59.3,-10.1,50.8,1.8,44.9,13C39.1,24.2,35.9,34.6,28.9,38.3C21.8,42,10.9,38.9,-2.8,42.8C-16.5,46.6,-33.1,57.4,-48.7,56.6C-64.4,55.7,-79.2,43.1,-82.2,28.1C-85.2,13,-76.4,-4.5,-63.7,-13.6C-50.9,-22.6,-34.1,-23.2,-22.8,-33.3C-11.6,-43.4,-5.8,-62.9,1.5,-65C8.8,-67.1,17.7,-51.8,29,-41.8Z",
+  "M33.4,-39.1C46.4,-36.6,62.2,-31,72.4,-18.9C82.7,-6.9,87.5,11.6,80.3,23.7C73.1,35.9,53.9,41.8,38.5,51.4C23.1,60.9,11.6,74,3.1,69.7C-5.3,65.4,-10.7,43.7,-21.2,32.6C-31.7,21.5,-47.4,21,-53.3,14.6C-59.1,8.2,-55.1,-4.2,-54.1,-20.7C-53,-37.2,-55.1,-57.9,-46.6,-61.9C-38.1,-65.8,-19,-53,-4.4,-46.9C10.2,-40.9,20.5,-41.5,33.4,-39.1Z",
+  "M27,-38.8C34.5,-25.8,39.9,-16.9,45,-5.4C50.1,6.2,54.9,20.3,48.6,24.9C42.2,29.5,24.6,24.4,9.1,34.1C-6.5,43.7,-20,68,-35,72.7C-49.9,77.4,-66.3,62.6,-72,45.2C-77.8,27.8,-73,7.9,-66.1,-8.3C-59.2,-24.4,-50.3,-36.9,-38.9,-49.2C-27.6,-61.6,-13.8,-73.9,-2,-71.5C9.7,-69.1,19.4,-51.9,27,-38.8Z",
+  "M45.9,-62.6C51,-50.4,40.8,-27.9,37.3,-11.9C33.8,4.2,37,13.7,36,25.9C35.1,38.1,29.9,53,21.4,54C13,54.9,1.2,41.9,-17.2,38.9C-35.7,35.9,-60.8,42.7,-64.2,37C-67.6,31.2,-49.4,12.9,-44.6,-6.7C-39.7,-26.2,-48.2,-46.9,-43,-59.1C-37.8,-71.2,-18.9,-74.8,0.7,-75.7C20.4,-76.5,40.8,-74.7,45.9,-62.6Z",
+  "M32.5,-35.3C45.9,-27.5,63.2,-20.8,60.3,-14C57.5,-7.3,34.4,-0.3,24.8,12.5C15.2,25.3,19,44,15.5,47.3C12,50.6,1.2,38.6,-8.4,31.5C-18,24.3,-26.3,22.2,-40.5,15C-54.6,7.8,-74.6,-4.5,-72.5,-12.1C-70.4,-19.8,-46.1,-22.9,-30.4,-30.4C-14.6,-37.9,-7.3,-49.7,1.1,-51C9.5,-52.3,19.1,-43.2,32.5,-35.3Z",
+  "M24,-26.6C31.1,-22.6,37,-15.1,46.7,-2C56.5,11.1,70.1,29.7,65.2,37.1C60.3,44.5,36.8,40.7,18.6,44.4C0.4,48.1,-12.6,59.3,-19.9,56.1C-27.1,52.8,-28.5,35,-30.7,22.1C-32.8,9.2,-35.7,1.2,-39.5,-12.1C-43.3,-25.4,-47.9,-44,-41.5,-48.2C-35,-52.4,-17.5,-42.1,-4.6,-36.7C8.4,-31.3,16.8,-30.7,24,-26.6Z",
+];
+
+const id = `service-${index + 1}`;
+const reversed = index % 2 === 1;
+
+const mask = blobMaskUrl(blobPaths[index % blobPaths.length], {
+  transform: "translate(100 100)",
+});
+
+const radial =
+  index % 2 === 0
+    ? "from-secondary/10 via-background bg-radial-[at_25%_50%]"
+    : "from-tertiary/10 via-background bg-radial-[at_75%_50%]";
+---
+
+<section
+  id={id}
+  data-service-reveal={id}
+  class:list={["reveal service-section-reveal py-16", radial]}
+>
+  <div class="grid items-center gap-10 md:grid-cols-2 md:gap-12">
+    <div
+      class:list={[
+        "reveal-item relative flex justify-center",
+        reversed ? "md:order-2 md:justify-start" : "md:justify-end",
+      ]}
+    >
+      <Image
+        src={img}
+        alt={title}
+        loading="lazy"
+        quality="mid"
+        layout="full-width"
+        style={`--blob-mask: ${mask}`}
+        class="service-img aspect-square w-full max-w-md object-cover"
+      />
+    </div>
+
+    <div class="space-y-4 md:space-y-6">
+      <h2 class="reveal-item reveal-fade text-style-h1">{title}</h2>
+
+      <p class="reveal-item reveal-fade text-style-body text-style-accent">
+        {tagline}
+      </p>
+
+      <p
+        class="reveal-item reveal-fade text-foreground/70 text-style-body max-w-xl"
+      >
+        {description}
+      </p>
+
+      <div class="grid gap-6 pt-2 sm:grid-cols-2">
+        <div class="reveal-item reveal-fade space-y-3">
+          <h4 class="text-style-small text-style-eyebrow">Para quem é</h4>
+
+          <ul class="space-y-2">
+            {
+              audience.map((item) => (
+                <li class="text-foreground/70 text-style-body flex gap-2">
+                  <span class="text-accent" aria-hidden="true">
+                    —
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="reveal-item reveal-fade space-y-3">
+          <h4 class="text-style-small text-style-eyebrow">O que inclui</h4>
+
+          <ul class="space-y-2">
+            {
+              includes.map((item) => (
+                <li class="text-foreground/70 text-style-body flex gap-2">
+                  <span class="text-accent" aria-hidden="true">
+                    —
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-img {
+    mask-image: var(--blob-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
+  }
+</style>
+
+<script>
+  import { initReveal } from "../../lib/reveal";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-service-reveal]")
+    .forEach((section) => {
+      const id = section.dataset.serviceReveal;
+      if (id) initReveal({ selector: `#${id}`, step: 120 });
+    });
+</script>

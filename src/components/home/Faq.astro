@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import FaqAccordion from "../faq/FaqAccordion.astro";
+
+const faqs = (await getCollection("faqs"))
+  .filter(({ data }) => data.home)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data: { question }, body }) => ({ question, text: body ?? "" }));
+---
+
+<section
+  class="reveal faqwave-reveal from-tertiary/10 via-background flex flex-col items-center bg-radial-[at_75%_50%]"
+>
+  <svg
+    class="reveal-item w-1/2 max-w-sm"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,50 C240,15 480,85 720,50 C960,15 1200,85 1440,50"
+      class="stroke-tertiary fill-none stroke-1"></path>
+  </svg>
+
+  <div class="py-16">
+    <div class="space-y-2 text-center">
+      <h2 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+        Perguntas Frequentes
+      </h2>
+
+      <p class="reveal-item reveal-fade text-style-lead text-style-accent">
+        Respostas rápidas para as dúvidas mais comuns
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <FaqAccordion faqs={faqs} idPrefix="faq-home" />
+    </div>
+
+    <div class="reveal-item mt-12 text-center">
+      <a
+        href="/faq"
+        class="hover:text-accent text-foreground/80 text-style-body text-style-accent inline-block"
+      >
+        Ver todas as perguntas »
+      </a>
+    </div>
+  </div>
+
+  <svg
+    class="reveal-item w-1/2 max-w-sm"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,50 C240,85 480,15 720,50 C960,85 1200,15 1440,50"
+      class="stroke-tertiary fill-none stroke-1"></path>
+  </svg>
+</section>
+
+<script>
+  import { initReveal } from "../../lib/reveal";
+
+  initReveal({
+    selector: ".faqwave-reveal",
+    desktopMargin: "0px 0px -350px 0px",
+  });
+</script>
