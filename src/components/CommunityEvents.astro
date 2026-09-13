@@ -1,69 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 
-type Event = {
-  date: Date;
-  title: string;
-  description: string;
-  locale: string;
-  url: string;
-};
-
-const events: Event[] = [
-  {
-    date: new Date(2026, 8, 15),
-    title: "Oficina: Organize suas finanças",
-    description:
-      "Um passo a passo prático para montar seu orçamento e começar o ano no azul.",
-    locale: "Online",
-    url: "",
-  },
-  {
-    date: new Date(2026, 5, 6),
-    title: "Café com Planejamento",
-    description:
-      "Encontro descontraído para trocar ideias sobre dinheiro, metas e hábitos.",
-    locale: "Porto",
-    url: "",
-  },
-  {
-    date: new Date(2026, 4, 26),
-    title: "Live: Investimentos para iniciantes",
-    description:
-      "Descomplicando os primeiros passos para investir com segurança e confiança.",
-    locale: "Online",
-    url: "",
-  },
-];
+const events = await getCollection("events");
+const mediaMentions = await getCollection("mediaMentions");
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
-
-type MediaMention =
-  | {
-      outlet: string;
-      title: string;
-      type: "video";
-      videoId: string;
-      start?: number;
-    }
-  | { outlet: string; title: string; type: "article"; url: string };
-
-const mediaMentions: MediaMention[] = [
-  {
-    outlet: "Podcast Paty Saad",
-    title: "Conversa com Marina Saad",
-    type: "video",
-    videoId: "htmWHPwwQW0",
-    start: 2360,
-  },
-  {
-    outlet: "Exame",
-    title: "Planejamento financeiro para empreendedoras",
-    type: "article",
-    url: "https://example.com/exame",
-  },
-];
 ---
 
 <section class="reveal community-reveal py-16">
@@ -79,7 +22,7 @@ const mediaMentions: MediaMention[] = [
 
   <ul class="mt-12 grid gap-6 md:grid-cols-3">
     {
-      events.map((event) => {
+      events.map(({ data: event, body }) => {
         const isPast = event.date < today;
         return (
           <li class="w-full">
@@ -120,9 +63,7 @@ const mediaMentions: MediaMention[] = [
                 </span>
               </div>
 
-              <p class="text-foreground/70 text-style-body mt-auto">
-                {event.description}
-              </p>
+              <p class="text-foreground/70 text-style-body mt-auto">{body}</p>
 
               <span class="text-foreground/60 text-style-small text-style-accent mt-auto group-hover:underline">
                 Saiba mais »
@@ -141,7 +82,7 @@ const mediaMentions: MediaMention[] = [
 
     <ul class="mt-6 flex flex-col gap-4 md:flex-row">
       {
-        mediaMentions.map((mention) =>
+        mediaMentions.map(({ data: mention }) =>
           mention.type === "video" ? (
             <li class="w-full">
               <button
