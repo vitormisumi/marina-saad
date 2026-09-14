@@ -1,0 +1,26 @@
+---
+import { papoInicialCta } from "../../lib/contact";
+
+interface Props {
+  label?: string;
+  href?: string;
+  id?: string;
+  class?: string;
+}
+
+const {
+  label = papoInicialCta.label,
+  href = papoInicialCta.href,
+  id,
+  class: className,
+} = Astro.props;
+
+const classes = [
+  "text-style-cta bg-accent hover:bg-accent/90 text-background inline-block cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<a id={id} href={href} class={classes}>{label}</a>

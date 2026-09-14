@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import marina from "../../assets/marina.jpg";
 import { blobMaskUrl } from "../../lib/blobMask";
+import CtaButton from "../ui/CtaButton.astro";
 
 const heroMask = blobMaskUrl(
   "M1912 1209c27-319-72-699-318-882-187-139-462-224-785-204S85 468 84 880c0 455 481 345 636 484s139 514 477 516c386 3 693-420 715-671Z",
@@ -38,12 +39,7 @@ const heroMask = blobMaskUrl(
       </p>
 
       <div class="reveal-item">
-        <button
-          id="hero-cta"
-          class="text-style-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
-        >
-          Agende seu Papo Inicial
-        </button>
+        <CtaButton id="hero-cta" />
       </div>
     </div>
 
@@ -251,7 +247,7 @@ const heroMask = blobMaskUrl(
       translate: 0 0;
     }
 
-    .hero-reveal .hero-copy button {
+    .hero-reveal .hero-copy a {
       min-height: 2.5rem;
     }
   }

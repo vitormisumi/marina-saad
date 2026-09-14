@@ -1,30 +1,14 @@
 ---
 import { Icon } from "astro-icon/components";
 import { blobMaskUrl } from "../../lib/blobMask";
+import { papoInicialCta, socialLinks } from "../../lib/contact";
 import { navLinks } from "../../lib/navigation";
+import CtaButton from "../ui/CtaButton.astro";
 
 const socialBlobMask = blobMaskUrl(
   "M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z",
   { transform: "translate(95 120) scale(1.5)" },
 );
-
-const social = [
-  {
-    href: "https://instagram.com/marinasaad",
-    label: "Instagram",
-    icon: "cib:instagram",
-  },
-  {
-    href: "https://wa.me/+351924035352",
-    label: "WhatsApp",
-    icon: "cib:whatsapp",
-  },
-  {
-    href: "https://linkedin.com/in/marinasaad",
-    label: "LinkedIn",
-    icon: "cib:linkedin",
-  },
-];
 ---
 
 <footer
@@ -66,7 +50,7 @@ const social = [
 
       <ul class="flex items-center gap-3 pb-4">
         {
-          social.map(({ href, label, icon }) => (
+          socialLinks.map(({ href, label, icon }) => (
             <li>
               <a
                 href={href}
@@ -87,13 +71,7 @@ const social = [
         }
       </ul>
 
-      <a
-        id="footer-cta"
-        href="/contact"
-        class="bg-accent hover:bg-accent/90 text-background text-style-small w-min cursor-pointer rounded-lg px-4 py-2 font-semibold whitespace-nowrap drop-shadow-md transition-colors"
-      >
-        Agende seu Papo Inicial
-      </a>
+      <CtaButton class="text-style-small font-sans font-semibold" />
     </div>
   </div>
 

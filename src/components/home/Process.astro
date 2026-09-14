@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import CtaButton from "../ui/CtaButton.astro";
 
 const steps = (await getCollection("processSteps")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -58,12 +59,7 @@ const steps = (await getCollection("processSteps")).sort(
   </ol>
 
   <div class="reveal-item mt-16 text-center">
-    <a
-      href="/contact"
-      class="text-style-cta bg-accent hover:bg-accent/90 text-background w-min cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
-    >
-      Agende seu Papo Inicial
-    </a>
+    <CtaButton />
   </div>
 </section>
 
