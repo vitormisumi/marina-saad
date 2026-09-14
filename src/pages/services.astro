@@ -4,7 +4,6 @@ import ServicesCta from "../components/services/ServicesCta.astro";
 import ServicesHero from "../components/services/ServicesHero.astro";
 import ServiceSection from "../components/services/ServiceSection.astro";
 import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
 
 const services = (await getCollection("services")).sort(
   (a, b) => a.data.order - b.data.order,

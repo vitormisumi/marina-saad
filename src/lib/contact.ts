@@ -3,7 +3,12 @@ export const calendarEmbedUrl =
 
 export const contactEmail = "contato@marinasaad.com";
 
-export const contactChannels = [
+export const papoInicialCta = {
+  label: "Agende seu Papo Inicial",
+  href: "/contact",
+};
+
+export const socialLinks = [
   {
     href: "https://instagram.com/marinasaad.financas",
     label: "Instagram",
@@ -22,6 +27,10 @@ export const contactChannels = [
     handle: "in/marinasaad",
     icon: "cib:linkedin",
   },
+];
+
+export const contactChannels = [
+  ...socialLinks,
   {
     href: `mailto:${contactEmail}`,
     label: "E-mail",

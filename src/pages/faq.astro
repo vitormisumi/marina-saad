@@ -5,7 +5,6 @@ import FaqCta from "../components/faq/FaqCta.astro";
 import FaqHero from "../components/faq/FaqHero.astro";
 import Layout from "../layouts/Layout.astro";
 import { faqCategories } from "../lib/faqs";
-import "../styles/global.css";
 
 const entries = (await getCollection("faqs")).sort(
   (a, b) => a.data.order - b.data.order,

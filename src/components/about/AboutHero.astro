@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import marina from "../../assets/marina-about.jpg";
 import { blobMaskUrl } from "../../lib/blobMask";
+import CtaButton from "../ui/CtaButton.astro";
 
 const aboutMask = blobMaskUrl(
   "M40.7,-52.9C52.2,-47.7,60.7,-35.1,63.9,-21.6C67.1,-8.2,64.9,6.1,62.9,23C60.9,39.8,59.1,59.3,48.6,70.8C38.1,82.4,19.1,86.1,4.6,79.8C-9.9,73.5,-19.8,57.2,-29.6,45.4C-39.4,33.6,-49.1,26.3,-55,16C-60.9,5.7,-63.1,-7.8,-58.7,-18.4C-54.3,-29,-43.3,-36.8,-32.5,-42.3C-21.6,-47.8,-10.8,-50.9,1.9,-53.6C14.6,-56.2,29.2,-58.2,40.7,-52.9Z",
@@ -56,12 +57,7 @@ const aboutMask = blobMaskUrl(
       </p>
 
       <div class="reveal-item reveal-fade pt-2">
-        <a
-          href="/contact"
-          class="text-style-cta bg-accent hover:bg-accent/90 text-background inline-block cursor-pointer rounded-lg px-6 py-2 whitespace-nowrap transition-colors"
-        >
-          Agende seu Papo Inicial
-        </a>
+        <CtaButton />
       </div>
     </div>
   </div>

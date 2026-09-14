@@ -43,12 +43,12 @@ const radial =
 <section
   id={id}
   data-service-reveal={id}
-  class:list={["reveal service-section-reveal py-16", radial]}
+  class:list={["service-section-reveal py-16", radial]}
 >
   <div class="grid items-center gap-10 md:grid-cols-2 md:gap-12">
     <div
       class:list={[
-        "reveal-item relative flex justify-center",
+        "relative flex justify-center",
         reversed ? "md:order-2 md:justify-start" : "md:justify-end",
       ]}
     >
@@ -59,11 +59,11 @@ const radial =
         quality="mid"
         layout="full-width"
         style={`--blob-mask: ${mask}`}
-        class="service-img aspect-square w-full max-w-md object-cover"
+        class="service-img service-blob aspect-square w-full max-w-md object-cover"
       />
     </div>
 
-    <div class="space-y-4 md:space-y-6">
+    <div class="reveal service-text space-y-4 md:space-y-6">
       <h2 class="reveal-item reveal-fade text-style-h1">{title}</h2>
 
       <p class="reveal-item reveal-fade text-style-body text-style-accent">
@@ -120,7 +120,19 @@ const radial =
     mask-image: var(--blob-mask);
     mask-repeat: no-repeat;
     mask-position: center;
+    mask-size: 0% 0%;
+    transition: mask-size 1s ease-in-out;
+  }
+
+  .service-section-reveal.is-visible .service-img {
     mask-size: 100% 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-img {
+      mask-size: 100% 100%;
+      transition: none;
+    }
   }
 </style>
 
@@ -131,6 +143,13 @@ const radial =
     .querySelectorAll<HTMLElement>("[data-service-reveal]")
     .forEach((section) => {
       const id = section.dataset.serviceReveal;
-      if (id) initReveal({ selector: `#${id}`, step: 120 });
+      if (!id) return;
+
+      // Blob zoom: fire once the section (and its image) enters the viewport.
+      initReveal({ selector: `#${id}`, step: 0 });
+
+      // Text: wait until the text block itself is visible, then reveal all of
+      // its content at once (no per-item stagger).
+      initReveal({ selector: `#${id} .service-text`, step: 0 });
     });
 </script>

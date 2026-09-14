@@ -22,56 +22,58 @@ today.setHours(0, 0, 0, 0);
 
   <ul class="mt-12 grid gap-6 md:grid-cols-3">
     {
-      events.map(({ data: event, body }) => {
-        const isPast = event.date < today;
-        return (
-          <li class="w-full">
-            <a
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
-              class:list={[
-                isPast
-                  ? "bg-foreground/3 hover:border-quaternary/30"
-                  : "media-card",
-              ]}
-            >
-              <div class="flex items-start justify-between gap-4">
-                <span
-                  class:list={[
-                    "text-style-small text-style-eyebrow rounded-full px-3 py-1",
-                    event.date < today
-                      ? "bg-foreground/5 text-foreground/50"
-                      : "bg-secondary/20 text-foreground/70",
-                  ]}
-                >
-                  {event.date < today ? "Passado" : "Por vir"}
+      events
+        .toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime())
+        .map(({ data: event, body }) => {
+          const isPast = event.date < today;
+          return (
+            <li class="w-full">
+              <a
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="reveal-item group border-foreground/10 flex h-full flex-col gap-3 rounded-lg border p-5"
+                class:list={[
+                  isPast
+                    ? "bg-foreground/3 hover:border-quaternary/30"
+                    : "media-card",
+                ]}
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <span
+                    class:list={[
+                      "text-style-small text-style-eyebrow rounded-full px-3 py-1",
+                      event.date < today
+                        ? "bg-foreground/5 text-foreground/50"
+                        : "bg-secondary/20 text-foreground/70",
+                    ]}
+                  >
+                    {event.date < today ? "Passado" : "Por vir"}
+                  </span>
+                </div>
+
+                <div>
+                  <h4 class="text-foreground text-style-h3">{event.title}</h4>
+
+                  <span class="text-foreground/60 text-style-small">
+                    {event.date.toLocaleDateString("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}{" "}
+                    · {event.locale}
+                  </span>
+                </div>
+
+                <p class="text-foreground/70 text-style-body mt-auto">{body}</p>
+
+                <span class="text-foreground/60 text-style-small text-style-accent mt-auto group-hover:underline">
+                  Saiba mais »
                 </span>
-              </div>
-
-              <div>
-                <h4 class="text-foreground text-style-h3">{event.title}</h4>
-
-                <span class="text-foreground/60 text-style-small">
-                  {event.date.toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  })}{" "}
-                  · {event.locale}
-                </span>
-              </div>
-
-              <p class="text-foreground/70 text-style-body mt-auto">{body}</p>
-
-              <span class="text-foreground/60 text-style-small text-style-accent mt-auto group-hover:underline">
-                Saiba mais »
-              </span>
-            </a>
-          </li>
-        );
-      })
+              </a>
+            </li>
+          );
+        })
     }
   </ul>
 
