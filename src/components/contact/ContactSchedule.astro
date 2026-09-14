@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+import { calendarEmbedUrl } from "../../lib/contact";
+
+const hasCalendar = !calendarEmbedUrl.includes("PLACEHOLDER");
+---
+
+<div class="reveal contact-schedule-reveal space-y-5">
+  <div class="space-y-2">
+    <h2 class="text-style-h2">Agende seu Papo Inicial</h2>
+
+    <p class="text-foreground/70 text-style-body">
+      Escolha um horário direto na agenda. São 30 minutos, online e gratuitos.
+    </p>
+  </div>
+
+  {
+    hasCalendar ? (
+      <div class="border-tertiary/20 bg-background overflow-hidden rounded-2xl border">
+        <iframe
+          src={calendarEmbedUrl}
+          title="Agenda de agendamento do Papo Inicial"
+          class="h-[600px] w-full"
+          loading="lazy"
+        />
+      </div>
+    ) : (
+      <div class="border-tertiary/30 bg-tertiary/5 text-foreground/70 text-style-small flex h-[420px] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed p-8 text-center">
+        <Icon name="circum:calendar" class="text-accent text-3xl" />
+        <p>O calendário de agendamento aparecerá aqui.</p>
+        <p>
+          Cole a URL de incorporação do Google Calendar em{" "}
+          <code class="text-foreground font-semibold">src/lib/contact.ts</code>.
+        </p>
+      </div>
+    )
+  }
+
+  <div class="space-y-2">
+    {
+      hasCalendar && (
+        <a
+          href={calendarEmbedUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground hover:text-accent text-style-small inline-flex items-center gap-2 font-semibold transition-colors"
+        >
+          <Icon name="circum:link" />
+          Abrir a agenda em nova aba
+        </a>
+      )
+    }
+
+    <p class="text-foreground/60 text-style-small">
+      Atendo online, então o fuso não é problema: o calendário mostra os
+      horários no seu horário local.
+    </p>
+  </div>
+</div>
+
+<script>
+  import { initReveal } from "../../lib/reveal";
+
+  initReveal({ selector: ".contact-schedule-reveal" });
+</script>
