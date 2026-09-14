@@ -43,12 +43,12 @@ const radial =
 <section
   id={id}
   data-service-reveal={id}
-  class:list={["reveal service-section-reveal py-16", radial]}
+  class:list={["service-section-reveal py-16", radial]}
 >
   <div class="grid items-center gap-10 md:grid-cols-2 md:gap-12">
     <div
       class:list={[
-        "reveal-item relative flex justify-center",
+        "relative flex justify-center",
         reversed ? "md:order-2 md:justify-start" : "md:justify-end",
       ]}
     >
@@ -59,7 +59,7 @@ const radial =
         quality="mid"
         layout="full-width"
         style={`--blob-mask: ${mask}`}
-        class="service-img aspect-square w-full max-w-md object-cover"
+        class="service-img service-blob aspect-square w-full max-w-md object-cover"
       />
     </div>
 
@@ -120,7 +120,24 @@ const radial =
     mask-image: var(--blob-mask);
     mask-repeat: no-repeat;
     mask-position: center;
+    mask-size: 0% 0%;
+    transition: mask-size 1s ease-in-out;
+  }
+
+  .service-section-reveal.is-visible .service-img {
     mask-size: 100% 100%;
+  }
+
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-img {
+      mask-size: 100% 100%;
+      transition: none;
+    }
   }
 </style>
 
@@ -131,6 +148,27 @@ const radial =
     .querySelectorAll<HTMLElement>("[data-service-reveal]")
     .forEach((section) => {
       const id = section.dataset.serviceReveal;
-      if (id) initReveal({ selector: `#${id}`, step: 120 });
+      if (!id) return;
+
+      // Blob zoom: fire once the section (and its image) enters the viewport.
+      initReveal({ selector: `#${id}`, step: 0 });
+
+      // Text: reveal each item as it actually becomes visible, so the
+      // animation is noticeable on mobile where the section is tall.
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        },
+        { threshold: 1 },
+      );
+
+      section
+        .querySelectorAll<HTMLElement>(".reveal-item")
+        .forEach((item) => observer.observe(item));
     });
 </script>
