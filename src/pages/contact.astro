@@ -1,0 +1,27 @@
+---
+import ContactChannels from "../components/contact/ContactChannels.astro";
+import ContactCta from "../components/contact/ContactCta.astro";
+import ContactExpectations from "../components/contact/ContactExpectations.astro";
+import ContactForm from "../components/contact/ContactForm.astro";
+import ContactHero from "../components/contact/ContactHero.astro";
+import ContactSchedule from "../components/contact/ContactSchedule.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <main class="space-y-24">
+    <ContactHero />
+
+    <ContactExpectations />
+
+    <section class="grid gap-10 lg:grid-cols-2 lg:items-start">
+      <ContactSchedule />
+      <ContactForm />
+    </section>
+
+    <ContactChannels />
+
+    <ContactCta />
+  </main>
+</Layout>

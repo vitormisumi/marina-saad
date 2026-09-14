@@ -1,0 +1,105 @@
+---
+import { Icon } from "astro-icon/components";
+import { blobMaskUrl } from "../../lib/blobMask";
+import { contactChannels } from "../../lib/contact";
+
+const socialBlobMask = blobMaskUrl(
+  "M52.6,-44.2C63.6,-28.2,64.7,-6.6,57.3,8.1C50,22.8,34.2,30.5,19.2,36.5C4.1,42.5,-10.2,46.7,-21.7,42.3C-33.2,37.8,-41.9,24.7,-47.2,8.7C-52.5,-7.3,-54.5,-26.1,-46,-41.5C-37.6,-57,-18.8,-68.9,1,-69.7C20.8,-70.5,41.6,-60.2,52.6,-44.2Z",
+  { transform: "translate(95 120) scale(1.5)" },
+);
+---
+
+<section class="reveal contact-channels-reveal py-16">
+  <div class="space-y-2 text-center">
+    <h3 class="reveal-item reveal-fade text-style-small text-style-eyebrow">
+      Onde me encontrar
+    </h3>
+
+    <h2 class="reveal-item reveal-fade text-style-h1">Também estou por aqui</h2>
+
+    <p
+      class="reveal-item reveal-fade text-foreground/70 text-style-lead text-style-accent"
+    >
+      Se preferir, me chame direto em um dos canais abaixo.
+    </p>
+  </div>
+
+  <ul class="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      contactChannels.map(({ href, label, icon }) => {
+        const isEmail = href.startsWith("mailto:");
+        return (
+          <li class="reveal-item">
+            <a
+              href={href}
+              target={isEmail ? undefined : "_blank"}
+              rel={isEmail ? undefined : "noopener noreferrer"}
+              class="group border-tertiary/20 bg-background hover:border-tertiary flex h-full flex-col items-center gap-3 rounded-2xl border p-6 text-center transition-colors"
+            >
+              <span class="relative flex size-14 items-center justify-center">
+                <span
+                  class="social-blob"
+                  style={`--blob-mask: ${socialBlobMask}`}
+                  aria-hidden="true"
+                />
+                <Icon name={icon} class="social-icon relative z-10 text-xl" />
+              </span>
+
+              <span class="text-foreground text-style-h3">{label}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>
+
+<style>
+  .social-blob {
+    position: absolute;
+    inset: 0;
+    background: var(--color-tertiary);
+    opacity: 0.2;
+    mask-image: var(--blob-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .social-icon {
+    color: var(--color-foreground);
+    transition: color 0.3s ease;
+  }
+
+  .group:hover .social-blob,
+  .group:focus-visible .social-blob {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+
+  .group:hover .social-icon,
+  .group:focus-visible .social-icon {
+    color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-blob,
+    .social-icon {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { initReveal } from "../../lib/reveal";
+
+  initReveal({
+    selector: ".contact-channels-reveal",
+    step: 150,
+    mobileMargin: "0px 0px -200px 0px",
+    desktopMargin: "0px 0px -120px 0px",
+  });
+</script>
